@@ -1,0 +1,28 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: Arkham <arkham at archlinux dot us>
+# Contributor: Arkham <arkham at archlinux dot us>
+# Contributor: LeCrayonVert < greenarrow at archlinux dot us>
+
+pkgname=nikto
+pkgver=2.1.4
+pkgrel=3
+pkgdesc='A  web server scanner which performs comprehensive tests against web servers for multiple items.'
+arch=('i686' 'x86_64')
+url='http://www.cirt.net/nikto2'
+license=('GPL')
+depends=('perl' 'openssl' 'perl-net-ssleay')
+source=("https://cirt.net/nikto/${pkgname}-${pkgver}.tar.gz"
+        "nikto.sh")
+sha256sums=('4d46cb9a03faca3b79fdbdb3c2a634031460c93e07750c58bc398ba8a0043c4c'
+            '93f0435cd2821b0a14d8c5e146652ae4d023954faa306ca59790488cd576bb56')
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/usr/share/nikto"
+  install -dm755 "${pkgdir}/etc"
+  cp -a * "${pkgdir}/usr/share/nikto/"
+  find "${pkgdir}/usr/share/nikto" -type f -exec chmod 644 {} +
+  cp "${pkgdir}/usr/share/nikto/nikto.conf" "${pkgdir}/etc/nikto.conf"
+  install -Dm755 "${srcdir}/nikto.sh" "${pkgdir}/usr/bin/nikto"
+  warning "Run 'sudo nikto -update' to update databases and plugins from CIRT.net."
+}

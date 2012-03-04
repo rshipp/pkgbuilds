@@ -1,0 +1,23 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=tcpflow
+pkgver=1.1.1
+pkgrel=1
+pkgdesc='A TCP flow recorder'
+arch=('i686' 'x86_64')
+url='http://afflib.org/software/tcpflow'
+license=('GPL')
+depends=('libpcap')
+source=("http://afflib.org/downloads/${pkgname}.tar.gz")
+sha256sums=('9c786fda38e2a5a86e4d68fe60553ae0e6ac4cadbcd24381ef28de3bdcd1655c')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

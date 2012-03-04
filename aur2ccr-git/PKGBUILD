@@ -1,0 +1,40 @@
+# Maintainer (PKGBUILD and bash script): george <rpubaddr0@gmail.com>
+# Maintainer (git repo and perl code): CaptainKnots
+# Maintainer (bash script): Inkane
+
+pkgname=aur2ccr-git
+pkgver=20120222
+pkgrel=1
+pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
+arch=('i686' 'x86_64')
+url='https://github.com/redhat69/aur2ccr'
+license=('GPL')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed')
+makedepends=('git' 'make')
+conflicts=('aur2ccr')
+
+_gitname="aur2ccr"
+_gitroot="git://github.com/redhat69/${_gitname}"
+
+build() {
+  cd ${srcdir}
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+    cd ..
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+
+  cd "${_gitname}"
+  make
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  make DESTDIR="${pkgdir}" install
+}

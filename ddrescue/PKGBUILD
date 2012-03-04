@@ -1,0 +1,22 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=ddrescue
+pkgver=1.15
+pkgrel=1
+pkgdesc='A data recovery tool, which tries hard to rescue data in case of read errors.'
+arch=('i686' 'x86_64')
+url='http://www.gnu.org/software/ddrescue/ddrescue.html'
+license=('GPL3')
+source=("http://ftpmirror.gnu.org/ddrescue/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('75e01362005ba5b59a275edd9d012229b43e0b56533c2abb89d40a44d7ec2d78')
+
+build() {
+	cd "${pkgname}-${pkgver}"
+	./configure --prefix=/usr
+	make
+}
+
+package() {
+	cd "${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+}

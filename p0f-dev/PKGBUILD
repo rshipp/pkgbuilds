@@ -1,0 +1,31 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=p0f-dev
+_pkgname=p0f
+pkgver=3.03b
+_pkgver=3.03b
+pkgrel=1
+pkgdesc='A passive OS fingerprinting tool, development version.'
+arch=('i686')
+url='http://lcamtuf.coredump.cx/p0f3/'
+license=('LGPL2')
+depends=('libpcap' 'coreutils')
+conflicts=('p0f')
+source=("http://lcamtuf.coredump.cx/p0f3/releases/${_pkgname}-${_pkgver}.tgz")
+sha256sums=('b0d4f8a043d49c5f219be268c6cb10fe1a4eebc42a60843124e1e11bae16d8eb')
+
+build() {
+	cd "${_pkgname}-${_pkgver}"
+	make
+	cd tools
+	make
+	cd ..
+}
+
+package() {
+	cd "${_pkgname}-${_pkgver}"
+	install -d -m755 "${pkgdir}/etc/"
+	install -d -m755 "${pkgdir}/usr/sbin/"
+	install -D -m644 p0f.fp "${pkgdir}/etc/p0f.fp"
+	install -D -m755 p0f tools/p0f-client tools/p0f-sendsyn tools/p0f-sendsyn6 "${pkgdir}/usr/sbin/"
+}

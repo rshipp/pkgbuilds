@@ -1,0 +1,30 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: Michael P <ptchinster@archlinux.us>
+# Contributor: Christoph Siegenthaler <csi@gmx.ch>
+# Contributor: Wael Nasreddine <gandalf@siemens-mobiles.org>
+
+pkgname=tcpxtract
+pkgver=1.0.1
+pkgrel=1
+pkgdesc='A tool for extracting files from network traffic.'
+url='http://tcpxtract.sourceforge.net'
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('libpcap')
+source=("http://prdownloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz" 
+        "conf_default_path.patch")
+md5sums=('1d8fe172d4590c33a157798e08dc0ccd'
+         'c7964f1e9c1315ae2d2b94c2bd06b4b7')
+
+build() {
+  cd "${startdir}/src/${pkgname}-${pkgver}"
+  # Apply conf_default_path.patch
+  patch -Np0 -i "${startdir}/src/conf_default_path.patch"
+  ./configure --prefix=/usr --sysconfdir=/etc
+  make
+}
+
+package() {
+  cd "${startdir}/src/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: Jozef Riha <jose1711@gmail.com
+
+pkgname=disktype
+pkgver=9
+pkgrel=1
+pkgdesc="A utility to detect the content format of a disk or disk image."
+url="http://disktype.sourceforge.net/"
+license=("custom")
+arch=('i686' 'x86_64')
+depends=('glibc')
+source=("http://prdownloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('b6701254d88412bc5d2db869037745f65f94b900b59184157d072f35832c1111')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/usr/bin/"
+  install -dm755 "${pkgdir}/usr/share/man/man1"
+  [[ -f disktype.1.gz ]] || gzip disktype.1
+  install -Dm755 disktype "${pkgdir}/usr/bin/"
+  install -Dm644 disktype.1.gz "${pkgdir}/usr/share/man/man1"
+}

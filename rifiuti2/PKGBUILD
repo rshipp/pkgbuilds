@@ -1,0 +1,24 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=rifiuti2
+pkgver=0.5.1
+pkgrel=1
+pkgdesc='A total rewrite of the Foundstone rifiuti tool for parsing INFO2 files.'
+arch=('i686' 'x86_64')
+url='https://code.google.com/p/rifiuti2/'
+license=('BSD')
+depends=('glibc')
+conflicts=('rifiuti')
+source=("https://rifiuti2.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('b8db7d9ff442d71794256a97103134200b286c19134f2fe30506f58035a380b2')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

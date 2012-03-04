@@ -1,0 +1,32 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
+# Contributor: Geoffroy Carrier <geoffroy.carrier@koon.fr>
+
+pkgname=sleuthkit-withlibs
+_pkgname=sleuthkit
+pkgver=3.2.3
+pkgrel=1
+pkgdesc='File system and media management forensic analysis tools - with AFF and EWF support.'
+arch=('i686' 'x86_64')
+url='http://www.sleuthkit.org/sleuthkit'
+license=('GPL2' 'CPL' 'custom:"IBM Public Licence"')
+depends=('perl' 'afflib' 'libewf')
+optdepends=('autopsy: Graphical frontend to sleuthkit tools')
+options=('!libtool')
+conflicts=('sleuthkit')
+source=("http://downloads.sourceforge.net/${_pkgname}/${_pkgname}-${pkgver}.tar.gz")
+sha256sums=('ba5f63d7fd60d978de03777c72b1571004caa8dfe384f09757b6a8efa890ea62')
+
+build() {
+  cd "${_pkgname}-${pkgver}"
+  ./configure --with-afflib --with-ewf --prefix=/usr
+  make LDFLAGS+="-lpthread -ldl"
+}
+
+package() {
+  cd "${_pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  # licenses
+  install -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -Dm0644 licenses/* "${pkgdir}/usr/share/licenses/${pkgname}"
+}

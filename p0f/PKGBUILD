@@ -1,0 +1,39 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=p0f
+pkgver=2.0.8
+pkgrel=2
+pkgdesc='A passive OS fingerprinting tool.'
+arch=('i686')
+url='http://lcamtuf.coredump.cx/p0f/'
+license=('LGPL2')
+depends=('libpcap>=0.4' 'coreutils')
+conflicts=('p0f-dev')
+source=("http://lcamtuf.coredump.cx/${pkgname}/${pkgname}-${pkgver}.tgz")
+sha256sums=('6c4d8745f04e59f2ba68d56fd1554551592f08a0497c9fc21b84498f47d1aee0')
+
+build() {
+	cd "${pkgname}"
+	make
+}
+
+package() {
+	cd "${pkgname}"
+	ed -s mk/Linux << EOF # this is necessay for pacman -R to work
+50,52d
+50i
+	install -d -m755 "${pkgdir}/usr/sbin"
+	install -D -m755 \$(FILE) p0frep "${pkgdir}/usr/sbin"
+	install -d -m755 "${pkgdir}/etc/p0f"
+	install -d -m755 "${pkgdir}/usr/local/man/man1"
+	install -d -m755 "${pkgdir}/usr/man/man1"
+.
+55,56s/cp -f/install -D -m644/g
+55s@\(/etc/p0f/\)@"${pkgdir}\1"
+56s@\(/usr/man/man1/\)@"${pkgdir}\1"
+56s@\(/usr/local/man/man1/\)@"${pkgdir}\1"
+wq
+EOF
+	make install
+}
+

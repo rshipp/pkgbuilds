@@ -1,0 +1,39 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: iruel <moot at 404chan dot org>
+# Contributor: Kyle Keen <keenerd@gmail.com>
+ 
+pkgname=trimage-git
+pkgver=20120221
+pkgrel=1
+pkgdesc='A graphical frontend to several lossless image compression tools.'
+url='http://trimage.org'
+arch=('any')
+license=('MIT')
+depends=('pyqt' 'optipng' 'advancecomp' 'jpegoptim' 'pngcrush' 'python')
+conflicts=('trimage')
+provides=('trimage')
+
+_gitroot="git://github.com/Kilian/Trimage.git"
+_gitname="Trimage"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to github..."
+  if [ -d "$_gitname" ] ; then
+    cd ${_gitname} && git pull origin
+    msg "The local files are updated."
+  else
+    git clone --depth 1 ${_gitroot}
+  fi
+  msg "GIT checkout done or server timeout"
+  msg "Running setup.py..."
+  cd "${srcdir}/${_gitname}"
+  find ./ -type f -name '*.py' | xargs -n 1 sed -i 's|/usr/bin/env python|/usr/bin/env python2|'
+  sed -i 's|/usr/bin/env python|/usr/bin/env python2|' trimage
+  python2 setup.py build
+}
+
+package() {
+  cd "${_gitname}"
+  python2 setup.py install --prefix=/usr --root="${pkgdir}"
+}

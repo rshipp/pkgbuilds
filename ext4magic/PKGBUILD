@@ -1,0 +1,24 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributer: Sebastien Luttringer <seblu+arch@seblu.net>
+
+pkgname=ext4magic
+pkgver=0.3.0
+pkgrel=1
+pkgdesc='Linux admin tool, can help to recover deleted or overwritten files on ext3 and ext4 filesystems.'
+arch=('i686' 'x86_64')
+url='http://developer.berlios.de/projects/ext4magic/'
+license=('GPL2')
+depends=('bzip2' 'file' 'util-linux' 'e2fsprogs')
+source=("http://downloads.sourceforge.net/project/ext4magic.berlios/${pkgname}-${pkgver}.tar.gz")
+md5sums=('62572100fd64b523b4c8dab4983f80ab')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

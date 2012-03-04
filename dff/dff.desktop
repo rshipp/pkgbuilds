@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DFF
+Type=Application
+Icon=dff
+Categories=Application;Utility;
+Comment=The free, open source Digital Forensics Framework
+GenericName=Digital Forensics Framework
+Exec=dff -g
+MimeType=text/html;application/xhtml+xml;
+Terminal=false

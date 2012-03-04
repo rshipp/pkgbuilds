@@ -1,0 +1,24 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributor: Bogdan Szczurek <thebodzio(at)gmail.com>
+
+pkgname=grokevt
+pkgver=0.5.0
+pkgrel=1
+pkgdesc='A Collection of scripts for reading Windows log files.'
+arch=('i686' 'x86_64')
+url='http://projects.sentinelchicken.org/grokevt'
+license=('GPL')
+depends=('python' 'reglookup')
+makedepends=('make' 'cpio')
+source=("http://grokevt.googlecode.com/files/$pkgname-$pkgver.tar.gz")
+md5sums=('787a28d5d253e07522305208ca65bc96')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make ETC_PREFIX=/etc
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make ETC_PREFIX="${pkgdir}/etc" PREFIX="${pkgdir}/usr" DESTDIR="${pkgdir}" install
+}

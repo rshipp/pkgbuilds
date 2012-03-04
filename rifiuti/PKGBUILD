@@ -1,0 +1,19 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributor: Michael P <ptchinster@archlinux.us>
+
+pkgname=rifiuti
+pkgver=20040505_1
+pkgrel=1
+pkgdesc='Examine the contents of the INFO2 file from a MS Recycle Bin.'
+arch=('i686' 'x86_64')
+url='http://www.jonesdykstra.com/'
+license=('GPL')
+conflicts=('rifiuti2')
+source=("http://downloads.sourceforge.net/project/odessa/Rifiuti/${pkgver}/${pkgname}_${pkgver}.tar.gz")
+md5sums=('c39d6e560ff96136f80dfb73fc4390db')
+
+package() {
+  cd "${pkgname}_${pkgver}/src"
+  make install
+  mv -v ../bin "${srcdir}/../pkg"
+}

@@ -1,0 +1,22 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=libbfio
+pkgver=20111031 #20120118 has issues wit libpff/DFF
+pkgrel=1
+pkgdesc='A library to provide basic file input/output abstraction.'
+arch=('i686' 'x86_64')
+url='http://sourceforge.net/projects/libbfio/'
+license=('GPL3')
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}-alpha/${pkgname}-alpha-${pkgver}/${pkgname}-alpha-${pkgver}.tar.gz")
+sha256sums=('0f118b0d3431f0d1b15acce935184417164ab569d592fc7dc63b2c64bbb17fc7') #sha256sums=('2f262f06121129fad5ef7a0fbab413549b7215239915a9d0a2ca9132c9defc02') <- 20121018
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

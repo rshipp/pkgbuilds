@@ -1,0 +1,21 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=wepbuster
+pkgver=1.0_beta_0.7
+_pkgver=1.0_beta
+pkgrel=3
+pkgdesc="Execute various programs included in the aircrack-ng suite in order to obtain the WEP encryption key of a wireless access point."
+arch=('i686' 'x86_64')
+url='http://code.google.com/p/wepbuster/'
+license=('BSD')
+depends=('aircrack-ng' 'perl-term-readkey' 'perl-expect' 'perl-file-slurp' 
+         'macchanger' 'dhclient' 'perl-algorithm-permute' 'perl-number-range' 
+         'perl' 'procps' 'net-tools')
+source=("http://wepbuster.googlecode.com/files/${pkgname}-${pkgver}.tgz")
+md5sums=('61b9013d81a65db6b33c8dc024fcc898')
+
+package() {
+    cd "${pkgname}-${_pkgver}"
+    install -dm755 "${pkgdir}/usr/bin"
+    install -Dm755 wepbuster "${pkgdir}/usr/bin/wepbuster"
+}

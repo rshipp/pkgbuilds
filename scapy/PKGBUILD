@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributor: Emmanuel Gras <gras.emmanuel@gmail.com>
+
+pkgname=scapy
+pkgver=2.2.0
+pkgrel=1
+pkgdesc="A powerful interactive packet manipulation program written in Python."
+url='http://www.secdev.org/projects/scapy/'
+depends=('tcpdump' 'python2')
+optdepends=('pycrypto: WEP decription support'
+            'gnuplot: plotting support'
+            'graphviz: conversations() method support')
+provides=('python-scapy')
+arch=('i686' 'x86_64')
+license=('GPL')
+source=("https://www.secdev.org/projects/scapy/files/${pkgname}-${pkgver}.tar.gz")
+md5sums=('406990bd8da1f4958b354b4b6fc4b3eb')
+
+build(){
+  cd "${pkgname}-${pkgver}"
+  python2 setup.py build
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  python2 setup.py install --prefix="${pkgdir}/usr"
+}

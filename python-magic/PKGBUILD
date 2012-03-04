@@ -1,0 +1,26 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=python-magic
+pkgver=5.11
+pkgrel=1
+pkgdesc='Python bindings to allow you to access the libmagic api.'
+arch=('i686' 'x86_64')
+url="http://darwinsys.com/file/"
+license=('custom')
+depends=('file' 'python')
+source=("ftp://ftp.astron.com/pub/file/file-${pkgver}.tar.gz")
+md5sums=('16a407bd66d6c7a832f3a5c0d609c27b')
+
+build() {
+  cd "file-${pkgver}/python"
+  sed -i 's@/usr/bin/python@/usr/bin/python2@' ../magic/Magdir/python
+  python2 setup.py build
+}
+
+package() {
+  cd "file-${pkgver}/python"
+  mkdir -p "${pkgdir}/usr/lib/python2.7/lib-dynload"
+  cp build/lib/magic.py "${pkgdir}/usr/lib/python2.7/lib-dynload/"
+  install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -Dm644 "${srcdir}/file-${pkgver}/COPYING" "${pkgdir}/usr/share/licenses/${pkgname}/COPYING"
+}

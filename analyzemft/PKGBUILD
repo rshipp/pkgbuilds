@@ -1,0 +1,18 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=analyzemft
+pkgver=1.7
+pkgrel=1
+pkgdesc='Fully parse the MFT file from an NTFS filesystem and present the results as accurately as possible in a format that allows further analysis with other tools.'
+arch=('any')
+url='http://www.integriography.com/'
+license=('custom')
+depends=('python' 'tk' 'tcl')
+source=("http://www.integriography.com/projects/analyzeMFT")
+sha256sums=('3e6f79a73655489c34089f7323901e2a90e263140019f876c4e0b3cbbe541681')
+
+package() {
+  install -dm755 "${pkgdir}/usr/bin"
+  install -Dm755 analyzeMFT "${pkgdir}/usr/bin/"
+  ln -sv "${pkgdir}/usr/bin/analyzeMFT" "${pkgdir}/usr/bin/analyzeMFT.py"
+}

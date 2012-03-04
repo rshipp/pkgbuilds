@@ -1,0 +1,32 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+
+pkgname=libpff
+pkgver=20110413
+pkgrel=1
+pkgdesc='A library and tools to access the PFF and OFF formats.'
+arch=('i686' 'x86_64')
+url='http://sourceforge.net/projects/libpff/'
+license=('LGPL3')
+depends=('libnotify' 'libbfio')
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}-alpha/${pkgname}-alpha-${pkgver}/${pkgname}-alpha-${pkgver}.tar.gz")
+sha256sums=('9d2ec6778abc8228ada26e3fc41731c701976c11474668edf49d5f79d42fd62d')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  LDFLAGS="-L/usr/lib" CFLAGS="-I/usr/include" ./configure --prefix=/usr #-D_LIBBFIO_TYPES_H 
+  make
+#  ed -s libpff/libpff_libbfio.h << EOF # patch for DFF
+#48c
+#/* TODO deprecated remove after a while */
+##define LIBBFIO_FLAG_READ                               LIBBFIO_ACCESS_FLAG_READ
+##define LIBBFIO_FLAG_WRITE                             LIBBFIO_ACCESS_FLAG_WRITE
+##define LIBBFIO_FLAG_TRUNCATE                       LIBBFIO_ACCESS_FLAG_TRUNCATE
+#.
+#wq
+#EOF
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
