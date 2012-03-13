@@ -1,10 +1,10 @@
 # Maintainer (PKGBUILD and bash script): george <rpubaddr0 {at} gmail [dot] com>
-# Maintainer (git repo and perl code): CaptainKnots
-# Maintainer (bash script): Inkane
+# Maintainer (bash script and python): Inkane
+# Maintainer (git repo): CaptainKnots
 
 pkgname=aur2ccr
-pkgver=0.7
-pkgrel=2
+pkgver=0.7.2
+pkgrel=3
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
 arch=('i686' 'x86_64')
 url='https://github.com/redhat69/aur2ccr'
@@ -16,16 +16,20 @@ source=('archrepos.pacman.conf'
         'aur2ccr'
         'aur2ccr.8'
         'aur2ccr.conf'
-        'getmirrors.sh'
+        'getmirrors.py'
         'Makefile'
-        'names.conf')
-sha256sums=('3f067db53d06f504934ff6bec52664d6484aa7fea15d5a9d50c54ce7632c279e'
-            '05b30064b73fd0ae6e52c234c22b858ccfc98dc36f125a9719747da5a40e91cd'
+        'names.conf'
+        'README.md'
+        'TODO')
+sha256sums=('c1b3abb04d2e0423cfd1bd8caed7e8a9f3b296910024d2672311d212b700e69e'
+            'a229503bc5c3b939c824b2f2a685ce341652351ad7af743f56b24a370ebb72a5'
             '69037f50af0568083a0927781a838fa783ad507db820009488cb09e6b0643789'
             '9eb29ca78cd6b7fa753bf56c0d3293801b125e4ae6c1f038536bbe3326a454d5'
-            '5563e18c07c848691ffbea804e9fb3b44d7cc3a55e13d1a8b4981e7061fb3b14'
-            '48c5571e5d6a25671b62ea401e6a9c13a45bdbcc7f6c5a9a9846c29b60b16118'
-            '907d7846c3a9b5c841c41e643021965c3d277126a9e6516660140978c89ebc97')
+            '5286dc1b7ab5172c711db124a6cb05c8ea242c5f83a9eebc3fbb1247151d3d98'
+            '9b668c1cea85a7b0e855a85cd8acd1594b0ed7c4986fb1727842a1f54dd352d7'
+            'a20d59bfe9a4951c53eb1f35774341990e9bb8469df70438a8598463160524d9'
+            '45455d00c074714f389c81f6c9a08e96feda934767749ebf1a423300ea882fc1'
+            'cac4ce52af7c34d9f001c88cf52024a1e76fd3361a5c6587738f4918c0827a8f')
 
 build() { 
   make
