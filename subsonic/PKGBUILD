@@ -9,6 +9,7 @@ pkgdesc='A free, web-based media streamer and jukebox.'
 arch=('i686' 'x86_64')
 url='http://subsonic.org/'
 license=('GPL')
+screenshot='http://www.subsonic.org/pages/inc/img/screenshots/screen02.png'
 depends=('java-runtime')
 optdepends=('lame: mp3 transcoding support'
             'ffmpeg: other media transcoding support')
