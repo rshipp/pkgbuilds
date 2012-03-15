@@ -1,0 +1,37 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributer: M0Rf30 <morf3089@gmail.com>
+# Contributors : hoban
+
+pkgname=subsonic
+pkgver=4.6
+pkgrel=1
+pkgdesc='A free, web-based media streamer and jukebox.'
+arch=('i686' 'x86_64')
+url='http://subsonic.org/'
+license=('GPL')
+depends=('java-runtime')
+optdepends=('lame: mp3 transcoding support'
+            'ffmpeg: other media transcoding support')
+conflicts=('subsonic-beta' 'subsonic-dev')
+source=("http://prdownloads.sourceforge.net/subsonic/${pkgname}-${pkgver}-standalone.tar.gz"
+        'subsonic.sh.off'
+        'subsonic.rc')
+backup=('var/subsonic/db')
+install=$pkgname.install
+sha1sums=('3c21c08e2938a7c6f82b61ba145ba77e8a8765ef'
+          'c95c26758d520e9ccbd8367f3cee8a3c313e8288'
+          '13970062cfaf93cc8b278f92687a464aaa97224d')
+
+package() {
+  cd "${srcdir}"
+  install -dm755 "${pkgdir}/"{var/subsonic,etc/rc.d}
+  install -Dm755 subsonic.rc "${pkgdir}/etc/rc.d/subsonic"
+  install -Dm755 subsonic.sh.off "${pkgdir}/var/subsonic/subsonic.sh"
+  rm subsonic.rc subsonic.bat subsonic.sh* "${pkgname}-${pkgver}-standalone.tar.gz"
+  install -Dm644 * "${pkgdir}/var/subsonic/"
+  install -dm755 "${pkgdir}/var/subsonic/transcode"
+  # see https://wiki.archlinux.org/index.php/Subsonic
+  # if ffmpeg/lame are installed, create symlinks so subsonic can find them
+  [[ -e /usr/bin/ffmpeg ]] && ln -s /usr/bin/ffmpeg "${pkgdir}/var/subsonic/transcode/ffmpeg"
+  [[ -e /usr/bin/lame ]] && ln -s /usr/bin/lame "${pkgdir}/var/subsonic/transcode/lame"
+}

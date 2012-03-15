@@ -1,0 +1,18 @@
+post_install() {
+  # set up subsonic so it can be run not as root (optional)
+  echo "Adding and configuring user 'subsonic'..."
+  useradd --system --groups audio subsonic
+  install -dm755 "${pkgdir}/tmp/subsonic"
+  chown -R subsonic:subsonic "${pkgdir}/tmp/subsonic"
+  [[ -e "${pkgdir}/var/subsonic" ]] && chown -R subsonic:subsonic "${pkgdir}/var/subsonic"
+  install -dm755 "${pkgdir}/var/subsonic/transcode"
+  chown -R root:root "${pkgdir}/var/subsonic/transcode"
+  [[ -e "${pkgdir}/var/subsonic/jetty/"*/webapp ]] && chown -R root:root "${pkgdir}/var/subsonic/jetty/"*/webapp
+
+  echo "*************************************************"
+  echo "* Edit /var/subsonic/subsonic.sh to configure   *"
+  echo "* subsonic                                      *"
+  echo "*************************************************"
+  
+}
+
