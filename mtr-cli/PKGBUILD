@@ -1,0 +1,28 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Steven Stillaway <steve AT stillaway DOT net>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Douglas Soares de Andrade <douglas@archlinux.org>
+
+pkgname=mtr-cli
+_pkgname=mtr
+pkgver=0.82
+pkgrel=1
+pkgdesc='Combines the functionality of traceroute and ping into one tool. (CLI version)'
+arch=('i686' 'x86_64')
+url='http://www.bitwizard.nl/mtr/'
+license=('GPL')
+depends=('ncurses>=5.7')
+source=("ftp://ftp.bitwizard.nl/mtr/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('10601ea543fda3e51545c4bce195b64c')
+ 
+build() {
+  mkdir -p "${srcdir}/mtr-cli"
+  cd "${srcdir}/${pkgname}"
+  ../${_pkgname}-${pkgver}/configure --prefix=/usr --disable-gtktest --without-gtk
+  make
+}
+ 
+package() {
+  cd "${srcdir}/${pkgname}"
+  make DESTDIR="${pkgdir}" install
+}
