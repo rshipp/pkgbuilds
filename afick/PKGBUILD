@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributor: Rorschach <r0rschach@lavabit.com
+# Contributer: Nathan Owe <ndowens04+AUR @ gmail.com>
+
+pkgname=afick
+pkgver=2.20
+pkgrel=1
+pkgdesc='Alternative to tripwire.'
+url='http://afick.sourceforge.net'
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('perl' 'perl-tk')
+source=("http://downloads.sourceforge.net/afick/afick-${pkgver}.tgz")
+md5sums=('6fa2d357839fc75138ef2ca287b0ae59')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  perl Makefile.pl
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  chmod a+r "${pkgdir}/etc/"{afick.conf,cron.daily/afick_cron}
+  chmod a+rx "${pkgdir}/"{etc/logrotate.d,var/{log/afick,lib/afick,lib/afick/archive}}
+}
