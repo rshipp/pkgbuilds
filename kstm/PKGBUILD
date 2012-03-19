@@ -1,0 +1,26 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: philacs
+
+pkgname=kstm
+pkgver=0.1
+pkgrel=1
+pkgdesc='KDE front-end to ssh tunneling.'
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/kstm/"
+screenshot='http://sourceforge.net/projects/kstm/screenshots/228033'
+license=('GPL3')
+depends=('qt')
+source=("http://downloads.sourceforge.net/sourceforge/kstm/kstm${pkgver}-source.tar.gz")
+md5sums=('5f5d82dda7961f7595582fa51f7e4e8e')
+ 
+build() {
+  cd "${pkgname}"
+  sed -i 's/icons\/kstm\.png/:icons\/icons\/kstm.png/g' mainwindow.cpp
+  qmake
+  make
+}
+
+package() {
+  cd "${pkgname}"
+  install -Dm755 kstm $pkgdir/usr/bin/kstm
+}
