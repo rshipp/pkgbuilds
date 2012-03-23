@@ -4,15 +4,16 @@
 pkgname=qastools
 pkgver=0.17.1
 pkgrel=1
-pkgdesc='A collection of Qt desktop applications for the Linux sound system ALSA.'
+pkgdesc='A collection of Qt desktop applications for the Linux ALSA sound system.'
 arch=('i686' 'x86_64')
 license=('GPL3')
 url='http://xwmw.org/qastools/'
+screenshot='http://xwmw.org/qastools/graphics/qasmixer_screens/screen_01.png'
 depends=('qt')
 makedepends=('cmake')
 replaces=('qasmixer')
 conflicts=('qasmixer')
-install='qasmixer.install'
+install=qasmixer.install
 source=("http://sourceforge.net/projects/${pkgname}/files/${pkgver}/${pkgname}_${pkgver}.tar.xz/download")
 md5sums=('61df791cc51b31e171e939bf8ce6418b')
 
@@ -21,7 +22,6 @@ build() {
   mkdir -p build
   cd build
   cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-  make -j8
 }
 
 package() {
