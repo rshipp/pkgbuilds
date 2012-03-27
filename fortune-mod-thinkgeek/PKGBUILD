@@ -1,0 +1,17 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=fortune-mod-thinkgeek
+pkgver=20120326
+pkgrel=2
+pkgdesc='Fortune cookies from the ThinkGeek fortunes database.'
+arch=('i686' 'x86_64')
+url='http://www.thinkgeek.com/brain/fortune.cgi'
+license=('custom')
+depends=('fortune-mod')
+source=('thinkgeek')
+sha256sums=('b9e40253bc9dbb9bc4cfb2c8fa4d3fd4b0931081a298173ee3cdcb7b2eb40fd9')
+
+package() {
+  install -Dm644 thinkgeek "${pkgdir}/usr/share/fortune/thinkgeek"
+  strfile "${pkgdir}/usr/share/fortune/thinkgeek"
+}
