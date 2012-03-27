@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Jan Zitnik <jan@zitnik.org>
+ 
+pkgname=vbox-runner
+pkgver=0.3.2
+pkgrel=1
+arch=('i686' 'x86_64')
+pkgdesc="Run Virtualbox machines in KRunner."
+url='http://www.kde-look.org/content/show.php/VBox+Runner?content=107926'
+screenshot='http://kde-look.org/CONTENT/content-pre1/107926-1.png'
+license=('GPL')
+makedepends=('cmake' 'automoc4')
+source=("http://www.kde-look.org/CONTENT/content-files/107926-${pkgname}-${pkgver}.tar.gz")
+md5sums=('8d00c807323882febd1b7cc0e237037b')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  mkdir -p build
+  cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX="$(kde4-config --prefix)"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}/build"
+  make DESTDIR="${pkgdir}" install
+}
