@@ -1,7 +1,6 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 # Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
 # Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
-# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
 
 pkgname=anyfs-tools
 pkgver=0.85.1c

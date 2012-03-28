@@ -1,6 +1,5 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 # Contributor: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
-# Contributor: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
 # Contributor: ivh
 
 pkgname=ext3grep

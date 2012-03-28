@@ -1,6 +1,5 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 # Contributor: Kosava <kosava@archlinux.us>
-# Contributor: Kosava <kosava@archlinux.us>
 
 pkgname=znotes
 pkgver=0.4.5
