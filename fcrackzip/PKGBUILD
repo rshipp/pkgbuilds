@@ -1,6 +1,7 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 # Contributor: Jaroslaw Swierczynski <swiergot@aur.archlinux.org>
-# Contributer: Daenyth <Daenyth+Arch at gmail dot com>
+# Contributor: Daenyth <Daenyth+Arch at gmail dot com>
+# Contributor: Daenyth <Daenyth+Arch at gmail dot com>
 
 pkgname=fcrackzip
 pkgver=1.0

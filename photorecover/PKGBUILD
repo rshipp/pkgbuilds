@@ -1,5 +1,6 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
-# Contributer: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
+# Contributor: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
+# Contributor: Jaroslav Lichtblau <dragonlord@aur.archlinux.org>
 
 pkgname=photorecover
 pkgver=0.9.0

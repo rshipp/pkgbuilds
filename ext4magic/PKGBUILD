@@ -1,5 +1,6 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
-# Contributer: Sebastien Luttringer <seblu+arch@seblu.net>
+# Contributor: Sebastien Luttringer <seblu+arch@seblu.net>
+# Contributor: Sebastien Luttringer <seblu+arch@seblu.net>
 
 pkgname=ext4magic
 pkgver=0.3.0
