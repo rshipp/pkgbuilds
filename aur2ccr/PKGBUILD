@@ -4,7 +4,7 @@
 
 pkgname=aur2ccr
 pkgver=0.7.2
-pkgrel=3
+pkgrel=4
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
 arch=('i686' 'x86_64')
 url='https://github.com/redhat69/aur2ccr'
@@ -18,18 +18,14 @@ source=('archrepos.pacman.conf'
         'aur2ccr.conf'
         'getmirrors.py'
         'Makefile'
-        'names.conf'
-        'README.md'
-        'TODO')
+        'names.conf')
 sha256sums=('c1b3abb04d2e0423cfd1bd8caed7e8a9f3b296910024d2672311d212b700e69e'
-            'a229503bc5c3b939c824b2f2a685ce341652351ad7af743f56b24a370ebb72a5'
+            '7220304103aa8f844dca95b41e9950383e1a23ef26162a22d6796e125d1613a9'
             '69037f50af0568083a0927781a838fa783ad507db820009488cb09e6b0643789'
             '9eb29ca78cd6b7fa753bf56c0d3293801b125e4ae6c1f038536bbe3326a454d5'
             '5286dc1b7ab5172c711db124a6cb05c8ea242c5f83a9eebc3fbb1247151d3d98'
-            '9b668c1cea85a7b0e855a85cd8acd1594b0ed7c4986fb1727842a1f54dd352d7'
-            'a20d59bfe9a4951c53eb1f35774341990e9bb8469df70438a8598463160524d9'
-            '45455d00c074714f389c81f6c9a08e96feda934767749ebf1a423300ea882fc1'
-            'cac4ce52af7c34d9f001c88cf52024a1e76fd3361a5c6587738f4918c0827a8f')
+            'c08bde5e232f2ad6bd15f578a2658cfdc7fd262d6675ef8c2796343aead9445d'
+            '56c78faaa234fe75227ff142e35298cf757459713a736aa3f21812c3c0889b37')
 
 build() { 
   make
