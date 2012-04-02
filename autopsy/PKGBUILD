@@ -9,7 +9,7 @@ pkgdesc="The Autopsy Forensic Browser is a GUI for The Sleuth Kit."
 arch=('any')
 url="http://www.sleuthkit.org/${pkgname}"
 license=("GPL2")
-depends=('perl' 'autopsy')
+depends=('perl' 'sleuthkit')
 options=(!emptydirs)
 source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         'autopsy.pl')
