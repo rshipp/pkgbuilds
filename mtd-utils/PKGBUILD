@@ -1,0 +1,24 @@
+# Maintainer: <rpubaddr0 {at} gmail [dot] com>
+# Contributor: <fedor@yu.wildpark.net>
+# Contributor: Robert Orzanna <orschiro@googlemail.com>
+
+pkgname=mtd-utils
+pkgver=1.4.9
+pkgrel=1
+pkgdesc='Utilities related to handling MTD devices, and for dealing with FTL, NFTL JFFS2 etc.'
+arch=('i686' 'x86_64')
+url='http://www.linux-mtd.infradead.org/'
+license=('GPL2')
+depends=('lzo2' 'util-linux')
+source=("ftp://ftp.infradead.org/pub/mtd-utils/${pkgname}-${pkgver}.tar.bz2")
+md5sums=('82b8e714b90674896570968f70ca778b')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

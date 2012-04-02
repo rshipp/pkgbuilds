@@ -1,0 +1,22 @@
+# Maintainer: <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Changaco <changaco .. changaco ... net>
+
+pkgname=ntfsfixboot
+pkgver=0.9
+pkgrel=1
+pkgdesc='A program to fix an NTFS partition boot sector.'
+arch=('i686' 'x86_64')
+url="http://www.linux-ntfs.org/doku.php?id=contrib:ntfsreloc"
+license=('GPL')
+source=('ntfsfixboot.c::http://homedir.jct.ac.il/~shaneh/ntfsreloc.c')
+md5sums=('221d6877604df7379f049806a70eca55')
+
+build() {
+  cd "${srcdir}"
+  gcc -g -Wall ntfsfixboot.c -o ntfsfixboot
+}
+
+package() {
+  install -dm755 "${pkgdir}/usr/bin"
+  install -Dm755 "${srcdir}/ntfsfixboot" "${pkgdir}/usr/bin"
+}

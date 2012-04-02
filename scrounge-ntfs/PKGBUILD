@@ -1,0 +1,23 @@
+# Maintainer: <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Tilmann Becker <tilmann.becker@freenet.de>
+
+pkgname=scrounge-ntfs
+pkgver=0.9
+pkgrel=1
+pkgdesc='Data recovery program for NTFS file systems.'
+arch=('i686' 'x86_64')
+url='http://memberwebs.com/stef/software/scrounge/'
+license=('BSD')
+source=("http://memberwebs.com/stef/software/scrounge/${pkgname}-${pkgver}.tar.gz")
+md5sums=('851cbb9a1ce417cf61f2612626a1bc58')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
