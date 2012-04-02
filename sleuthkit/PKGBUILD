@@ -4,21 +4,21 @@
 
 pkgname=sleuthkit
 pkgver=3.2.3
-pkgrel=1
+pkgrel=2
 pkgdesc='File system and media management forensic analysis tools.'
 arch=('i686' 'x86_64')
 url='http://www.sleuthkit.org/sleuthkit'
 license=('GPL2' 'CPL' 'custom:"IBM Public Licence"')
 depends=('perl')
-optdepends=('afflib: profides support for parsing Advanced Forensics Format files' 'libewf: profides support for parsing Expert Witness Format files' 'autopsy: Graphical frontend to sleuthkit tools')
+optdepends=('autopsy: Graphical frontend to sleuthkit tools')
 options=('!libtool')
 conflicts=('sleuthkit-withlibs')
-source=("http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz")
+source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 sha256sums=('ba5f63d7fd60d978de03777c72b1571004caa8dfe384f09757b6a8efa890ea62')
 
 build() {
   cd "${pkgname}-${pkgver}"
-  ./configure --without-afflib --without-ewf --prefix=/usr
+  ./configure --without-afflib --without-libewf --prefix=/usr
   make LDFLAGS+="-lpthread -ldl"
 }
 
