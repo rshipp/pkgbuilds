@@ -1,9 +1,9 @@
-# Maintainer (PKGBUILD and bash script): george <rpubaddr0 {at} gmail [dot] com>
-# Maintainer (git repo and perl code): CaptainKnots
-# Maintainer (bash script): Inkane
+# Maintainer (PKGBUILD and bash): george <rpubaddr0 {at} gmail [dot] com>
+# Maintainer (bash and python): Inkane
+# Maintainer (git repo): CaptainKnots
 
 pkgname=aur2ccr-git
-pkgver=20120222
+pkgver=20120403
 pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
 arch=('i686' 'x86_64')
