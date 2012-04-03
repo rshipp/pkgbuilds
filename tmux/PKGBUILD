@@ -1,0 +1,26 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: mornik <mornik@gmail.com>
+ 
+pkgname=tmux
+pkgver=1.6
+pkgrel=1
+pkgdesc='A terminal multiplexer, intended as an alternative to GNU screen.'
+arch=('i686' 'x86_64')
+url='http://sourceforge.net/projects/tmux/'
+screenshot='http://tmux.sourceforge.net/tmux3.png'
+license=('BSD')
+depends=('ncurses' 'libevent')
+install=${pkgname}.install
+source=("http://download.sourceforge.net/tmux/${pkgname}-${pkgver}.tar.gz")
+md5sums=('3e37db24aa596bf108a0442a81c845b3')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure 
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
