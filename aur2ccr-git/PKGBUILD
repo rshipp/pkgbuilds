@@ -4,7 +4,7 @@
 
 pkgname=aur2ccr-git
 pkgver=20120403
-pkgrel=1
+pkgrel=2
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
 arch=('i686' 'x86_64')
 url='https://github.com/redhat69/aur2ccr'
@@ -32,6 +32,7 @@ build() {
 
   cd "${_gitname}"
   make
+  sed -i "s/pver=\"0.7.3\"/pver=\"0.7.3-git-$(date +%Y%m%d)\"/" aur2ccr
 }
 
 package() {

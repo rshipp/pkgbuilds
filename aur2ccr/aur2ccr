@@ -15,7 +15,7 @@
 #  ...and all others who have used aur2ccr or helped in some other way.
 
 # internal settings - you can modify some of these in aur2ccr.conf
-pname="aur2ccr"         pver="0.7.3"
+pname="aur2ccr"         pver="0.7.3-official-r2"
 confdir="/etc/aur2ccr"  lconfdir=~/.aur2ccr # must be unquoted to use ~ substitution
 tmpdir="/tmp/aur2ccr"   ltmpdir=~/tmp/aur2ccr
 namesconf="names.conf"  apconf="archrepos.pacman.conf"  
@@ -296,7 +296,7 @@ namelookup() {  # see https://github.com/redhat69/aur2ccr/issues/1
 
 namechange() {  # companion function to namelookup()
   debug "namechange('$@')"
-  namelookup $1 && sed -i "s/\(^[^ ]*depends=.*[(\s'\"]*\)${apkgname}\([\s'\")]\)/\1${cpkgname}\2/g; s/\(['\"]\)${apkgname}\(['\"]\)/\1${cpkgname}\2/g" PKGBUILD || return 1
+  namelookup $1 && sed -i "s/\(^[^ ]*depends=.*[( '\"]*\)${apkgname}\([ '\")]\)/\1${cpkgname}\2/g; s/\([ '\"]\)${apkgname}\([ '\"]\)/\1${cpkgname}\2/g" PKGBUILD || return 1
   debug "new PKGBUILD: $(cat PKGBUILD)"
   depends
 }
@@ -766,7 +766,7 @@ debug "args is $args"
 }
 
 # main()
-debug "main('$@')"
+debug "main('$@') /* version = $pver */"
 # prevent running the script as root
 ([[ $EUID -eq 0 ]] && (err "This script must not be run as root!"; err "aur2ccr will ask for your password if needed."; \
   err "Exiting..."; debug "script run as root, exiting"; exit 0) && exit 0) && exit 1
