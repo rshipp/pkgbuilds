@@ -3,7 +3,7 @@
 # Maintainer (bash script): Inkane
 
 pkgname=aur2ccr-unstable
-pkgver=20120220
+pkgver=20120404
 pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - unstable version.'
 arch=('i686' 'x86_64')
@@ -30,7 +30,7 @@ build() {
   msg "GIT checkout done or server timeout"
 
   cd "${_gitname}"
-  make
+  sed -i "s/pver=\"0.7.3\"/pver=\"0.7.3-unstable-$(date +%Y%m%d)\"/" aur2ccr-unstable
 }
 
 package() {
