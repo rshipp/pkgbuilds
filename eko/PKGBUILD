@@ -1,0 +1,35 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Umidjon Almasov <u.almasov@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=eko
+pkgver=0.6.1
+pkgrel=1
+pkgdesc='A simple sound editor based on Qt, libsndfile, and libsamplerate.'
+arch=('i686' 'x86_64')
+url='http://eko.sourceforge.net/'
+screenshot='http://sourceforge.net/projects/eko/screenshots/288783'
+license=('GPL')
+depends=('qt' 'jack')
+install=$pkgname.install
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+        "eko.desktop")
+md5sums=('cbff39fecd194d7a51b3b9a5ff168c95'
+         '0365846d63a9a259d905f1e5b5e62ad3')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  qmake PREFIX=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make INSTALL_ROOT="${pkgdir}" install
+
+  # desktop file
+  install -Dm644 ../eko.desktop "${pkgdir}/usr/share/applications/eko.desktop"
+
+  # icon
+  install -Dm644 icons/eko_icon.png "${pkgdir}/usr/share/pixmaps/eko.png"
+}
