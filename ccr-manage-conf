@@ -1,0 +1,364 @@
+_pkglist=('advancecomp' 'afick' 'dff' 'fortune-mod-thinkgeek' 'optipng'
+          'arp-sk' 'aide' 'amap' 'analyzemft' 'antiword' 'anyfs-tools'
+          'arpalert' 'arping' 'arpoison' 'arptools' 'avant-window-navigator-kde'
+          'bkhive' 'chntpw' 'cifer' 'cmospwd' 'convmv' 'cryptcat' 'dcfldd'
+          'ddrescue' 'dd_rescue' 'disktype' 'eko' 'ext3grep' 'ext3undel'
+          'feff' 'flashrom' 'grokevt' 'iperf' 'john' 'jpegoptim' 'openbox')
+
+printf 'checking advancecomp...\n'
+advancecomp="$(curl -l --silent http://advancemame.sourceforge.net/comp-download.html |
+    grep 'advancecomp-.*\.tar.gz' | 
+    sed 's/.*advancecomp-\(.*\)\.tar\.gz<\/a>.*/\1/')"
+
+printf 'checking afick...\n'
+afick="$(echo 2.20)"
+
+printf 'checking aide...\n'
+aide="$(curl -l --silent http://aide.sourceforge.net/ | 
+    grep 'stable</em> version of AIDE' | 
+    sed  's/.*stable<\/em> version of AIDE is <strong>\(.*\)<\/strong> (<a .*/\1/')"
+
+printf 'checking amap...\n'
+amap="$(curl -l --silent http://freeworld.thc.org/thc-amap/ | 
+    grep 'amap-.*\.tar.gz' | 
+    sed  's/.*.tar.gz">amap-\(.*\)\.tar.gz.*/\1/')"
+
+printf 'checking analyzemft...\n'
+analyzemft="$(echo 1.7)"
+
+printf 'checking antiword...\n'
+antiword="$(curl -l --silent http://www.winfield.demon.nl/ | 
+    grep 'Click to download <A HREF="linux/.*>version .*' | 
+    sed  's/.*version \(.*[0-9]*\).*/\1/')"
+
+printf 'checking anyfs-tools...\n'
+anyfs_tools="$(echo 0.85.1c)"
+
+printf 'checking arpalert...\n'
+arpalert="$(curl -l --silent http://www.arpalert.org/arpalert.html | 
+    grep 'src/arpalert-' | sed 's/.*arpalert-\(.*\)\.tar.gz">arpalert.*/\1/')"
+
+printf 'checking arping...\n'
+arping="$(curl -l --silent http://www.habets.pp.se/synscan/programs.php?prog=arping | 
+    grep 'http://www.habets.pp.se/synscan/files/arping-.*.tar.gz' | 
+    sed  's/.*http:\/\/www.ha.*se\/synscan\/files\/arping-\(.*\)\.tar.gz">.*/\1/')"
+
+printf 'checking arpoison...\n'
+arpoison="$(echo 0.6)"
+
+printf 'checking arp-sk...\n'
+arp_sk="$(curl -l --silent http://sid.rstack.org/arp-sk/ | 
+    grep 'arp-sk-.*\.tgz</a>' | 
+    sed 's/.*arp-sk-\(.*\)\.tgz<\/a>.*/\1/')"
+
+printf 'checking arptools...\n'
+arptools="$(curl -l --silent http://blog.burghardt.pl/2007/12/arp-tools/ | 
+    grep 'http://www.burghardt.pl/files/arptools-.*.tar.gz' | 
+    sed  's/.*arptools-\(.*\)\.tar.gz<\/a>.*/\1/')"
+
+printf 'checking avant-window-navigator-kde...\n'
+avant_window_navigator_kde="$(curl -l --silent https://launchpad.net/awn | 
+    grep 'Latest version is ' | sed 's/.*Latest version is \(.*\)$/\1/')"
+
+printf 'checking bkhive...\n'
+bkhive="$(echo 1.1.1)" # not maintained
+
+printf 'checking chntpw...\n'
+chntpw="$(echo 110511)"
+
+printf 'checking cifer...\n'
+cifer="$(echo 1.2.0)" # google code
+
+printf 'checking cmospwd...\n'
+cmospwd="$(curl -l --silent http://www.cgsecurity.org/wiki/CmosPwd | 
+    grep 'http://www.cgsecurity.org/cmospwd-5.0.tar.bz2' | 
+    sed  's/.*href="http:\/\/www.cg.*ty.org\/cmospwd-\(.*\)\.tar.bz2">.*/\1/')"
+
+printf 'checking convmv...\n'
+convmv="$(echo 1.15)"
+
+printf 'checking cryptcat...\n'
+cryptcat="$(curl -l --silent http://sourceforge.net/projects/cryptcat/files/ | 
+    grep 'latest.*cryptcat-.*-.*\.[z|t]' | 
+    sed  's/.*\/cryptcat-.*-\(.*\)\.[z|t]...*/\1/')"
+
+printf 'checking dcfldd...\n'
+dcfldd="$(echo 1.3.4)"
+
+printf 'checking ddrescue...\n'
+ddrescue="$(curl -l --silent http://ftp.gnu.org/gnu/ddrescue/ | 
+    sed "s/.*href=\"//g" | cut -d\" -f1 | grep .gz$ | sed "s/\.tar\.gz//g" | 
+    tail -1 | cut -d- -f2 )"
+
+printf 'checking dd_rescue...\n'
+dd_rescue="$(curl -l --silent http://www.garloff.de/kurt/linux/ddrescue/ | 
+    grep 'current version is' | sed 's/.*current version is \(.*\), .*/\1/')"
+
+printf 'checking dff...\n'
+dff="$(curl -l --silent http://digital-forensic.org/framework/download/ | 
+    grep 'compressed sources tarball' | 
+    sed  's/.*DFF \([0-9]*\.[0-9]*\.[0-9]*\) compressed.*/\1/')"
+
+printf 'checking disktype...\n'
+disktype="$(curl -l --silent http://disktype.sourceforge.net/ | 
+    grep 'http://.*rge.net/disktype/disktype-.*.tar.gz?download">disktype' | 
+    sed  's/.*disktype-\(.*\)\.tar.gz.*/\1/')"
+
+printf 'checking eko...\n'
+eko="$(curl -l --silent http://eko.sourceforge.net/ | 
+    grep ' - source code tarball' | 
+    sed  's/.*">EKO \(.*\)<\/a> - source.*/\1/')"
+
+printf 'checking euforie-icon-theme...\n'
+euforie_icon_theme="$()" # not added
+
+printf 'checking ext3grep...\n'
+ext3grep="$(curl -l --silent http://code.google.com/p/ext3grep/downloads/list | 
+    grep .gz$ | cut -d- -f2 | sed "s/\.tar\.gz//g" | head -1)"
+
+printf 'checking ext3undel...\n'
+ext3undel="$(echo 0.1.6)" # weird
+
+printf 'checking ext4magic...\n'
+ext4magic="$()" # weird, inactive
+
+printf 'checking fatback...\n'
+fatback="$()" # inactive
+
+printf 'checking feff...\n'
+feff="$(echo 1.7)"
+
+printf 'checking flashrom...\n'
+flashrom="$(curl -l --silent http://www.flashrom.org/Latest_release | 
+    grep 'http://download.flashrom.org/releases/flashrom-.*.tar.bz2' | 
+    sed  's/.*flashrom-\(.*\)\.tar.bz2.asc".*/\1/')"
+
+printf 'checking grokevt...\n'
+grokevt="$(echo 0.5.0)"
+
+printf 'checking hping...\n'
+hping="$()" # inactive
+
+printf 'checking httptunnel...\n'
+httptunnel="$(echo 3.3)" # inactive, can't parse
+
+printf 'checking iperf...\n'
+iperf="$(curl -l --silent http://sourceforge.net/projects/iperf/files/ | 
+    grep '<span>Download iperf-.*' | 
+    sed  's/.*Download iperf-\(.*\)\.tar.gz (.*/\1/')"
+
+printf 'checking john...\n'
+john="$(echo 1.7.9)"
+
+printf 'checking jpegoptim...\n'
+jpegoptim="$(curl -l --silent http://www.kokkonen.net/tjko/projects.html | 
+    grep 'jpegoptim v.* <a' | sed 's/.*jpegoptim v\(.*\) <a .*/\1/' | head -1)"
+
+printf 'checking kftpgrabber...\n'
+kftpgrabber="$()"
+
+printf 'checking kstm...\n'
+kstm="$()"
+
+printf 'checking libbfio...\n'
+libbfio="$()"
+
+printf 'checking libdaq...\n'
+libdaq="$()"
+
+printf 'checking libewf...\n'
+libewf="$()"
+
+printf 'checking libpff...\n'
+libpff="$()"
+
+printf 'checking mdk3...\n'
+mdk3="$()"
+
+printf 'checking ms-sys...\n'
+ms_sys="$()"
+
+printf 'checking mtd-utils...\n'
+mtd_utils="$()"
+
+printf 'checking mtr-cli...\n'
+mtr_cli="$()"
+
+printf 'checking mythes-en...\n'
+mythes_en="$()"
+
+printf 'checking navit...\n'
+navit="$()"
+
+printf 'checking ngrep...\n'
+ngrep="$()"
+
+printf 'checking nikto...\n'
+nikto="$()"
+
+printf 'checking ntfsfixboot...\n'
+ntfsfixboot="$()"
+
+printf 'checking openbox...\n'
+openbox="$(curl -l --silent http://openbox.org/dist/openbox/ | 
+    sed "s/.*href=\"//g" | cut -d '"' -f 1 | grep .tar.gz$ | 
+    sed "s/\.tar\.gz//g" | cut -d "-" -f2 | tail -1)"
+
+printf 'checking optipng...\n'
+optipng="$(curl -l --silent http://optipng.sourceforge.net/ | 
+    grep '>optipng-.*\.tar.gz</a>' | sed 's/.*>optipng-\(.*\)\.tar.gz.*/\1/')"
+
+printf 'checking outguess...\n'
+outguess="$()"
+
+printf 'checking p0f...\n'
+p0f="$()"
+
+printf 'checking p0f-dev...\n'
+p0f_dev="$()"
+
+printf 'checking pasco...\n'
+pasco="$()"
+
+printf 'checking pdfcrack...\n'
+pdfcrack="$()"
+
+printf 'checking pdfid...\n'
+pdfid="$()"
+
+printf 'checking pdf-parser...\n'
+pdf_parser="$()"
+
+printf 'checking pdfresurrect...\n'
+pdfresurrect="$()"
+
+printf 'checking pdnsd...\n'
+pdnsd="$()"
+
+printf 'checking perl-algorithm-permute...\n'
+perl_algorithm_permute="$()"
+
+printf 'checking perl-expect...\n'
+perl_expect="$()"
+
+printf 'checking perl-io-tty...\n'
+perl_io_tty="$()"
+
+printf 'checking photorecover...\n'
+photorecover="$()"
+
+printf 'checking pigz...\n'
+pigz="$()"
+
+printf 'checking pyrit...\n'
+pyrit="$()"
+
+printf 'checking python-magic...\n'
+python_magic="$()"
+
+printf 'checking qastools...\n'
+qastools="$()"
+
+printf 'checking qlipper...\n'
+qlipper="$()"
+
+printf 'checking qtnotifydaemon...\n'
+qtnotifydaemon="$()"
+
+printf 'checking ranger...\n'
+ranger="$()"
+
+printf 'checking recoverdm...\n'
+recoverdm="$()"
+
+printf 'checking reglookup...\n'
+reglookup="$()"
+
+printf 'checking rifiuti...\n'
+rifiuti="$()"
+
+printf 'checking rifiuti2...\n'
+rifiuti2="$()"
+
+printf 'checking sbd...\n'
+sbd="$()"
+
+printf 'checking scalpel...\n'
+scalpel="$()"
+
+printf 'checking scapy...\n'
+scapy="$()"
+
+printf 'checking scrounge-ntfs...\n'
+scrounge_ntfs="$()"
+
+printf 'checking servicemenu-steghide-kde4...\n'
+servicemenu_steghide_kde4="$()"
+
+printf 'checking sleuthkit...\n'
+sleuthkit="$()"
+
+printf 'checking snort...\n'
+snort="$()"
+
+printf 'checking ssdeep...\n'
+ssdeep="$()"
+
+printf 'checking stegdetect...\n'
+stegdetect="$()"
+
+printf 'checking stunnel...\n'
+stunnel="$()"
+
+printf 'checking subsonic...\n'
+subsonic="$()"
+
+printf 'checking tcpflow...\n'
+tcpflow="$()"
+
+printf 'checking tcpreplay...\n'
+tcpreplay="$()"
+
+printf 'checking tcpxtract...\n'
+tcpxtract="$()"
+
+printf 'checking tinyproxy...\n'
+tinyproxy="$()"
+
+printf 'checking tmux...\n'
+tmux="$()"
+
+printf 'checking tripwire...\n'
+tripwire="$()"
+
+printf 'checking unhide...\n'
+unhide="$()"
+
+printf 'checking uuid...\n'
+uuid="$()"
+
+printf 'checking vbox-runner...\n'
+vbox_runner="$()"
+
+printf 'checking vinetto...\n'
+vinetto="$()"
+
+printf 'checking volatility...\n'
+volatility="$()"
+
+printf 'checking wepbuster...\n'
+wepbuster="$()"
+
+printf 'checking weplab...\n'
+weplab="$()"
+
+printf 'checking xcompmgr...\n'
+xcompmgr="$()"
+
+printf 'checking znotes...\n'
+znotes="$()"
+
+printf 'checking zziplib...\n'
+zziplib="$()"
+
+echo
