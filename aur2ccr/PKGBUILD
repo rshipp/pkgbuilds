@@ -8,8 +8,8 @@ pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
 arch=('i686' 'x86_64')
 url='http://ccr-tools.github.com/'
 license=('GPL')
-depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed')
-makedepends=('make' 'python2')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed' 'python2')
+makedepends=('make')
 conflicts=('aur2ccr-git')
 source=('archrepos.pacman.conf'
         'aur2ccr'

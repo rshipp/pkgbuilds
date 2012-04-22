@@ -1,20 +1,19 @@
 # Maintainer (PKGBUILD and bash): george <rpubaddr0 {at} gmail [dot] com>
 # Maintainer (bash and python): Inkane
-# Maintainer (git repo): CaptainKnots
 
 pkgname=aur2ccr-git
-pkgver=20120403
-pkgrel=2
+pkgver=20120422
+pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
 arch=('i686' 'x86_64')
-url='https://github.com/redhat69/aur2ccr'
+url='http://ccr-tools.github.com/'
 license=('GPL')
-depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed' 'python2')
 makedepends=('git' 'make')
 conflicts=('aur2ccr')
 
 _gitname="aur2ccr"
-_gitroot="git://github.com/redhat69/${_gitname}"
+_gitroot="git://github.com/ccr-tools/${_gitname}"
 
 build() {
   cd ${srcdir}
