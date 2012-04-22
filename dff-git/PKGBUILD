@@ -9,7 +9,8 @@ arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
 license=('GPL')
 makedepends=('cmake>=2.8' 'swig' 'qt' 'git')
-depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio==20111031' 'libpff' 'python-magic' 'tre' 'python2-apsw')
+depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio==20111031' 
+         'libpff' 'python2-magic' 'tre' 'python2-apsw')
 conflicts=('dff')
 source=('dff.desktop')
 sha256sums=('00a7a84d4286883ca648c9771dfe624ce2c112caff7610bca0dfc35d19537886')

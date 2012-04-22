@@ -7,9 +7,10 @@ pkgver=20120221
 pkgrel=1
 pkgdesc='A graphical frontend to several lossless image compression tools.'
 url='http://trimage.org'
+screenshot='http://trimage.org/image.png'
 arch=('any')
 license=('MIT')
-depends=('pyqt' 'optipng' 'advancecomp' 'jpegoptim' 'pngcrush' 'python')
+depends=('pyqt' 'optipng' 'advancecomp' 'jpegoptim' 'pngcrush' 'python2')
 conflicts=('trimage')
 provides=('trimage')
 

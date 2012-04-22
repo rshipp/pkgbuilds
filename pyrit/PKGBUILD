@@ -3,13 +3,13 @@
 
 pkgname=pyrit
 pkgver=0.4.0
-pkgrel=1
-pkgdesc='WPA/WPA2-PSK attacking with gpu and cluster.'
+pkgrel=2
+pkgdesc='WPA/WPA2-PSK attacking with GPU and cluster.'
 arch=('i686' 'x86_64')
 url='http://code.google.com/p/pyrit'
 license=('GPL3')
 depends=('openssl' 'python' 'zlib' 'libpcap')
-makedepends=('gcc' 'python')
+makedepends=('gcc' 'python2')
 optdepends=('cpyrit-cuda: support for nvidia gpu'
             'cpyrit-opencl: support for opencl')
 source=("http://pyrit.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")

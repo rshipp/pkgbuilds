@@ -8,7 +8,8 @@ arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
 license=('GPL')
 makedepends=('cmake>=2.8' 'swig' 'qt')
-depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio==20111031' 'libpff' 'python-magic' 'tre' 'python2-apsw')
+depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio==20111031' 
+         'libpff' 'python2-magic' 'tre' 'python2-apsw')
 conflicts=('dff-git')
 source=("http://www.digital-forensic.org/${pkgname}-src-${pkgver}.tar.gz"
         'dff.desktop')

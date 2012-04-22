@@ -1,13 +1,13 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
-pkgname=python-magic
+pkgname=python2-magic
 pkgver=5.11
 pkgrel=1
 pkgdesc='Python bindings to allow you to access the libmagic api.'
 arch=('i686' 'x86_64')
-url="http://darwinsys.com/file/"
+url='http://darwinsys.com/file/'
 license=('custom')
-depends=('file' 'python')
+depends=('file' 'python2')
 source=("ftp://ftp.astron.com/pub/file/file-${pkgver}.tar.gz")
 md5sums=('16a407bd66d6c7a832f3a5c0d609c27b')
 
