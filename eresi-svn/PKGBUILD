@@ -1,0 +1,48 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: thotypous <matiasΘarchlinux-br·org>
+
+pkgname=eresi-svn
+pkgver=1446
+pkgrel=1
+pkgdesc='A multi-architecture binary analysis framework based on a common domain-specific language for reverse engineering.'
+url='http://www.eresi-project.org'
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('openssl' 'bash' 'readline')
+makedepends=('subversion')
+provides=('eresi' 'elfsh')
+conflicts=('eresi' 'elfsh')
+
+_svnmod="eresi"
+_svntrunk="http://svn.eresi-project.org/svn/trunk/"
+
+build() {
+  cd "${srcdir}"
+
+  msg "Getting sources..."
+  svn co "${_svntrunk}" "${_svnmod}" -r "${pkgver}"
+  cd "${_svnmod}"
+
+  msg "Building..."
+
+  _opts="--enable-32-64 --enable-readline --libasm-ia32 --libasm-sparc --libasm-mips --libasm-arm"
+  [ "$CARCH" = "x86_64" ] && _opts="${_opts} --enable-m64"
+  sed -i 's,/usr/local,/usr,g;s,ln -sf \$([A-Z]\{3\}PATH),ln -sf ,;s,^GENTOO=.*$,GENTOO=1,' configure
+  sed -i '/dprintf(/d' librevm/include/revm.h
+
+  ./configure ${_opts}
+
+  # Fix Makefile
+  sed -i 's/^sed -ie "s%TESTING_ROOT=/	sed -ie "s%TESTING_ROOT=/' Makefile
+  [[ "$CARCH" == "x86_64" ]] && _eresiconf=64 
+  [[ "$CARCH" == "i686" ]] && _eresiconf=32 
+  sed -i "s,eresi/%\" eresi-config$,eresi/%\" eresi-config$_eresiconf," Makefile
+
+  make
+}
+
+package() {
+  cd "${srcdir}/${_svnmod}"
+  make DESTDIR="${pkgdir}" install
+  rm -rf "${pkgdir}/usr/include/libelfsh/.svn"
+}
