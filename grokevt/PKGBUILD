@@ -3,12 +3,12 @@
 
 pkgname=grokevt
 pkgver=0.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A Collection of scripts for reading Windows log files.'
 arch=('i686' 'x86_64')
 url='http://projects.sentinelchicken.org/grokevt'
 license=('GPL')
-depends=('python' 'reglookup')
+depends=('python2' 'reglookup')
 makedepends=('make' 'cpio')
 source=("http://grokevt.googlecode.com/files/$pkgname-$pkgver.tar.gz")
 md5sums=('787a28d5d253e07522305208ca65bc96')

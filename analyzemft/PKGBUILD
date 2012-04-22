@@ -2,12 +2,14 @@
 
 pkgname=analyzemft
 pkgver=1.7
-pkgrel=1
+pkgrel=2
 pkgdesc='Fully parse the MFT file from an NTFS filesystem and present the results as accurately as possible in a format that allows further analysis with other tools.'
 arch=('any')
 url='http://www.integriography.com/'
 license=('custom')
-depends=('python' 'tk' 'tcl')
+depends=('python2')
+optdepends=('tk: for using the gui'
+            'tcl: for using the gui')
 source=("http://www.integriography.com/projects/analyzeMFT")
 sha256sums=('3e6f79a73655489c34089f7323901e2a90e263140019f876c4e0b3cbbe541681')
 

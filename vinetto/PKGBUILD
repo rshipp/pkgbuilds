@@ -4,12 +4,12 @@
 
 pkgname=vinetto
 pkgver=0.07
-pkgrel=1
+pkgrel=2
 pkgdesc="A forensics tool to examine Thumbs.db files."
 url="http://vinetto.sourceforge.net"
 license="GPL2"
 arch=('i686' 'x86_64')
-depends=('python' 'python-imaging')
+depends=('python2' 'python-imaging')
 source=("vinetto-hashlib.patch"
         "http://downloads.sourceforge.net/${pkgname}/${pkgname}-beta-${pkgver}.tar.gz")
 sha1sums=('3341f15439a68c549ece778bed6b09c429ee6aea'
