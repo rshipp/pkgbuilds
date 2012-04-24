@@ -1,0 +1,47 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Commiebstrd<spenserreinhardt@gmail.com>
+
+pkgname=barnyard2
+pkgver=1.9
+pkgrel=1
+pkgdesc="Barnyard2 is a fork of the original barnyard project, designed specifically for Snort's new unified2 file format."
+arch=('i686' 'x86_64')
+url="http://www.securixlive.com/barnyard2/index.php"
+license=('GPLv2')
+depends=('snort')
+source=("http://www.securixlive.com/download/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+md5sums=('fadb3bb25dd4cc4ed2fb674e06031ee9')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --with-mysql
+  make 
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  
+  #makes dir for /etc locations
+  mkdir "${pkgdir}/etc" -p
+
+  #makes dirs for /var locations
+  mkdir "${pkgdir}/var" -p
+  mkdir "${pkgdir}/var/log" -p
+  mkdir "${pkgdir}/var/log/$pkgname" -p
+
+  #makes /usr/bin, /usr should already be made from make\make install
+  mkdir "${pkgdir}/usr/bin"
+
+  #copy barnyard2.conf to /etc/barnyard2.conf and executable to /usr/bin/
+  cp "${pkgdir}/usr/local/etc/$pkgname.conf" "${pkgdir}/etc/"
+  cp "${pkgdir}/usr/local/bin/$pkgname" "${pkgdir}/usr/bin/"
+
+  #file permission mods and creation of initial .waldo file
+  chmod 666 "${pkgdir}/var/log/$pkgname"
+  touch "${pkgdir}/var/log/$pkgname/$pkgname.waldo"
+  chown snort.snort "${pkgdir}/var/log/$pkgname/$pkgname.waldo"
+
+  #not needed since conf is copied to /etc/ and barnyard is sent to /usr/bin
+  rm -rf "${pkgdir}/usr/local/"
+}
