@@ -3,7 +3,8 @@ _pkglist=('advancecomp' 'afick' 'dff' 'fortune-mod-thinkgeek' 'optipng'
           'arpalert' 'arping' 'arpoison' 'arptools' 'avant-window-navigator-kde'
           'bkhive' 'chntpw' 'cifer' 'cmospwd' 'convmv' 'cryptcat' 'dcfldd'
           'ddrescue' 'dd_rescue' 'disktype' 'eko' 'ext3grep' 'ext3undel'
-          'feff' 'flashrom' 'grokevt' 'iperf' 'john' 'jpegoptim' 'openbox')
+          'feff' 'flashrom' 'grokevt' 'iperf' 'john' 'jpegoptim' 'openbox'
+          'webmin')
 
 printf 'checking advancecomp...\n'
 advancecomp="$(curl -l --silent http://advancemame.sourceforge.net/comp-download.html |
@@ -345,6 +346,11 @@ vinetto="$()"
 
 printf 'checking volatility...\n'
 volatility="$()"
+
+printf 'checking webmin...\n'
+webmin="$(curl -l --silent http://www.webmin.com/ | 
+    grep '<h1>Download Webmin ' | 
+    sed 's/.*Download Webmin \(.*\)<\/h1>.*/\1/')"
 
 printf 'checking wepbuster...\n'
 wepbuster="$()"

@@ -13,7 +13,7 @@ depends=('qt')
 makedepends=('cmake')
 replaces=('qasmixer')
 conflicts=('qasmixer')
-install=qasmixer.install
+install=$pkgname.install
 source=("http://sourceforge.net/projects/${pkgname}/files/${pkgver}/${pkgname}_${pkgver}.tar.xz/download")
 md5sums=('61df791cc51b31e171e939bf8ce6418b')
 

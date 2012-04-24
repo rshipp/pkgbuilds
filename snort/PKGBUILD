@@ -6,7 +6,8 @@
 # Contributor: Gregor Ibic <gregor.ibic@intelicom.si>
 
 pkgname=snort
-pkgver=2.9.2.1
+pkgver=2.9.2.2
+_pkgver=1538
 pkgrel=1
 pkgdesc='A lightweight network intrusion detection system.'
 arch=('i686' 'x86_64')
@@ -17,19 +18,18 @@ makedepends=('ca-certificates')
 backup=('etc/conf.d/snort'
         'etc/snort/snort.conf'
         'etc/snort/threshold.conf'
-        'etc/snort/confreference.config'
         'etc/snort/classification.config')
 options=('!makeflags' '!libtool')
-install='snort.install'
-source=('http://www.snort.org/downloads/1416'
+install=$pkgname.install
+source=("http://www.snort.org/downloads/$_pkgver"
         'snort'
         'snort.conf.d')
-md5sums=('2f3e2b6ee72adbdfac73cb1c6c14bd61'
+md5sums=('4254389550e3be31afebc70e64e6002f'
          '361b8b9e40b9af0164f6b3e3da2e8277'
          'b4fb8a68490589cd34df93de7609bfac')
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${pkgname}-${pkgver}"
 
   ./configure --prefix=/usr --sysconfdir=/etc/snort --with-libpcap-includes=/usr/include/pcap \
               --without-mysql --without-postgresql --without-oracle --without-odbc --enable-zlib \
@@ -38,7 +38,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${pkgname}-${pkgver}"
 
   make DESTDIR="${pkgdir}" install
 
