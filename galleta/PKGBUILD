@@ -1,0 +1,18 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Michael P <ptchinster@archlinux.us>
+
+pkgname=galleta
+pkgver=20040505_1
+pkgrel=1
+pkgdesc="Examine the contents of the IE's cookie files, for forensic purposes."
+arch=('i686' 'x86_64')
+url='http://odessa.sourceforge.net/'
+license=('GPL')
+source=("http://downloads.sourceforge.net/project/odessa/Galleta/${pkgver}/${pkgname}_${pkgver}.tar.gz")
+md5sums=('11bc9258fe571fb54377eca64695651c')
+
+package() {
+  cd "${pkgname}_${pkgver}/src"
+  make install
+  install -Dm755 ../bin/galleta "${pkgdir}/usr/bin/galleta"
+}
