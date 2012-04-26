@@ -5,20 +5,20 @@ pkgver=2.0
 pkgrel=2
 pkgdesc='A frugal, high-performance file carver.'
 arch=('i686' 'x86_64')
-url="http://www.digitalforensicssolutions.com/Scalpel/"
+url='http://www.digitalforensicssolutions.com/Scalpel/'
 license=('GPL2')
 depends=('tre')
 source=("http://www.digitalforensicssolutions.com/Scalpel/${pkgname}-${pkgver}.tar.gz")
 sha256sums=('164a8a58ad8473c545794e981ca6349f2b4b76107c9553baab10a8a0204267e7')
 
 build() {
-	cd "${pkgname}-${pkgver}"
-	./configure --prefix=/usr
-	make
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
 }
 
 package() {
-	cd "${pkgname}-${pkgver}"
-	make DESTDIR="${pkgdir}" install
-	install -D -m644 scalpel.conf "${pkgdir}/etc/scalpel.conf"
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 scalpel.conf "${pkgdir}/etc/scalpel.conf"
 }
