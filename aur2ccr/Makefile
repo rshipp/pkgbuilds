@@ -7,7 +7,7 @@ others = aur2ccr.8 Makefile
 allfiles = $(binfiles) $(configs) $(manpages) $(others)
 
 all: man $(allfiles)
-	quiet=1 python2 getmirrors.py
+	python2 getmirrors.py --quiet
 	@echo "run 'aur2ccr -s' if the above server is incorrect"
 
 man: aur2ccr.8.gz $(others)
