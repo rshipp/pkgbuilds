@@ -3,7 +3,7 @@
  
 pkgname=tmux
 pkgver=1.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A terminal multiplexer, intended as an alternative to GNU screen.'
 arch=('i686' 'x86_64')
 url='http://sourceforge.net/projects/tmux/'
@@ -16,7 +16,7 @@ md5sums=('3e37db24aa596bf108a0442a81c845b3')
 
 build() {
   cd "${pkgname}-${pkgver}"
-  ./configure 
+  ./configure --prefix=/usr --mandir=/usr/share/man
   make
 }
 
