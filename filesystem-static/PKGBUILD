@@ -1,0 +1,112 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Chakra Packagers
+
+pkgname=filesystem-static
+_pkgname=filesystem
+pkgver=2012.02
+pkgrel=1
+_codename=Archimedes
+pkgdesc='Base filesystem for static binaries.'
+arch=('any')
+license=('GPL')
+url="http://www.chakra-project.org"
+groups=('base')
+install=filesystem.install
+depends=('iana-etc-static' 'bash-static' 'coreutils-static')
+backup=(static/etc/fstab static/etc/crypttab static/etc/group static/etc/hosts
+        static/etc/ld.so.conf static/etc/passwd static/etc/shadow 
+        static/etc/gshadow static/etc/resolv.conf static/etc/motd 
+        static/etc/nsswitch.conf static/etc/shells static/etc/host.conf 
+        static/etc/securetty static/etc/profile static/etc/issue
+        static/etc/chakra-release)
+source=("http://chakra.sourceforge.net/sources/${_pkgname}/${_pkgname}-${pkgver}-${pkgrel}.tar.xz")
+md5sums=('e201fff56c0de549e227af66d0486aa4')
+
+# create tarball: source PKGBUILD && mksource
+
+mksource() {
+	  rm -vRf chakra-${_pkgname}
+	  git clone git://gitorious.org/chakra/chakra-${_pkgname}.git
+	  rm -vRf chakra-${_pkgname}/.git
+	  pushd chakra-${_pkgname}
+	  popd
+	  tar -cvJf ${_pkgname}-${pkgver}-${pkgrel}.tar.xz chakra-${_pkgname}/*
+	  md5sum ${_pkgname}-${pkgver}-${pkgrel}.tar.xz
+}
+
+package() {
+	cd ${srcdir}/chakra-${_pkgname}
+
+	#
+	# setup root filesystem
+	#
+	for d in bin boot dev etc home lib/modules media mnt sbin usr var opt srv/http sys run; do
+		install -d -m755 ${pkgdir}/static/${d}
+	done
+
+	install -d -m555 ${pkgdir}/static/proc
+	install -d -m0750 ${pkgdir}/static/root
+	install -d -m1777 ${pkgdir}/static/tmp
+	# vsftpd won't run with write perms on /srv/ftp
+	install -d -m555 -g ftp ${pkgdir}/static/srv/ftp
+
+	#
+	# setup /etc
+	#
+	install -d ${pkgdir}/static/etc/{ld.so.conf.d,skel,profile.d}
+	for f in fstab group host.conf hosts issue ld.so.conf motd nsswitch.conf passwd resolv.conf securetty shells profile; do
+		install -m644 ${srcdir}/chakra-${_pkgname}/${f} ${pkgdir}/static/etc/
+	done
+
+	for f in gshadow shadow crypttab; do
+		install -m600 ${srcdir}/chakra-${_pkgname}/${f} ${pkgdir}/static/etc/
+	done
+
+	install -D -m644 ${srcdir}/chakra-${_pkgname}/modprobe.d.usb-load-ehci-first ${pkgdir}/static/lib/modprobe.d/usb-load-ehci-first.conf
+
+	#
+	# setup /var
+	#
+	for d in cache/man local opt run log/old lib/misc empty; do
+		install -d -m755 ${pkgdir}/static/var/${d}
+	done
+
+	install -d -m1777 ${pkgdir}/static/var/{lock,tmp,spool/mail}
+
+	#
+	# allow setgid games to write scores
+	#
+	install -d -m775 -g games ${pkgdir}/static/var/games
+	ln -s spool/mail ${pkgdir}/static/var/mail
+
+	#
+	# prevent pacman from removing directory (FS#16886)
+	#
+	touch ${pkgdir}/static/var/empty/.keep
+
+	#
+	# setup /usr hierarchy
+	#
+	for d in bin include lib sbin share/misc src; do
+		install -d -m755 ${pkgdir}/static/usr/${d}
+	done
+
+	for d in $(seq 8); do
+		install -d -m755 ${pkgdir}/static/usr/share/man/man${d}
+	done
+
+	#
+	# setup /usr/local hierarchy
+	#
+	for d in bin etc games include lib man sbin share src; do
+		install -d -m755 ${pkgdir}/static/usr/local/${d}
+	done
+
+	ln -s ../man ${pkgdir}/static/usr/local/share/man
+
+	#
+	# setup chakra tags
+	#
+	echo "Chakra Linux release ${pkgver} (${_codename})" > "${pkgdir}/static/etc/chakra-release"
+	sed -i -e "s~Chakra Linux~Chakra Linux (${pkgver} - ${_codename})~g" "${pkgdir}/static/etc/issue"
+}

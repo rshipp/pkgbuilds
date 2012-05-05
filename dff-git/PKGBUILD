@@ -27,7 +27,7 @@ build() {
     msg "The local files are updated."
     cd ..
   else
-    git clone $_gitroot $_gitname
+    git clone $_gitroot $_gitname -b develop
   fi
 
   msg "GIT checkout done or server timeout"

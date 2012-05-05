@@ -2,14 +2,13 @@
 # Maintainer (bash and python): Inkane
 
 pkgname=aur2ccr
-pkgver=0.7.3
-pkgrel=3
+pkgver=0.7.4
+pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
-arch=('i686' 'x86_64')
+arch=('any')
 url='http://ccr-tools.github.com/'
 license=('GPL')
-depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed' 'python2')
-makedepends=('make')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'python2' 'sed')
 conflicts=('aur2ccr-git')
 source=('archrepos.pacman.conf'
         'aur2ccr'
@@ -19,14 +18,14 @@ source=('archrepos.pacman.conf'
         'Makefile'
         'names.conf')
 sha256sums=('c1b3abb04d2e0423cfd1bd8caed7e8a9f3b296910024d2672311d212b700e69e'
-            '4fadabf60ccc03d57fdfaf3aa1e42ceee7fdfae17a9b16d963711ffc90911410'
-            'd0742ddaad1484c56d400b09187dea6f8b3b57ab57c6da08d66cbde00a498dca'
-            'c9af6af7ce641c3dbf9279e9aa9f11357c9e00569b4c61983458646f7b795de4'
-            '24cb0fa8710d9a25543a752c49d7d4509363be709d6b6106cdc7513d1440fdfb'
+            '25d0b67dab3e3575fb7044e81f7f8c6996101ada4a746a695fe1e350131d6f51'
+            '005610a8541e88e4024bb1d1d00902f5cf896612419492bb35fab5712a000f7a'
+            '7c542a0802808d920c91f375d9512826568a821cea208f0b83499c1d9096c339'
+            'dcd435133354df41afd38e2fb30cda61e60064ab9cfbcaed14f00a8d80b60885'
             'a053d410a2aeaadba21c5109455ed513ffdb5c101b9de30da94d429a18a07693'
-            '7ef3d6ed80b36795c4e6d1d474eaec6e437282cedb82707a769523c9b6b69a39')
+            '01a3621b80fdeeeebcabc3e713bf5684f7c5c3610d748159260e1a4e066f5543')
 
-build() { 
+build() {
   make
 }
 

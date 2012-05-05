@@ -3,17 +3,17 @@
 # Contributor: Henrik Nymann Jensen <h@henriknj.dk>
 
 pkgname=pdnsd
-pkgver=1.2.8
+pkgver=1.2.9a
 pkgrel=1
 pkgdesc='A caching DNS proxy server.'
 arch=('i686' 'x86_64')
-url="http://www.phys.uu.nl/~rombouts/pdnsd/"
+url='http://members.home.nl/p.a.rombouts/pdnsd/index.html'
 license=('GPL')
 depends=('glibc')
 #backup=('etc/pdnsd.conf')
 source=("http://members.home.nl/p.a.rombouts/pdnsd/releases/pdnsd-${pkgver}-par.tar.gz"
-        'pdnsd')
-md5sums=('779c5d19576e561fbf2455de435e5597'
+        'pdnsd.rc')
+md5sums=('2f3e705d59a0f9308ad9504b24400769'
          '3670bd47c9303fbb655d9216715512de')
 
 build() {
@@ -25,8 +25,5 @@ build() {
 package() {
   cd "${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
-  install -dm755 "${pkgdir}/etc/rc.d"
-  install -Dm0755 "$srcdir/pdnsd" "${pkgdir}/etc/rc.d/pdnsd"
-  install -dm755 "${pkgdir}/usr/share/"
-  mv "${pkgdir}/usr/man" "${pkgdir}/usr/share/"
+  install -Dm755 "${srcdir}/pdnsd.rc" "${pkgdir}/etc/rc.d/pdnsd"
 }

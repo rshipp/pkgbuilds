@@ -8,6 +8,9 @@ arch=('i686' 'x86_64')
 url='http://darwinsys.com/file/'
 license=('custom')
 depends=('file' 'python2')
+conflicts=('python-magic')
+replaces=('python-magic')
+provides=('python-magic')
 source=("ftp://ftp.astron.com/pub/file/file-${pkgver}.tar.gz")
 md5sums=('16a407bd66d6c7a832f3a5c0d609c27b')
 

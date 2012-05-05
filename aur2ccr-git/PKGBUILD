@@ -2,14 +2,14 @@
 # Maintainer (bash and python): Inkane
 
 pkgname=aur2ccr-git
-pkgver=20120427
+pkgver=20120429
 pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
 arch=('i686' 'x86_64')
 url='http://ccr-tools.github.com/'
 license=('GPL')
-depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'sed' 'python2')
-makedepends=('git' 'make')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'python2' 'sed')
+makedepends=('git')
 conflicts=('aur2ccr')
 
 _gitname="aur2ccr"
@@ -24,14 +24,14 @@ build() {
     msg "The local files are updated."
     cd ..
   else
-    git clone $_gitroot $_gitname
+    git clone -b development $_gitroot $_gitname
   fi
 
   msg "GIT checkout done or server timeout"
 
   cd "${_gitname}"
   make
-  sed -i "s/pver=\"0.7.3\"/pver=\"0.7.3-git-$(date +%Y%m%d)\"/" aur2ccr
+  sed -i "s/pver=\"0.7.4\"/pver=\"0.7.4-git-$(date +%Y%m%d)\"/" aur2ccr
 }
 
 package() {
