@@ -11,6 +11,7 @@ depends=('file' 'python2')
 conflicts=('python-magic')
 replaces=('python-magic')
 provides=('python-magic')
+install=$pkgname.install
 source=("ftp://ftp.astron.com/pub/file/file-${pkgver}.tar.gz")
 md5sums=('16a407bd66d6c7a832f3a5c0d609c27b')
 
