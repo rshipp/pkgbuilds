@@ -1,0 +1,20 @@
+warn() {
+  echo -e "\e[1;33m==>\e[0m" "$@"
+}
+
+disclaimer() {
+  warn "This script was designed to help make porting packages from the AUR and"
+  warn "Arch repos to CCR easier. It was NOT designed to help you install Arch"
+  warn "packages. Misuse of this script WILL result in a broken system, and will"
+  warn "make it impossible for the Chakra developers to troubleshoot any problems"
+  warn "you may have. If the script continues to be misused, it will be removed"
+  warn "from the CCR, and no longer available for those who use it correctly."
+}
+
+post_install() {
+  disclaimer
+}
+
+post_upgrade() {
+  post_install
+}

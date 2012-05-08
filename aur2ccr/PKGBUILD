@@ -2,7 +2,7 @@
 # Maintainer (bash and python): Inkane
 
 pkgname=aur2ccr
-pkgver=0.7.4
+pkgver=0.7.5
 pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
 arch=('any')
@@ -10,6 +10,7 @@ url='http://ccr-tools.github.com/'
 license=('GPL')
 depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'python2' 'sed')
 conflicts=('aur2ccr-git')
+install=$pkgname.install
 source=('archrepos.pacman.conf'
         'aur2ccr'
         'aur2ccr.8'
