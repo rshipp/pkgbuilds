@@ -22,4 +22,6 @@ package() {
   export PYTHONPATH="$PYTHONPATH:${pkgdir}/usr/lib/python2.7/site-packages/"
   install -dm755 "${pkgdir}/usr/lib/python2.7/site-packages"
   python setup.py install --prefix="${pkgdir}/usr"
+  mv "${pkgdir}/usr/lib/python2.7/site-packages/"{site.py,site.pyc} \
+    "${pkgdir}/usr/lib/python2.7/site-packages/duckduckgo-0.1-py2.7.egg/"
 }
