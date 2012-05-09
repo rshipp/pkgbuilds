@@ -1,0 +1,25 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=python2-duckduckgo
+_pkgname=python-duckduckgo
+pkgver=0.1
+_pkgver=7c88e2b
+pkgrel=1
+pkgdesc='A Python library for querying the Duck Duck Go API.'
+arch=('i686' 'x86_64')
+url='http://pypi.python.org/pypi/duckduckgo/'
+license=('BSD')
+makedepends=('python-distribute')
+depends=('python2')
+conflicts=('python-duckduckgo')
+replaces=('python-duckduckgo')
+provides=('python-duckduckgo')
+source=("https://github.com/mikejs/${_pkgname}/tarball/master/${_pkgver}")
+md5sums=('0d84d5feb9636ecad63133d3b7ddc4e4')
+
+package() {
+  cd "mikejs-${_pkgname}-${_pkgver}"
+  export PYTHONPATH="$PYTHONPATH:${pkgdir}/usr/lib/python2.7/site-packages/"
+  install -dm755 "${pkgdir}/usr/lib/python2.7/site-packages"
+  python setup.py install --prefix="${pkgdir}/usr"
+}
