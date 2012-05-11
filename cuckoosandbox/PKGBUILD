@@ -1,6 +1,6 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
-pkgname=cuckoobox
+pkgname=cuckoosandbox
 _pkgname=cuckoo
 pkgver=0.3.2
 pkgrel=1
