@@ -1,0 +1,16 @@
+post_install() {
+  echo "==> Adding 'cuckoo' user as a memner of the 'vboxusers' group..."
+  useradd -d /opt/cuckoobox -G vboxusers -s /bin/false cuckoo
+  echo "==> There is still some setup necessary before you can use cuckobox."
+  echo "==> Please read http://www.cuckoobox.org/doc/0.3.2/text/installation/"
+  echo "==> Note that you need a copy of Windows (XP SP3 recommended) to use cuckoo."
+}
+
+post_upgrade() {
+  post_install
+}
+
+post_remove() {
+  echo "==> removing 'cuckoo' user..."
+  userdel cuckoo
+}

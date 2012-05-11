@@ -1,0 +1,19 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Wes Brown <wesbrown18@gmail.com>
+
+pkgname=python2-dpkt
+_pkgname=dpkt
+pkgver=1.7
+pkgrel=1
+pkgdesc='A Python library for interacting with and creating packets.'
+arch=('i686' 'x86_64')
+url='http://code.google.com/p/dpkt/'
+license=('BSD')
+depends=('python2')
+source=("http://${_pkgname}.googlecode.com/files/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('0baa25fd5d87066cf6189a66cf452ac0')
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python2 setup.py build install --root="${pkgdir}"
+}

@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Roberto Alsina <ralsina@kde.org>
+
+pkgname=python2-mako
+_pkgname=Mako
+pkgver=0.7.0
+pkgrel=1
+pkgdesc='Hyperfast and lightweight templating for the Python2 platform.'
+arch=('any')
+url='http://www.makotemplates.org/'
+license=('custom')
+makedepends=('python-distribute')
+depends=('python2' 'python2-markupsafe' 'python-beaker')
+source=("http://www.makotemplates.org/downloads/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('fe51688d9532b220a0df1aa2aacce04d')
+
+build() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python2 setup.py build
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}-${pkgver}"
+    python2 setup.py install --root="${pkgdir}" --optimize=1
+    install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/python2-mako/COPYING"
+}

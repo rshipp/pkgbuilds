@@ -1,0 +1,24 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=cuckoobox
+_pkgname=cuckoo
+pkgver=0.3.2
+pkgrel=1
+pkgdesc='An automated malware analysis system.'
+arch=('i686' 'x86_64')
+url='http://www.cuckoobox.org/'
+screenshot='http://www.cuckoobox.org/images/slider/2.png'
+license=('GPL3')
+depends=('python2' 'python2-magic' 'python2-dpkt' 'python2-mako' 'virtualbox')
+optdepends=('pyssdeep: for calculating ssdeep fuzzy hash of files'
+            'tcpdump: needed in some cases for packet interception')
+install=$pkgname.install
+source=("http://www.cuckoobox.org/downloads/${pkgver}/${_pkgname}_${pkgver}.tar.gz")
+sha256sums=('016c192898c75a36071f1192a3868b272e0bfbc694fdd780a6f285fd73b6ed5a')
+
+package() {
+  cd "${srcdir}"
+  install -dm755 "${pkgdir}/opt/cuckoobox"
+  rm ${_pkgname}_${pkgver}.tar.gz
+  cp -R * "${pkgdir}/opt/cuckoobox/"
+}
