@@ -44,5 +44,5 @@ package() {
   make DESTDIR="${pkgdir}" install
   install -dm755 "${pkgdir}/usr/share/applications/"
   install -Dm755 "${startdir}/dff.desktop" "${pkgdir}/usr/share/applications/dff.desktop"
-  [[ -f /usr/lib/libtre.so.4 ]] || ln -sv /usr/lib/libtre.so /usr/lib/libtre.so.4
+  [[ -f /usr/lib/libtre.so.4 ]] || ln -sv /usr/lib/libtre.so "${pkgdir}/usr/lib/libtre.so.4"
 }
