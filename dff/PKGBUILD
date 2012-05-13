@@ -8,10 +8,10 @@ arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
 license=('GPL')
 makedepends=('cmake>=2.8' 'swig' 'qt')
-depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio=20111031' 
+depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio' 
          'libpff' 'python2-magic' 'tre' 'python2-apsw')
 conflicts=('dff-git')
-source=("http://www.digital-forensic.org/en/downloads/1.2.0/dff-1.2.0.tar.gz/?submit=Download"
+source=("http://ftp.arxsys.fr/old_dff_releases/dff-src-1.2.0.tar.gz"
         'dff.desktop')
 sha256sums=('e6342f1b105fa9077d4b859e1dba0214e5e899ce152b9d26342a9f14659c6de6'
             '00a7a84d4286883ca648c9771dfe624ce2c112caff7610bca0dfc35d19537886')

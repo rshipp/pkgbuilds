@@ -15,15 +15,15 @@ build() {
   cd "${pkgname}-${pkgver}"
   LDFLAGS="-L/usr/lib" CFLAGS="-I/usr/include" ./configure --prefix=/usr #-D_LIBBFIO_TYPES_H 
   make
-#  ed -s libpff/libpff_libbfio.h << EOF # patch for DFF
-#48c
-#/* TODO deprecated remove after a while */
-##define LIBBFIO_FLAG_READ                               LIBBFIO_ACCESS_FLAG_READ
-##define LIBBFIO_FLAG_WRITE                             LIBBFIO_ACCESS_FLAG_WRITE
-##define LIBBFIO_FLAG_TRUNCATE                       LIBBFIO_ACCESS_FLAG_TRUNCATE
-#.
-#wq
-#EOF
+  ed -s libpff/libpff_libbfio.h << EOF # patch for DFF
+48c
+/* TODO deprecated remove after a while */
+#define LIBBFIO_FLAG_READ                               LIBBFIO_ACCESS_FLAG_READ
+#define LIBBFIO_FLAG_WRITE                             LIBBFIO_ACCESS_FLAG_WRITE
+#define LIBBFIO_FLAG_TRUNCATE                       LIBBFIO_ACCESS_FLAG_TRUNCATE
+.
+wq
+EOF
 }
 
 package() {
