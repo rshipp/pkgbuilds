@@ -11,7 +11,7 @@ arch=('any')
 url='http://www.makotemplates.org/'
 license=('custom')
 makedepends=('python-distribute')
-depends=('python2' 'python2-markupsafe' 'python-beaker')
+depends=('python2' 'python-markupsafe' 'python-beaker')
 source=("http://www.makotemplates.org/downloads/${_pkgname}-${pkgver}.tar.gz")
 md5sums=('fe51688d9532b220a0df1aa2aacce04d')
 
