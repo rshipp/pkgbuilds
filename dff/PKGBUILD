@@ -6,6 +6,7 @@ pkgrel=1
 pkgdesc='The free and open source Digital Forensics Framework.'
 arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
+screenshot='http://i.imgur.com/Rr02O.png'
 license=('GPL')
 makedepends=('cmake>=2.8' 'swig' 'qt')
 depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio' 
