@@ -1,0 +1,42 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: d4n1x <danlo8600@gmail.com>
+# Contributor: Sabart Otto <seberm[at]gmail[dot]com>
+
+pkgname=metasploit
+pkgver=4.3.0
+pkgrel=1
+pkgdesc='An advanced open-source platform for developing, testing, and using exploit code.'
+url='http://metasploit.org'
+license=('BSD')
+arch=('i686' 'x86_64')
+depends=('ruby' 'libpcap' 'ruby-msgpack' 'ruby-pg')
+optdepends=('java-runtime: To use the msf gui'
+            'dradis: Open source framework to enable effective information sharing')
+conflicts=('armitage' 'armitage-svn')
+provides=('armitage' 'armitage-svn')
+options=(!strip)
+source=("http://downloads.metasploit.com/data/releases/framework-${pkgver}.tar.bz2"
+        'metasploit.sh')
+md5sums=('d5607fba7f6fff8b5e5c19aacde4064e'
+         '912c21a795ac6116a8c13bee876ddf99')
+
+package() {
+  cd "${srcdir}/msf3"
+  echo "Installing the license file..."
+  install -dm755 "${pkgdir}/"{opt/,etc/profile.d/,usr/bin/}
+  install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -Dm444 README "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+  # Removes all .svn directories
+  echo "Removing all .svn directories..."
+  find "${srcdir}/msf3/" -name ".svn" -type d -exec rm -fr {} +
+
+  echo "Installing the framework..."
+  mv "${srcdir}/msf3" "${pkgdir}/opt/$pkgname"
+  install -Dm755 "${startdir}/metasploit.sh" "${pkgdir}/etc/profile.d/metasploit.sh"
+  for script in armitage msfbinscan msfcli msfconsole msfd msfelfscan \
+                msfencode msfgui msfmachscan msfpayload msfpescan msfrop \
+                msfrpc msfrpcd msfupdate msfvenom; do
+    ln -s /opt/metasploit/$script "${pkgdir}/usr/bin/$script"
+  done
+}
