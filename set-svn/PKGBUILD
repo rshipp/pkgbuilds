@@ -4,7 +4,7 @@
 pkgname=set-svn
 pkgver=1262
 pkgrel=1
-pkgdesc="A python-driven suite of custom tools focusing on attacking the human element."
+pkgdesc="A python-driven suite of custom pentesting tools with a focus on attacking the human element."
 arch=('i686' 'x86_64')
 url='http://www.social-engineer.org/framework/Social_Engineering_Framework'
 license=('BSD')
