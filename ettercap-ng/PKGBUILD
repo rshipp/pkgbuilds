@@ -1,0 +1,39 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Tom Newsom <Jeepster@gmx.co.uk>
+
+pkgname=ettercap-ng
+_pkgname=ettercap-NG
+pkgver=0.7.3
+pkgrel=1
+pkgdesc='A network sniffer/interceptor/logger for ethernet LANs - console interface only.'
+arch=('i686' 'x86_64')
+url='http://ettercap.sourceforge.net/'
+license=('GPL')
+depends=('openssl' 'libpcap' 'pcre' 'libltdl' 'libnet' 'zlib')
+backup=('etc/etter.conf')
+#options=('!libtool' '!makeflags' '!emptydirs')
+source=("http://downloads.sourceforge.net/ettercap/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('28fb15cd024162c55249888fe1b97820')
+
+build() {
+  cd "${_pkgname}-${pkgver}"
+
+  # Fix the ./configure script
+  sed -i "s/gentoo_ltmain_version=\`grep '^\[:space:\]/gentoo_ltmain_version=\`grep '^\[\[:space:\]\]/" \
+    configure
+
+  # Configure, without gtk gui
+  ./configure --prefix=/usr \
+              --sysconfdir=/etc \
+              --mandir=/usr/share/man \
+              --datadir=/usr/share \
+              --enable-plugins \
+              --enable-https \
+              --disable-gtk
+  make
+}
+
+package() {
+  cd "${_pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
