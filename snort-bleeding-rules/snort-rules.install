@@ -1,0 +1,8 @@
+post_install() {
+  echo "To use these rules, you need to add them to your"
+  echo "Snort config in /etc/snort/snort.conf."
+}
+
+post_upgrade() {
+  post_install
+}

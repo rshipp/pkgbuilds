@@ -1,0 +1,20 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=snort-bleeding-rules
+pkgver=20100612
+pkgrel=1
+pkgdesc='Bleeding Snort rules.'
+arch=('i686' 'x86_64')
+url='http://www.bleedingsnort.com/'
+license=('unknown')
+install=snort-rules.install
+depends=('snort')
+source=("http://www.bleedingsnort.com/downloads/bleeding.rules.tar.gz")
+sha256sums=('660f9aa624410626dd9ca91ba933cb7dc8aacffe9e2449e2bf76fb9bef43aa84')
+
+package() {
+  cd rules
+  install -dm755 "${pkgdir}/etc/snort/rules/"
+  cp *.rules "${pkgdir}/etc/snort/rules/"
+  cp bleeding.conf bleeding-sid-msg.map "${pkgdir}/etc/snort/"
+}
