@@ -1,0 +1,19 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Marti Raudsepp <marti@juffo.org>
+
+pkgname=mitmproxy
+pkgver=0.8
+pkgrel=1
+pkgdesc='An SSL-capable man-in-the-middle HTTP proxy.'
+arch=('any')
+license=('GPL')
+url='http://mitmproxy.org/'
+depends=('python2' 'openssl' 'python-urwid')
+conflicts=('mitmproxy-git')
+source=("http://mitmproxy.org/download/${pkgname}-${pkgver}.tar.gz")
+md5sums=('b53f8649fd2c082b8adaf63d2e075db6')
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  python2 setup.py install --root="${pkgdir}"
+}

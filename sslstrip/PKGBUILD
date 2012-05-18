@@ -1,0 +1,18 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: MatToufoutu <mattoufootu[at]gmail.com>
+
+pkgname=sslstrip
+pkgver=0.9
+pkgrel=1
+pkgdesc='A python tool to hijack HTTPS connections during a MITM attack.'
+url='http://www.thoughtcrime.org/software/sslstrip/'
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('openssl' 'python2' 'pyopenssl' 'twisted')
+source=("http://www.thoughtcrime.org/software/sslstrip/${pkgname}-${pkgver}.tar.gz")
+md5sums=('944020144e4f5528888b3dfbb107dd78')
+
+package() {
+    cd "${pkgname}-${pkgver}"
+    python2 setup.py install --root="${pkgdir}"
+}

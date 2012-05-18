@@ -1,0 +1,19 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Daenyth <Daenyth+arch@gmail.com>
+
+pkgname=fortune-mod-firefly
+pkgver=2.1.1
+pkgrel=1
+pkgdesc="Fortune cookies from Joss Whedon's Firefly series."
+url='http://www.daughtersoftiresias.org/progs/firefly/'
+arch=('i686' 'x86_64')
+license=('unknown')
+depends=("fortune-mod")
+source="http://www.daughtersoftiresias.org/progs/firefly/fortune-firefly-$pkgver.tar.bz2"
+md5sums=('5fce9b6c951bb73926c5bd9a67892a6a')
+
+package() {
+  cd "${srcdir}"
+  install -dm755 "${pkgdir}/usr/share/fortune"
+  install -Dm644 firefly firefly.dat "${pkgdir}/usr/share/fortune"
+}

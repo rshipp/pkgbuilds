@@ -1,0 +1,30 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Contributor: Geoffroy Carrier <geoffroy.carrier@koon.fr>
+# Contributor: Michal Krenek <mikos@sg1.cz>
+
+pkgname=rainbowcrack
+pkgver=1.5
+pkgrel=1
+pkgdesc="Password cracker based on the faster time-memory trade-off. With MySQL and Cisco PIX Algorithm patches"
+arch=('i686' 'x86_64')
+url="http://project-rainbowcrack.com/"
+license=('custom')
+depends=('openssl')
+[[ $CARCH == "x86_64" ]] && _arch=64
+source=("http://project-rainbowcrack.com/${pkgname}-${pkgver}-linux${_arch-32}.zip")
+        #"http://www.oxid.it/downloads/rc_patch_mysql_pix.zip")
+md5sums=('fde37b87b64cfae41841468e0172f3dc')
+         #'71845ac352ff888a9cfcff6c1ea4184b')
+[[ $CARCH == "x86_64" ]] && md5sums[0]='fff71ccebfc43c999352dbd5cddc5977'
+
+package() {
+  cd "${pkgname}-${pkgver}-linux${_arch-32}"
+
+  install -Dm644 charset.txt "${pkgdir}/usr/share/rainbowcrack/charset.txt"
+  install -Dm644 readme.txt "${pkgdir}/usr/share/rainbowcrack/readme.txt"
+  for bin in rcrack rt2rtc rtc2rt rtgen rtsort; do
+    install -Dm755 $bin "${pkgdir}/usr/bin/$bin"
+  done
+  install -Dm755 alglib0.so "${pkgdir}/usr/lib/alglib0.so"
+}
