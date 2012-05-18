@@ -1,0 +1,24 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: nozog <nozog@archlinux.us>
+
+pkgname=unhash
+pkgver=1.1
+pkgrel=1
+pkgdesc='A program that tries a brute force attack against an MD5 or SHA1 hash.'
+arch=('i686' 'x86_64')
+license=('GPL')
+url="http://freshmeat.net/projects/unhash/"
+depends=('openssl' 'libssh')
+source=("http://www.dxp2532.info/tools/${pkgname}-${pkgver}.tar.bz2")
+md5sums=('b0cce452ec2eb64c4e0a8ec1b04a32d5')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make CFLAGS+='-lcrypto'
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/bin"
+  install -Dm755 unhash "${pkgdir}/bin/unhash"
+}
