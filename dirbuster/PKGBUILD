@@ -1,0 +1,23 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=dirbuster
+_pkgname=DirBuster
+pkgver=0.12
+pkgrel=1
+pkgdesc='An application designed to brute force directories and files names on webapp servers.' 
+url='http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project'
+license=('LGPL')
+arch=('i686' 'x86_64')
+depends=('jre6')
+source=("http://downloads.sourceforge.net/dirbuster/${_pkgname}-${pkgver}.tar.bz2"
+        'dirbuster') 
+md5sums=('1db1c2e6f0d06f2f1aa662775567b6fa'
+         '87da15877aadf469f4a0349a9fb50168')
+
+package() {
+  cd "${_pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/opt/"
+  install -dm755 "${pkgdir}/usr/bin"
+  cp -r ${_pkgname}-${pkgver}.jar "${pkgdir}/opt/DirBuster.jar"
+  cp "${srcdir}/dirbuster" "${pkgdir}/usr/bin/"
+}

@@ -1,0 +1,48 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Sébastien Luttringer <seblu@aur.archlinux.org>
+# Contributor: Le_suisse <lesuisse.dev+aur at gmail dot com>
+# Contributor: Jason Rodriguez <jason-aur@catloaf.net>
+
+pkgname=sslh
+pkgver=1.13b
+_pkgver=1.13
+pkgrel=1
+pkgdesc='SSL/SSH/OpenVPN/XMPP/tinc port multiplexer.'
+arch=('i686' 'x86_64')
+url='http://www.rutschle.net/tech/sslh.shtml'
+license=('GPL2')
+depends=('libconfig')
+backup=('etc/conf.d/sslh' 'etc/sslh.conf')
+source=("http://www.rutschle.net/tech/${pkgname}-${pkgver}.tar.gz"
+        'sslh.rc'
+        'sslh.conf')
+md5sums=('fbd8934e6f799437c562866f09afee5b'
+         'c2a0c7c58d091acf5b4672f58066ee8f'
+         'c51c63d2b28080bae4c1c7a0c469bab7')
+
+build() {
+  cd ${pkgname}-${_pkgver}
+  # fix archlinux path in manpage
+  sed -i 's/init.d/rc.d/' sslh.pod
+  sed -i 's+/etc/default+/etc/conf.d+' sslh.pod
+  make VERSION=\"v${_pkgver}\"
+}
+
+package() {
+  # install initscripts
+  install -Dm 755 sslh.rc "${pkgdir}/etc/rc.d/sslh"
+  install -Dm 644 sslh.conf "${pkgdir}/etc/conf.d/sslh"
+
+  # manually install to have both ssl-fork and ssl-select
+  cd ${pkgname}-${_pkgver}
+  install -Dm 0755 sslh-fork "${pkgdir}/usr/bin/sslh-fork"
+  install -Dm 0755 sslh-select "${pkgdir}/usr/bin/sslh-select"
+  ln -s sslh-fork "${pkgdir}/usr/bin/sslh"
+  # install manpage
+  install -Dm 0644 sslh.8.gz "${pkgdir}/usr/share/man/man8/sslh.8.gz"
+  # install example file
+  install -Dm 0644 example.cfg "${pkgdir}/etc/sslh.conf"
+  # install systemd service
+  install -Dm 644 scripts/systemd.sslh.service \
+    "${pkgdir}/usr/lib/systemd/system/sslh.service"
+}
