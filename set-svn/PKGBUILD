@@ -10,7 +10,7 @@ url='http://www.social-engineer.org/framework/Social_Engineering_Framework'
 license=('BSD')
 depends=('metasploit' 'python2' 'beautiful-soup' 'python-pexpect')
 makedepends=('subversion')
-optdepends=('ettercap: DNS spoofing and ARP cache poisoning capabilities'
+optdepends=('ettercap-ng: DNS spoofing and ARP cache poisoning capabilities'
             'sendmail: email address spoofing'
             'java-runtime: create self-signed JAVA applets and spoof publisher'
             'python-pefile: advanced AV evasion via hijacking a legit digital certificate'
