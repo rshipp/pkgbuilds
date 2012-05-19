@@ -1,0 +1,34 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Kaiting Chen <kaitocracy@gmail.com>
+# Contributor: Gaetan Bisson <bisson@archlinux.org>
+# Contributor: Roberto Alsina <ralsina@kde.org>
+
+pkgname=nsd
+pkgver=3.2.10
+pkgrel=1
+pkgdesc='Authoritative only, high performance and simple DNS server.'
+url='http://www.nlnetlabs.nl/nsd/'
+license=('BSD')
+depends=('openssl')
+makedepends=('flex')
+arch=('i686' 'x86_64')
+source=("http://www.nlnetlabs.nl/downloads/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+sha1sums=('04657cffe5087d97213b245f8281296cac86b868')
+
+install=install
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/ --exec-prefix=/usr --datarootdir=/usr/share
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -d "${pkgdir}/"{etc/rc.d,usr/share/{doc,licenses}/nsd}
+  rm doc/differences.pdf
+  install -m644 doc/* "${pkgdir}/usr/share/doc/${pkgname}"
+  ln -s "../../doc/${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  ln -s "../../usr/sbin/nsdc" "${pkgdir}/etc/rc.d/nsd"
+}
