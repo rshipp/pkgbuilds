@@ -1,0 +1,18 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=bdns
+pkgver=2.0.1
+pkgrel=1
+pkgdesc='A bind/nsupdate web interface.'
+arch=('any')
+url='http://bdns.sourceforge.net/'
+license=('GPL')
+source=("http://downloads.sourceforge.net/project/bdns/Bdns-${pkgver}/Bdns-${pkgver}/Bdns.tar.gz")
+md5sums=('3cd21d166d89e4321e3ad2578d3c97a5')
+
+package() {
+  cd "${srcdir}"
+  find ./Bdns -type d -name CVS -exec rm -rf {} \; || true
+  install -dm755 "${pkgdir}/srv/http/"
+  cp -aR Bdns "${pkgdir}/srv/http/Bdns"
+}
