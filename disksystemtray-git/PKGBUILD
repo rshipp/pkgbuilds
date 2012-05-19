@@ -1,0 +1,39 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: PyrO_70 <brieuc.roblin at gmail dot com>
+
+pkgname=disksystemtray-git
+pkgver=20120519
+pkgrel=1
+pkgdesc='Qt systemtray client for UDisks and UIso.'
+arch=('i686' 'x86_64')
+url="http://www.pyrotools.org/"
+license=('GPL')
+depends=('qt' 'uiso-git')
+makedepends=('git')
+
+_gitroot="git://gitorious.org/ptdisksystemtray/ptdisksystemtray.git"
+_gitname="ptdisksystemtray"
+
+build() {
+  cd "${srcdir}"
+
+  msg "Connecting to gitorious ..."
+
+  if [ -d $_gitname ] ; then
+    ( cd $_gitname && git pull )
+  else
+    git clone $_gitroot $_gitname || return 1
+  fi
+
+  msg "Starting make..."
+  
+  cd "$_gitname"
+
+  qmake
+  make
+}
+
+package() {
+  cd "${srcdir}/$_gitname"
+  install -Dm755 "PtDiskSystemTray" "${pkgdir}/usr/bin/DiskSystemTray"
+}

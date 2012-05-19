@@ -1,0 +1,46 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: PyrO_70 <brieuc.roblin at gmail dot com>
+
+pkgname=uiso-git
+pkgver=20120519
+pkgrel=1
+pkgdesc='Daemon providing userland mount and umount of ISO file using DBus.'
+arch=('i686' 'x86_64')
+url="http://www.pyrotools.org/"
+license=('GPL')
+depends=('qt')
+makedepends=('git')
+
+_gitroot="git://gitorious.org/uiso/uiso.git"
+_gitname="uiso"
+
+build() {
+  cd "${srcdir}"
+
+  msg2 "Connecting to gitorious ..."
+
+  if [ -d $_gitname ] ; then
+    ( cd $_gitname && git pull )
+  else
+    git clone $_gitroot $_gitname || return 1
+  fi
+
+  msg2 "Starting make..."
+  
+  cd "$_gitname"
+
+  qmake
+  make
+}
+
+package() {
+  cd "${srcdir}/$_gitname"
+  #installing binary
+  install -Dm755 uiso "${pkgdir}/usr/bin/uiso"
+  
+  #installing daemon script
+  install -Dm755 conf/uiso "${pkgdir}/etc/rc.d/uiso"
+  
+  #installing dbus config
+  install -Dm644 conf/org.pyrotools.UIso.conf "$pkgdir/etc/dbus-1/system.d/org.pyrotools.UIso.conf"
+} 
