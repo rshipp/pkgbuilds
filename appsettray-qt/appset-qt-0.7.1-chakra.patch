@@ -1,0 +1,126 @@
+diff -Npur appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/ccr appset-qt-0.7.1-sources/appsetconf/appset/Chakra/ccr
+--- appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/ccr	1970-01-01 01:00:00.000000000 +0100
++++ appset-qt-0.7.1-sources/appsetconf/appset/Chakra/ccr	2011-11-21 23:16:41.000000000 +0100
+@@ -0,0 +1,6 @@
++community_name=CCR
++search=ccr -Ss --ccronly
++query_info=ccr -Si --ccronly
++install=ccr -S --noconfirm --ccronly
++remove=pacman -Rd --noconfirm
++upgrade=ccr -Syu --noconfirm --ccronly
+diff -Npur appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/pacman appset-qt-0.7.1-sources/appsetconf/appset/Chakra/pacman
+--- appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/pacman	1970-01-01 01:00:00.000000000 +0100
++++ appset-qt-0.7.1-sources/appsetconf/appset/Chakra/pacman	2011-11-21 23:16:00.000000000 +0100
+@@ -0,0 +1,40 @@
++update=pacman -Sy
++upgrade=pacman -Su --needed
++install=pacman -S --needed
++remove=pacman -Rsd
++clean_cache=pacman -Scc
++query_upgradable=pacman -Qui
++query_local_byname=pacman -Q
++query_local_info_byname=pacman -Qi
++query_remote_byname=pacman -Ssq
++query_remote_info_byname=pacman -Si
++tool_ignore_upgrades=--ignore
++tool_hold_upgrades=*
++tool_unhold_upgrades=*
++check_install_deps=pacman -Sp --print-format "%r/%n %s"
++check_remove_deps=pacman -Rcp --print-format "%r/%n %s"
++check_upgrade_deps=pacman -Sdup --print-format "%r/%n %v"
++download_path=/var/cache/pacman/pkg/
++tool_lock_file=/var/lib/pacman/db.lck
++install_local=pacman -U --noconfirm
++local_ext=.pkg.tar.xz
++check_local_deps=pacman -Up --print-format "%r/%n %s"
++tool_post_up_cmd=pacman-db-upgrade
++tool_rm_repo=*
++get_file_list=pacman -Qlq
++tool_repos_dir=/var/lib/pacman/sync/
++
++query_filter_regexp=^[^ ]+ [^ ]+$
++query_repo_sep=/
++query_name_regexp=^[[:alpha:]][^\\ ]+
++query_lversion_regexp=[^:\\ ]+$
++query_info_name_regexp=^Name[[:space:]]+:[ ]+
++query_info_version_regexp=^Version[[:space:]]+:[ ]+
++query_info_group_regexp=^Groups[[:space:]]+:[ ]+
++query_info_license_regexp=^Licenses[[:space:]]+:[ ]+
++query_info_description_regexp=^Description[[:space:]]+:[ ]+
++query_info_url_regexp=^URL[[:space:]]+:[ ]+
++query_info_ksize_regexp=^Download[[:space:]]Size[[:space:]]+:[ ]+
++query_info_repo_regexp=^Repository[[:space:]]+:[ ]+
++
++community_tool=ccr
+diff -Npur appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/pacman.quest appset-qt-0.7.1-sources/appsetconf/appset/Chakra/pacman.quest
+--- appset-qt-0.7.1-sources.orig/appsetconf/appset/Chakra/pacman.quest	1970-01-01 01:00:00.000000000 +0100
++++ appset-qt-0.7.1-sources/appsetconf/appset/Chakra/pacman.quest	2011-11-16 20:25:23.000000000 +0100
+@@ -0,0 +1,2 @@
++.* are in conflict .*\?.*
++.*Replace .*with .*\?.*
+diff -Npur appset-qt-0.7.1-sources.orig/appsetconf/appset.conf appset-qt-0.7.1-sources/appsetconf/appset.conf
+--- appset-qt-0.7.1-sources.orig/appsetconf/appset.conf	2011-11-16 20:25:23.000000000 +0100
++++ appset-qt-0.7.1-sources/appsetconf/appset.conf	2011-11-21 23:17:22.000000000 +0100
+@@ -1,9 +1,5 @@
+-distribution=Arch
++distribution=Chakra
+ tool=pacman
+ as_conf_path=/etc/appset/
+-rss_main=http://www.archlinux.org/feeds/news/
+-rss_Italian=http://www.archlinux.it/forum/extern.php?action=feed&fid=15&type=rss
+-rss_French=http://archlinux.fr/feed
+-rss_German=https://bbs.archlinux.de/extern.php?action=feed&fid=257&type=rss&order=posted&show=6
+-rss_Greek=http://www.archlinux.gr/?feed=rss
+-rss_Spanish=http://archlinux-es.org/feeds/news/
++rss_main=http://chakra-linux.org/news/index.php?/feeds/index.rss1
++rss_Italian=http://chakra-project.it/component/ninjarsssyndicator/?feed_id=1&format=raw
+diff -Npur appset-qt-0.7.1-sources.orig/appsetconf/appsetconf.pro appset-qt-0.7.1-sources/appsetconf/appsetconf.pro
+--- appset-qt-0.7.1-sources.orig/appsetconf/appsetconf.pro	2011-11-16 20:25:23.000000000 +0100
++++ appset-qt-0.7.1-sources/appsetconf/appsetconf.pro	2011-11-21 23:17:47.000000000 +0100
+@@ -2,9 +2,9 @@ TEMPLATE = subdirs
+ 
+ OTHER_FILES += \
+     appset.conf \
+-    appset/Arch/pacman \
+-    appset/Arch/packer \
+-    appset/Arch/pacman.quest
++    appset/Chakra/pacman \
++    appset/Chakra/ccr \
++    appset/Chakra/pacman.quest
+ 
+ configuration.path = /etc
+ configuration.files += appset.conf
+diff -Npur appset-qt-0.7.1-sources.orig/Qt/AppSet-Qt/options.ui appset-qt-0.7.1-sources/Qt/AppSet-Qt/options.ui
+--- appset-qt-0.7.1-sources.orig/Qt/AppSet-Qt/options.ui	2011-11-16 20:25:50.000000000 +0100
++++ appset-qt-0.7.1-sources/Qt/AppSet-Qt/options.ui	2011-11-21 23:18:40.000000000 +0100
+@@ -440,7 +440,7 @@
+           <item>
+            <widget class="QLineEdit" name="xTermCmd">
+             <property name="text">
+-             <string notr="true">xterm -e</string>
++             <string notr="true">konsole --nofork -e</string>
+             </property>
+            </widget>
+           </item>
+diff -Npur appset-qt-0.7.1-sources.orig/Qt/AppSetRepoEditor-Qt/AppSetRepoEditor-Qt.pro appset-qt-0.7.1-sources/Qt/AppSetRepoEditor-Qt/AppSetRepoEditor-Qt.pro
+--- appset-qt-0.7.1-sources.orig/Qt/AppSetRepoEditor-Qt/AppSetRepoEditor-Qt.pro	2011-11-16 20:25:41.000000000 +0100
++++ appset-qt-0.7.1-sources/Qt/AppSetRepoEditor-Qt/AppSetRepoEditor-Qt.pro	2011-11-21 23:19:35.000000000 +0100
+@@ -28,7 +28,7 @@ HEADERS  += repoeditor.h \
+ FORMS    += repoeditor.ui \
+     addrepo.ui
+ 
+-OTHER_FILES += conf/Arch/pacman.repos
++OTHER_FILES += conf/Chakra/pacman.repos
+ 
+ target.path = /usr/bin
+ target.files+=appsetrepoeditor-qt
+diff -Npur appset-qt-0.7.1-sources.orig/Qt/AppSetRepoEditor-Qt/conf/Chakra/pacman.repos appset-qt-0.7.1-sources/Qt/AppSetRepoEditor-Qt/conf/Chakra/pacman.repos
+--- appset-qt-0.7.1-sources.orig/Qt/AppSetRepoEditor-Qt/conf/Chakra/pacman.repos	1970-01-01 01:00:00.000000000 +0100
++++ appset-qt-0.7.1-sources/Qt/AppSetRepoEditor-Qt/conf/Chakra/pacman.repos	2011-11-16 20:25:39.000000000 +0100
+@@ -0,0 +1,6 @@
++repo_conf_path=/etc/pacman.conf
++repo_match_regexp=^\[(?!(options|repo-name|\[|\s))
++detail_match_regexp=^(Server|Include)\s*=\b.+\b
++repo_name_filter=(\s+|\[|\])
++conf_comment_string=#
++repo_name_format=[%repo%]

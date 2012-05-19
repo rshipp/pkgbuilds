@@ -1,0 +1,31 @@
+--- Qt/AppSetRepoEditor-Qt/repoconf.h	2011/10/24 13:18:41	192
++++ Qt/AppSetRepoEditor-Qt/repoconf.h	2011/11/15 23:41:22	193
+@@ -21,14 +21,14 @@
+ #define REPOCONF_H
+ 
+ #include <QAbstractTableModel>
+-#include <QQueue>
++#include <QList>
+ #include "repoentry.h"
+ 
+ class RepoConf : public QAbstractTableModel {
+     Q_OBJECT
+ 
+ private:
+-    QQueue<RepoEntry> entries;
++    QList<RepoEntry> entries;
+     QStringList preamble;
+ 
+     QString repoConfFilePath;    
+
+--- Qt/AppSetRepoEditor-Qt/repoconf.cpp	2011/10/24 13:18:41	192
++++ Qt/AppSetRepoEditor-Qt/repoconf.cpp	2011/11/15 23:41:22	193
+@@ -131,7 +131,7 @@
+ 
+ void RepoConf::addEntry(const RepoEntry & entry){
+     beginInsertRows(QModelIndex(),entries.count(),entries.count());
+-    entries.enqueue(entry);
++    entries.push_back(entry);
+     endInsertRows();
+ }
+ 
