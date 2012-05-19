@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: dorphell <dorphell@archlinux.org>
+# Contributor: Tom Newsom <Jeepster@gmx.co.uk>
+
+pkgname=adns
+pkgver=1.4
+pkgrel=1
+pkgdesc='An asyncronous dns resolver library and tools.'
+arch=('i686' 'x86_64')
+url='http://www.chiark.greenend.org.uk/~ian/adns/'
+license=('GPL')
+depends=('glibc')
+source=("http://www.chiark.greenend.org.uk/~ian/${pkgnam}e/ftp/${pkgname}-${pkgver}.tar.gz")
+md5sums=('88bc7bbf3f62a8d4fb186b8f72ead853')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  mkdir -p "${pkgdir}/usr/"{lib,include,bin}
+  make prefix="${pkgdir}/usr" install
+}
