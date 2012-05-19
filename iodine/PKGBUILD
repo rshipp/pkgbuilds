@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Daenyth <Daenyth+Arch [at] gmail [dot] com>
+# Contributor: nofxx <x@nofxx.com>
+
+pkgname=iodine
+pkgver=0.6.0_rc1
+_pkgver=0.6.0-rc1
+pkgrel=1
+pkgdesc='Lets you tunnel IPv4 data through a DNS server.'
+arch=('i686' 'x86_64')
+url="http://code.kryo.se/iodine"
+license=('custom: ISC')
+source=("http://code.kryo.se/iodine/${pkgname}-${_pkgver}.tar.gz")
+md5sums=('a15bb4faba020d217016fde6e231074a')
+
+build() {
+  cd "${pkgname}-${_pkgver}"
+  make
+}
+
+package() {
+  cd "${pkgname}-${_pkgver}"
+  make prefix=/usr DESTDIR="${pkgdir}" install
+
+  install -d "${pkgdir}/usr/share/licenses/iodine"
+  sed -n '/AUTHORS & LICENSE/,$p' README > "${pkgdir}/usr/share/licenses/iodine/LICENSE"
+}
