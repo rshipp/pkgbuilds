@@ -1,21 +1,21 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=dd_rescue
-pkgver=1.25
+pkgver=1.28
 pkgrel=1
 pkgdesc='Similar to dd, with features designed for rescuing data from a medium with errors.'
 arch=('i686' 'x86_64')
-url="http://www.garloff.de/kurt/linux/ddrescue/"
+url='http://www.garloff.de/kurt/linux/ddrescue/'
 license=('GPL2')
 source=("http://www.garloff.de/kurt/linux/ddrescue/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('22a2b030868c6e0639240df590a0c8483fda9ad1c01c5e6a0f7f188271c02585')
+sha256sums=('4adcc368a1d4ad62577eaf8609809be1678335d54ef565a5a0fa6e1210489f03')
 
 build() {
-	cd "${pkgname}"
-	make
+  cd "${pkgname}"
+  make
 }
 
 package() {
-	cd "${pkgname}"
-	make DESTDIR="$pkgdir" install
+  cd "${pkgname}"
+  make DESTDIR="${pkgdir}" install
 }
