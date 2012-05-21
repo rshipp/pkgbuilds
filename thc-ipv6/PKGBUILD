@@ -1,0 +1,26 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: henning mueller <henning@orgizm.net>
+
+pkgname=thc-ipv6
+pkgver=1.8
+pkgrel=1
+pkgdesc='A complete toolset to attack the inherent protocol weaknesses of IPv6 and ICMP6, and includes an easy to use packet factory library.'
+url='http://freeworld.thc.org/thc-ipv6/'
+license=('GPL')
+arch=('i686' 'x86_64')
+depends=('libpcap' 'openssl')
+source=("http://dl.packetstormsecurity.net/groups/thc/${pkgname}-${pkgver}.tar.gz")
+md5sums=('ae5d4180dae0763d315493ac7c825033')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  sed -i 's:+=:=:' Makefile
+  make clean all
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  for bin in $(find . -type f -perm /o+x); do
+    install -D $bin "${pkgdir}/usr/bin/$bin"
+  done
+}
