@@ -1,0 +1,22 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: virtuemood <virtue@archlinux.us>
+
+pkgname=icmptx
+pkgver=0.01
+pkgrel=1
+license=('GPL')
+pkgdesc='A program that allows a user with root privledges to create a virtual network link between two computers, encapsulating data inside of ICMP packets.'
+arch=('i686' 'x86_64')
+url='https://github.com/jakkarth/icmptx/'
+source=("http://thomer.com/icmptx/${pkgname}-${pkgver}.tar.gz")
+md5sums=('f83d1d7789a1b100abcc00d1a56ee95d')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  install -Dm755 icmptx "${pkgdir}/usr/bin/icmptx"
+}
