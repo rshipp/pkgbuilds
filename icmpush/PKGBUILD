@@ -1,0 +1,25 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: grawity@gmail.com
+
+pkgname=icmpush
+pkgver=2.2
+pkgrel=1
+_debrel=6
+pkgdesc='An ICMP packet builder.'
+arch=('i686' 'x86_64')
+url='http://packages.debian.org/src:icmpush'
+license=('GPL2')
+source=("http://ftp.de.debian.org/debian/pool/main/i/icmpush/icmpush_${pkgver}.orig.tar.gz"
+        "http://ftp.de.debian.org/debian/pool/main/i/icmpush/icmpush_${pkgver}-${_debrel}.diff.gz")
+md5sums=('a9832e789be4138f04fca87cbe20d29f'
+         'b744953a0b37f88d50a8d3e8b2ac783f')
+
+build() {
+  cd "${pkgname}-${pkgver}.orig"
+  patch -p1 < "${srcdir}/icmpush_2.2-6.diff"
+  make linuz
+}
+package() {
+  cd "${pkgname}-${pkgver}.orig"
+  install -Dm755 icmpush "${pkgdir}/usr/bin/icmpush"
+}
