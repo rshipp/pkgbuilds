@@ -4,7 +4,7 @@
 pkgname=thc-ipv6
 pkgver=1.8
 pkgrel=1
-pkgdesc='A complete toolset to attack the inherent protocol weaknesses of IPv6 and ICMP6, and includes an easy to use packet factory library.'
+pkgdesc='A complete toolset to attack the inherent protocol weaknesses of IPv6 and ICMP6, including an easy to use packet factory library.'
 url='http://freeworld.thc.org/thc-ipv6/'
 license=('GPL')
 arch=('i686' 'x86_64')
