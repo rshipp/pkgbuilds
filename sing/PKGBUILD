@@ -1,0 +1,23 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Pranay Kanwar <warl0ck@metaeye.org>
+
+pkgname=sing
+pkgver=1.1
+pkgrel=1
+pkgdesc='Send ICMP Nasty Garbage - a tool that sends ICMP packets fully customized from the command line.'
+url='http://sourceforge.net/projects/sing/'
+license=('GPL')
+arch=('i686' 'x86_64')
+source=("http://downloads.sourceforge.net/sourceforge/sing/SING-$pkgver.tgz")
+md5sums=('f9f649c4b40174a983601d46e4a3daac')
+
+build() {
+  cd "SING-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "SING-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
