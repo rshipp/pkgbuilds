@@ -1,0 +1,25 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Daenyth <Daenyth+Arch AT gmail DOT com>
+# Contributor: Kessia Pinheiro <kessiapinheiro at gmail.com>
+
+pkgname=pingtunnel
+pkgver=0.72
+pkgrel=1
+pkgdesc='An application that tunnels TCP connections using ICMP echo request and reply packets.'
+url='http://www.cs.uit.no/~daniels/PingTunnel/index.html'
+arch=('i686' 'x86_64')
+license=('BSD')
+depends=('libpcap')
+source=("http://www.cs.uit.no/~daniels/PingTunnel/PingTunnel-${pkgver}.tar.gz")
+md5sums=('c5f0c36d1a48d84ce7b5217f1ba52dd0')
+
+build() {
+  cd "${srcdir}/PingTunnel"
+  make
+}
+
+package() {
+  cd "${srcdir}/PingTunnel"
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  make prefix="${pkgdir}/usr" install
+}
