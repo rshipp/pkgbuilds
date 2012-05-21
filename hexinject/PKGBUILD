@@ -1,0 +1,26 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Guillermo Ramos <0xwille at gmail dot com>
+
+pkgname=hexinject
+pkgver=1.4
+pkgrel=1
+pkgdesc='A very versatile packet injector and sniffer, that provides a command-line framework for raw network access.'
+arch=('i686' 'x86_64')
+url='http://hexinject.sourceforge.net'
+license=('BSD')
+depends=('libpcap')
+source=("http://sourceforge.net/projects/${pkgname}/files/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.gz/download"
+        'COPYING')
+sha256sums=('047e1db28900846eaa2427d4150d276a19481f05659a836944db47b42917aea4'
+            'd6c66830395da3461a5d599d3cc814f7697c25fac2e1b1ba6d1a64a86d9bddb8')
+
+build() {
+  cd "${pkgname}"
+  make
+}
+
+package() {
+  cd "${pkgname}"
+  install -Dm755 hexinject "${pkgdir}/usr/bin/hexinject"
+  install -Dm644 "${srcdir}/COPYING" "${pkgdir}/usr/share/licenses/hexinject/COPYING"
+}
