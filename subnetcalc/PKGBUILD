@@ -1,0 +1,25 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Stefan J. Betz <info@stefan-betz.net>
+
+pkgname=subnetcalc
+pkgver=2.1.3
+pkgrel=1
+pkgdesc='A subnet calculator for IPv4/IPv6.'
+arch=('i686' 'x86_64')
+license=('GPL')
+url='http://www.iem.uni-due.de/~dreibh/subnetcalc/'
+depends=('geoip')
+source=("http://www.iem.uni-due.de/~dreibh/${pkgname}/download/${pkgname}-${pkgver}.tar.gz")
+md5sums=('3f89cb8c55631137f1831bc0cf7f13f7')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/usr"
+  ./configure --prefix="${pkgdir}/usr"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  make install
+}

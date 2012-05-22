@@ -1,0 +1,27 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Elmo Todurov <todurov@gmail.com>
+# Update: henning mueller <henning@orgizm.net>
+
+pkgname=netcat6
+_pkgname=nc6
+pkgver=1.0
+pkgrel=1
+pkgdesc='Improved IPv6-ready version of Netcat, the network piping application.'
+arch=('i686' 'x86_64')
+url='http://www.deepspace6.net/projects/netcat6.html'
+license=('GPL')
+makedepends=('glibc')
+optdepends=('bluez-libs')
+source=("ftp://ftp.deepspace6.net/pub/ds6/sources/nc6/nc6-${pkgver}.tar.bz2")
+md5sums=('5074bc51989420a1f68716f93322030f')
+
+build() {
+  cd "${_pkgname}-${pkgver}"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "${_pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}

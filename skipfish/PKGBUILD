@@ -1,0 +1,36 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Alex Cartwright (alexc223@googlemail.com)
+# Contributor: CRT <crt.011@gmail.com>
+
+pkgname=skipfish
+pkgver=2.06b
+pkgrel=1
+pkgdesc='A fully automated, active web application security reconnaissance tool.'
+arch=('i686' 'x86_64')
+license=('apache')
+url='http://code.google.com/p/skipfish/'
+depends=('openssl' 'libidn' 'zlib' 'glibc' 'bash')
+source=("http://skipfish.googlecode.com/files/${pkgname}-${pkgver}.tgz"
+        'skipfish.diff')
+md5sums=('301f3f209ddf57dd7103a61256f62afa'
+         'd1b2eb33427e1bdcfbbc5a223c80990e')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+
+  # Patch fixes application run directory system error
+  patch -p1 config.h < "${srcdir}/skipfish.diff"
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+  install -dm755 "${pkgdir}/usr/share/skipfish"
+  install -dm755 "${pkgdir}/usr/share/licenses/skipfish"
+  install -dm755 "${pkgdir}/usr/share/skipfish/dictionaries"
+  install -Dm644 dictionaries/* "${pkgdir}/usr/share/skipfish/dictionaries"
+  install -dm755 "${pkgdir}/usr/share/skipfish/assets"
+  install -Dm644 assets/* "${pkgdir}/usr/share/skipfish/assets"
+  install -Dm755 skipfish "${pkgdir}/usr/bin/skipfish"
+  install -Dm644 COPYING "${pkgdir}/usr/share/licenses/skipfish/COPYING"
+}

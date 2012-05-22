@@ -1,0 +1,5 @@
+38c38,39
+< #define ASSETS_DIR              "assets"
+---
+> #define ASSETS_DIR              "/usr/share/skipfish/assets"
+> #define DEF_WORDLIST            "/usr/share/skipfish/skipfish.wl"

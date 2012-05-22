@@ -1,0 +1,4 @@
+20c20
+< INSTALL = /usr/bin/install
+---
+> INSTALL = /bin/install

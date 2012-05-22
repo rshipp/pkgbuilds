@@ -1,0 +1,49 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=totd
+pkgver=1.5.1
+pkgrel=1
+pkgdesc='The Trick Or Treat Daemon is a DNS-proxy for IPv4/IPv6 translation (DNS-ALG).'
+arch=('x86_64' 'i686')
+url='http://www.dillema.net/software/totd.html'
+license=('BSD')
+groups=('network')
+depends=('glibc')
+optdepends=('socat')
+backup=('etc/totd.conf')
+install=$pkgname.install
+source=("http://www.dillema.net/software/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+        'Makefile.in.patch'
+        'install-location.diff'
+        'totd.conf'
+        'rc-totd')    
+md5sums=('7edaedae9f6aca5912dd6c123582cf08'
+         'd2700ca1d451747d937fd3c1a3cf465f'
+         'bc960265544564d59959803bd99babfb'
+         '5fc57ce93ddf1a70fd0d7156d7d8460e'
+         'f8d81ef8c6356aebca376f720500ff29')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+  patch -Np1 -i "${srcdir}/Makefile.in.patch"
+  patch -p1 Makefile.in < "${srcdir}/install-location.diff"
+
+  ./configure --prefix=/usr --sysconfdir=/etc
+  make
+}
+
+package() {
+  cd "${pkgname}-${pkgver}"
+
+  # prepare directories
+  install -dm755 "${pkgdir}/usr/"{sbin,man/man8}
+
+  # build program
+  make DESTDIR="${pkgdir}" install
+
+  # install default config
+  install -Dm664 "${srcdir}/totd.conf" "${pkgdir}/etc/totd.conf"
+
+  # rc script
+  install -Dm755 "${srcdir}/rc-totd" "${pkgdir}/etc/rc.d/totd"
+}
