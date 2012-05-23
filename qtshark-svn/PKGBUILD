@@ -1,0 +1,74 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Guillaume ALAUX <guillaume@archlinux.org>
+# Contributor: Florian Pritz <bluewind at jabber dot ccc dot de>
+
+pkgname=qtshark-svn
+_pkgname=wireshark
+pkgver=42813
+pkgrel=1
+pkgdesc='A free network protocol analyzer for Unix/Linux - experimental Qt frontend.'
+arch=('i686' 'x86_64')
+url='http://www.wireshark.org/'
+screenshot='http://i.imgur.com/u170R.png'
+license=('GPL2')
+makedepends=('bison' 'flex' 'cmake')
+depends=('krb5' 'libcap' 'libpcap' 'bash' 'gnutls' 'libgcrypt' 'glib2'
+         'lua' 'qt' 'qtcreator')
+conflicts=('wireshark' 'wireshark-gtk' 'wireshark-cli' 'tshark' 'qtshark')
+provides=('wireshark-cli' 'tshark')
+replaces=('wireshark-cli')
+install=wireshark.install
+options=(!libtool)
+
+_svnmod="wireshark"
+_svntrunk="http://anonsvn.wireshark.org/wireshark/trunk/"
+
+build() {
+  cd "${srcdir}"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi  
+  
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+  
+  cp -r ./$_svnmod ./$_svnmod-build
+  cd ./$_svnmod-build
+  
+  export CFLAGS="-fno-unit-at-a-time ${CFLAGS}"
+  ./autogen.sh
+  #cmake cmake/ . -DCMAKE_INSTALL_PREFIX=/usr
+
+  #./configure --prefix=/usr \
+  #            --with-ssl \
+  #            --with-zlib=yes \
+  #            --with-lua \
+  #            --with-qt
+  #cd ui/qt
+  #qmake QtShark.pro
+  #cd ../..
+  sed -i 's/QT-GUI version of Wireshark" OFF)/QT-GUI version of Wireshark" ON)/' \
+    CMakeOptions.txt
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
+
+  make all
+}
+
+package() {
+  cd "${_pkgname}-build"
+  make DESTDIR="${pkgdir}" install
+
+  # Headers
+  install -dm755 "${pkgdir}/usr/include/wireshark/"{epan/{crypt,dfilter,dissectors,ftypes},wiretap,wsutil}
+  install -m644 color.h config.h register.h "${pkgdir}/usr/include/wireshark"
+  for d in epan epan/crypt epan/dfilter epan/dissectors epan/ftypes wiretap wsutil; do
+    install -m644 ${d}/*.h "${pkgdir}/usr/include/wireshark/${d}"
+  done
+
+  # wireshark uid group is 150
+  chgrp 150 "${pkgdir}/usr/bin/dumpcap"
+  chmod 754 "${pkgdir}/usr/bin/dumpcap"
+}
