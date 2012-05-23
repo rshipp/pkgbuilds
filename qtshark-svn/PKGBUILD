@@ -13,7 +13,7 @@ screenshot='http://i.imgur.com/u170R.png'
 license=('GPL2')
 makedepends=('bison' 'flex' 'cmake')
 depends=('krb5' 'libcap' 'libpcap' 'bash' 'gnutls' 'libgcrypt' 'glib2'
-         'lua' 'qt' 'qtcreator')
+         'lua' 'qt' 'geoip' 'zlib')
 conflicts=('wireshark' 'wireshark-gtk' 'wireshark-cli' 'tshark' 'qtshark')
 provides=('wireshark-cli' 'tshark')
 replaces=('wireshark-cli')
@@ -40,18 +40,11 @@ build() {
   
   export CFLAGS="-fno-unit-at-a-time ${CFLAGS}"
   ./autogen.sh
-  #cmake cmake/ . -DCMAKE_INSTALL_PREFIX=/usr
 
-  #./configure --prefix=/usr \
-  #            --with-ssl \
-  #            --with-zlib=yes \
-  #            --with-lua \
-  #            --with-qt
-  #cd ui/qt
-  #qmake QtShark.pro
-  #cd ../..
+  # Enable the Qt gui
   sed -i 's/QT-GUI version of Wireshark" OFF)/QT-GUI version of Wireshark" ON)/' \
     CMakeOptions.txt
+
   cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
 
   make all
