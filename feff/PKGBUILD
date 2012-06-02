@@ -1,27 +1,30 @@
-# Maintainer: Umidjon Almasov <u.almasov@gmail.com>
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com
+# Contributor: Umidjon Almasov <u.almasov@gmail.com>
 # Contributor: Christian Holme <cholme at gmx dot com>
 
 pkgname=feff
-pkgver=1.7
+pkgver=1.8
+_pkgid=140298
 pkgrel=1
-pkgdesc="Qt frontend for FFmpeg"
+pkgdesc='Qt frontend for FFmpeg.'
 arch=('i686' 'x86_64')
 url=("http://qt-apps.org/content/show.php/Feff?content=140298")
-screenshot="http://qt-apps.org/CONTENT/content-pre1/140298-1.jpg"
+screenshot='http://qt-apps.org/CONTENT/content-pre1/140298-1.jpg'
 license=('GPL3')
 depends=('qt' 'ffmpeg')
-source=('http://qt-apps.org/CONTENT/content-files/140298-feff_source.tar.gz')
+source=("http://qt-apps.org/CONTENT/content-files/${_pkgid}-${pkgname}_source.tar.gz")
 md5sums=('44b414bae9263969c0c2b9bc3dfb0551')
 
 build() {
-  	cd "$srcdir"
-    [[ -e "$pkgname_$pkgver" ]] && rm -rf "$pkgname_$pkgver"
-    mv feff_source "$pkgname-$pkgver"
-  	cd "$srcdir/$pkgname-$pkgver"
-   	qmake
-   	make
+  cd "${srcdir}"
+  [[ -e "$pkgname_$pkgver" ]] && rm -rf "$pkgname_$pkgver"
+  mv feff_source "$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  qmake
+  make
 }
 
 package() {
-	install -Dm 755 $srcdir/$pkgname-$pkgver/Bin/feff $pkgdir/usr/bin/feff
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  install -Dm755 Bin/feff "${pkgdir}/usr/bin/feff"
 }

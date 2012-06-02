@@ -21,7 +21,7 @@ build() {
   cd "${pkgname}-${pkgver}"
   mkdir -p build
   cd build
-  cmake -DINSTALL=1 ..
+  cmake ../ -DINSTALL=1 -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 

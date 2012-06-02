@@ -6,7 +6,7 @@
 
 pkgname=aide
 pkgver=0.15.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A file integrity checker and intrusion detection program.'
 arch=('i686' 'x86_64')
 url='http://www.cs.tut.fi/~rammer/aide.html'
@@ -29,7 +29,7 @@ build() {
 package() {
   cd "${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
-  install -dm755 "${pkgdir}/etc/aide.conf"
+  install -dm755 "${pkgdir}/etc/"
   install -Dm644 "${srcdir}/aide.conf" "${pkgdir}/etc/aide.conf"
   install -dm755 "${pkgdir}/var/"{log,lib}/aide/
 }

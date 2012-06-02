@@ -2,7 +2,7 @@
 
 pkgname=dff-git
 _pkgname=dff
-pkgver=20120514
+pkgver=20120531
 pkgrel=1
 pkgdesc='The free and open source Digital Forensics Framework.'
 arch=('i686' 'x86_64')
@@ -12,6 +12,7 @@ license=('GPL')
 makedepends=('cmake>=2.8' 'swig' 'qt' 'git')
 depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio' 
          'libpff' 'python2-magic' 'tre' 'python2-apsw')
+optdepends=('python-matplotlib: optional for some parts of the gui')
 conflicts=('dff')
 source=('dff.desktop')
 sha256sums=('00a7a84d4286883ca648c9771dfe624ce2c112caff7610bca0dfc35d19537886')
@@ -36,7 +37,7 @@ build() {
   cd "${_gitname}"
   mkdir -p build
   cd build
-  cmake -DINSTALL=1 ..
+  cmake ../ -DINSTALL=1 -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 
