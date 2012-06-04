@@ -4,19 +4,19 @@
 
 pkgname=qtshark-svn
 _pkgname=wireshark
-pkgver=42825
+pkgver=43046
 pkgrel=1
 pkgdesc='A free network protocol analyzer for Unix/Linux - experimental Qt frontend.'
 arch=('i686' 'x86_64')
 url='http://www.wireshark.org/'
 screenshot='http://i.imgur.com/u170R.png'
 license=('GPL2')
-makedepends=('bison' 'flex' 'cmake')
+makedepends=('bison' 'flex' 'cmake' 'subversion')
 depends=('krb5' 'libcap' 'libpcap' 'bash' 'gnutls' 'libgcrypt' 'glib2'
          'lua' 'qt' 'geoip' 'zlib')
-conflicts=('wireshark' 'wireshark-gtk' 'wireshark-cli' 'tshark' 'qtshark')
+conflicts=('wireshark' 'wireshark-gtk' 'wireshark-cli' 'tshark'
+           'qtshark' 'wireshark-svn')
 provides=('wireshark-cli' 'tshark')
-replaces=('wireshark-cli')
 install=wireshark.install
 options=(!libtool)
 

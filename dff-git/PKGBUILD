@@ -2,7 +2,7 @@
 
 pkgname=dff-git
 _pkgname=dff
-pkgver=20120531
+pkgver=20120603
 pkgrel=1
 pkgdesc='The free and open source Digital Forensics Framework.'
 arch=('i686' 'x86_64')
