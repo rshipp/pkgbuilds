@@ -13,12 +13,12 @@ source=("https://rifiuti2.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
 sha256sums=('b8db7d9ff442d71794256a97103134200b286c19134f2fe30506f58035a380b2')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

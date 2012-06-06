@@ -12,12 +12,12 @@ source=("http://downloads.sourceforge.net/project/biatchux/${pkgname}/${pkgname}
 sha256sums=('92fa7a8a8f3b2e9e5c51e8af55dd306bb97b29a78963f42d8c63e79070459410')
 
 build() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	./configure --prefix=/usr
 	make
 }
 
 package() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	make DESTDIR="$pkgdir" install
 }

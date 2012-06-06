@@ -11,12 +11,12 @@ source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}-alpha/${
 sha256sums=('0f118b0d3431f0d1b15acce935184417164ab569d592fc7dc63b2c64bbb17fc7') #sha256sums=('2f262f06121129fad5ef7a0fbab413549b7215239915a9d0a2ca9132c9defc02') <- 20121018
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr 
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

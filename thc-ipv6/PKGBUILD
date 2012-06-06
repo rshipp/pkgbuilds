@@ -13,13 +13,13 @@ source=("http://dl.packetstormsecurity.net/groups/thc/${pkgname}-${pkgver}.tar.g
 md5sums=('ae5d4180dae0763d315493ac7c825033')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   sed -i 's:+=:=:' Makefile
   make clean all
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   for bin in $(find . -type f -perm /o+x); do
     install -D $bin "${pkgdir}/usr/bin/$bin"
   done

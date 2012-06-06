@@ -12,11 +12,11 @@ source=("http://thomer.com/icmptx/${pkgname}-${pkgver}.tar.gz")
 md5sums=('f83d1d7789a1b100abcc00d1a56ee95d')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm755 icmptx "${pkgdir}/usr/bin/icmptx"
 }

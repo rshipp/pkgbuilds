@@ -17,14 +17,14 @@ md5sums=('19b400b91d68fb7cc3f04dfb2a493239'
          '9491a164459ab986ab3528a2ec4e5268')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   #patch -p1 < "$srcdir/arping-HAVE_NET_BPF_H.patch" # seems to be included in 2.11
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="$pkgdir" install
   cp "extra/arping-scan-net.sh" "${pkgdir}/usr/sbin"
 }

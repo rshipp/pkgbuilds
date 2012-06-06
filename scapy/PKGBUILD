@@ -17,11 +17,11 @@ source=("https://www.secdev.org/projects/scapy/files/${pkgname}-${pkgver}.tar.gz
 md5sums=('406990bd8da1f4958b354b4b6fc4b3eb')
 
 build(){
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py build
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py install --prefix="${pkgdir}/usr"
 }

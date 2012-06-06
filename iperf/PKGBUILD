@@ -15,13 +15,13 @@ md5sums=('44b5536b67719f4250faed632a3cd016'
          'a2879f900b76668b28a1cc922909db18')
  
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm644 "${srcdir}/license" "${pkgdir}/usr/share/licenses/iperf/LICENSE"
 }

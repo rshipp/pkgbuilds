@@ -20,7 +20,7 @@ sha1sums=('859f633d10b763f06b602e2113828cbbd964c7eb'
           '01bce260e9639d9cd26109a689dddf2498e5026a')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   #patch -p1 -i ../Makefile.patch
 
@@ -35,7 +35,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   make DESTDIR="${pkgdir}" install
   install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"

@@ -16,7 +16,7 @@ sha256sums=('a75ea58de75034de6b10b0de0065ec88e32f9e9af11c7d69edbffc4da9a5b059'
             '608adf3637c8670ad5cfe4a2f69cdab5640b427f94bfed3e00df5c68dbeeca66')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   sed -i -e 's:etc/:share/amap/:g' amap-lib.c
   sed -i 's:/usr/local:/usr:' amap.h
   sed -i '/DATADIR/s:/etc:/share/amap:' Makefile.am
@@ -28,7 +28,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/usr/"{bin,man/man1,share/amap,share/licenses/amap}
   make DESTDIR="${pkgdir}" PREFIX="${pkgdir}/usr" install
   install -Dm644 LICENCE.AMAP "${pkgdir}/usr/share/licenses/amap"

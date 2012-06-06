@@ -13,12 +13,12 @@ source=("http://sid.rstack.org/${pkgname}/files/${pkgname}-${pkgver}.tgz")
 md5sums=('25198bc6f8e0ac5ee9d3bb1b8be5adc5')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

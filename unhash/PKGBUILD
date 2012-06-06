@@ -13,12 +13,12 @@ source=("http://www.dxp2532.info/tools/${pkgname}-${pkgver}.tar.bz2")
 md5sums=('b0cce452ec2eb64c4e0a8ec1b04a32d5')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make CFLAGS+='-lcrypto'
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/bin"
   install -Dm755 unhash "${pkgdir}/bin/unhash"
 }

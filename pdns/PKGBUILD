@@ -28,7 +28,7 @@ md5sums=('7dedae65403b31a795b2d53a512947fd'
          'a390ab49c4fcde205629be33bddc2e6c')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   #patch -p1 -i "${srcdir}/2.9.18-default-mysql-options.patch"
   #patch -p1 -i "${srcdir}/pdns-2.9.22-gcc44.patch"
   touch AUTHORS NEWS
@@ -53,7 +53,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -m755 -d "${pkgdir}/etc/rc.d"
   rm "${pkgdir}/etc/powerdns/pdns.conf-dist"

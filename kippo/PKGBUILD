@@ -16,7 +16,7 @@ md5sums=('4d1572c7ce1da82bc57bd0f133973056'
          'd0715a80bfb7d031f71de5b92743d2b6')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/opt/kippo/"
   mv * "${pkgdir}/opt/kippo/"
   install -Dm755 "${srcdir}/start.sh" "${pkgdir}/opt/kippo/start.sh"

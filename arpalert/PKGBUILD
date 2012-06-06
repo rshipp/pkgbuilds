@@ -14,7 +14,7 @@ source=("http://www.arpalert.org/src/${pkgname}-${pkgver}.tar.gz")
 md5sums=('4b2b7682b27c7f260716f59ecfa50ecc')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/ --exec-prefix=/usr \
               --includedir=/usr/include \
               --datarootdir=/usr/share
@@ -22,6 +22,6 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="$pkgdir" install
 }

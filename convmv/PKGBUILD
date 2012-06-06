@@ -13,11 +13,11 @@ source=("http://j3e.de/linux/convmv/${pkgname}-${pkgver}.tar.gz")
 sha1sums=('7ca8599a37480a99058c4498fba7cfed64134de5')
  
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
 
 package() {
-    cd "${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
   make PREFIX="${pkgdir}/usr" install
 }

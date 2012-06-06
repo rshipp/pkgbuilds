@@ -13,11 +13,11 @@ source=("http://www.cgsecurity.org/${pkgname}-${pkgver}.tar.bz2")
 md5sums=('24c8caf61ff244dc2aae0ebfde47dd45')
 
 build() {
-  cd "${pkgname}-${pkgver}/src"
+  cd "${srcdir}/${pkgname}-${pkgver}/src"
   make -B
 }
 
 package() {
-  cd "${pkgname}-${pkgver}/src"
+  cd "${srcdir}/${pkgname}-${pkgver}/src"
   install -Dm0755 cmospwd "${pkgdir}/usr/bin/cmospwd"
 }

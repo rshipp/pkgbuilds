@@ -24,7 +24,7 @@ md5sums=('7edaedae9f6aca5912dd6c123582cf08'
          'f8d81ef8c6356aebca376f720500ff29')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   patch -Np1 -i "${srcdir}/Makefile.in.patch"
   patch -p1 Makefile.in < "${srcdir}/install-location.diff"
 
@@ -33,7 +33,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   # prepare directories
   install -dm755 "${pkgdir}/usr/"{sbin,man/man8}

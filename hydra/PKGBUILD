@@ -18,14 +18,14 @@ source=("http://freeworld.thc.org/releases/${pkgname}-${pkgver}-src.tar.gz")
 md5sums=('ac17b395d6af5ee56726b4d3b24580fb')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   ./configure --prefix=/usr --mandir=/usr/share/man
   make
 } 
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   install -dm755 "${pkgdir}/usr/"{bin,share/man/man1,man/man1}
   make PREFIX="${pkgdir}/usr" install

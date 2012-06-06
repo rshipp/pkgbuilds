@@ -19,7 +19,7 @@ md5sums=('d0b72535ff68b93a648e4d08b0ed7f07'
          'd3ac69ad7c12c1686f8accf2717139f6')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --sysconfdir=/etc --with-mhash \
               --with-posix-acl --with-prelink --with-xattr \
               --with-zlib --with-e2fsattrs
@@ -27,7 +27,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -dm755 "${pkgdir}/etc/"
   install -Dm644 "${srcdir}/aide.conf" "${pkgdir}/etc/aide.conf"

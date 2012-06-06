@@ -20,12 +20,12 @@ md5sums=('ecdf08c6c2b232152ef3b5b5e761d8ad'
          '9b62235b449594a27388aaabcaf5ba8d')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make -f GNUmakefile adsuck
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm700 adsuck "${pkgdir}/usr/sbin/adsuck"
   install -Dm644 adsuck.8 "${pkgdir}/usr/share/man/man8/adsuck.8"
   install -Dm644 "${srcdir}/filter" "${pkgdir}/var/adsuck/filter"

@@ -14,7 +14,7 @@ source=("http://www.goof.com/pcg/marc/data/${pkgname}-${pkgver}.tar.gz")
 md5sums=('254941f51759f9425965f4b05fe7ac2c')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }

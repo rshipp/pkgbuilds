@@ -16,12 +16,12 @@ source=("http://downloads.sourceforge.net/project/${pkgname}/libewf2/${pkgname}-
 md5sums=('aaa2ca0011f26ad045d9d606a513607f')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --sysconfdir=/etc
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

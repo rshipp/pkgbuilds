@@ -17,13 +17,13 @@ source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz
 sha256sums=('ba5f63d7fd60d978de03777c72b1571004caa8dfe384f09757b6a8efa890ea62')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --without-afflib --without-libewf --prefix=/usr
   make LDFLAGS+="-lpthread -ldl"
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   # licenses
   install -d "${pkgdir}/usr/share/licenses/${pkgname}"

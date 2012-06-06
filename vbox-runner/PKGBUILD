@@ -14,7 +14,7 @@ source=("http://www.kde-look.org/CONTENT/content-files/107926-${pkgname}-${pkgve
 md5sums=('1a5946de409e6e5bde67f58f542dcfd2')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   mkdir -p build
   cd build
   cmake .. -DCMAKE_INSTALL_PREFIX="$(kde4-config --prefix)"
@@ -22,6 +22,6 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}/build"
+  cd "${srcdir}/${pkgname}-${pkgver}/build"
   make DESTDIR="${pkgdir}" install
 }

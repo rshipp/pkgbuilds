@@ -17,13 +17,13 @@ md5sums=('2f3e705d59a0f9308ad9504b24400769'
          '3670bd47c9303fbb655d9216715512de')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --sysconfdir=/etc
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm755 "${srcdir}/pdnsd.rc" "${pkgdir}/etc/rc.d/pdnsd"
 }

@@ -13,13 +13,13 @@ source=("http://www.iem.uni-due.de/~dreibh/${pkgname}/download/${pkgname}-${pkgv
 md5sums=('3f89cb8c55631137f1831bc0cf7f13f7')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/usr"
   ./configure --prefix="${pkgdir}/usr"
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make install
 }

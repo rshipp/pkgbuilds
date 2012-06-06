@@ -12,12 +12,12 @@ source=("http://memberwebs.com/stef/software/scrounge/${pkgname}-${pkgver}.tar.g
 md5sums=('851cbb9a1ce417cf61f2612626a1bc58')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

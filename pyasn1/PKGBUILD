@@ -14,7 +14,7 @@ source=("http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pk
 md5sums=('b888dfba318c19b07e15813721a8f96e')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py install --root="${pkgdir}"
   # install LICENSE
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"

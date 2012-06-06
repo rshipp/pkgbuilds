@@ -13,6 +13,6 @@ source=("http://www.thoughtcrime.org/software/sslstrip/${pkgname}-${pkgver}.tar.
 md5sums=('944020144e4f5528888b3dfbb107dd78')
 
 package() {
-    cd "${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     python2 setup.py install --root="${pkgdir}"
 }

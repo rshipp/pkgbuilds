@@ -12,7 +12,7 @@ source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}-alpha/${
 sha256sums=('9d2ec6778abc8228ada26e3fc41731c701976c11474668edf49d5f79d42fd62d')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   LDFLAGS="-L/usr/lib" CFLAGS="-I/usr/include" ./configure --prefix=/usr #-D_LIBBFIO_TYPES_H 
   make
   ed -s libpff/libpff_libbfio.h << EOF # patch for DFF
@@ -27,6 +27,6 @@ EOF
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

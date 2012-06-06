@@ -12,13 +12,13 @@ source=("http://www.digitalforensicssolutions.com/Scalpel/${pkgname}-${pkgver}.t
 sha256sums=('164a8a58ad8473c545794e981ca6349f2b4b76107c9553baab10a8a0204267e7')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm644 scalpel.conf "${pkgdir}/etc/scalpel.conf"
 }

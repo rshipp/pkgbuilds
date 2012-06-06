@@ -20,18 +20,18 @@ md5sums=('11b9f47f9051e25bdfe84a365c961ec1'
          '1dc6604975d3cd51321a8ad7cd53947c')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --with-firewall=iptables
   make
 }
 
 check() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   strings src/sshguard | grep -E "^`which iptables`[[:space:]]" >/dev/null
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make prefix="${pkgdir}/usr" install
   install -Dm0755 "${srcdir}/sshguard.rc" "${pkgdir}/etc/rc.d/sshguard"
   install -Dm0644 "${srcdir}/sshguard.conf.d" "${pkgdir}/etc/conf.d/sshguard"

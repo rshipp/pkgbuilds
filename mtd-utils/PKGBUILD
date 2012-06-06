@@ -14,11 +14,11 @@ source=("ftp://ftp.infradead.org/pub/mtd-utils/${pkgname}-${pkgver}.tar.bz2")
 md5sums=('82b8e714b90674896570968f70ca778b')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

@@ -11,12 +11,12 @@ source=("http://ftpmirror.gnu.org/ddrescue/${pkgname}-${pkgver}.tar.gz")
 sha256sums=('75e01362005ba5b59a275edd9d012229b43e0b56533c2abb89d40a44d7ec2d78')
 
 build() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	./configure --prefix=/usr
 	make
 }
 
 package() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	make DESTDIR="$pkgdir" install
 }

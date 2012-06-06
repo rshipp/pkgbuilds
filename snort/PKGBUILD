@@ -28,7 +28,7 @@ md5sums=('9ddb26005d864577fca66a9a1cdfdc8a'
          'b4fb8a68490589cd34df93de7609bfac')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   ./configure --prefix=/usr \
               --sysconfdir=/etc/snort \
@@ -43,7 +43,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   make DESTDIR="${pkgdir}" install
 

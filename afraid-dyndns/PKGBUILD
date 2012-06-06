@@ -24,7 +24,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./install "${pkgdir}"
   install -Dpm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
 }

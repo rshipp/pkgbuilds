@@ -14,7 +14,7 @@ source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz
 md5sums=('d2a1b56f51cf40e919c63206ca4ec8f8')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -m0655 -D oinkmaster.pl "${pkgdir}/usr/bin/oinkmaster.pl"
   install -m0644 -D oinkmaster.conf "${pkgdir}/etc/oinkmaster.conf"
   install -m0644 -D oinkmaster.1 "${pkgdir}/usr/man/man1/oinkmaster.1"

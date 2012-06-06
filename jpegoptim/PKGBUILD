@@ -13,12 +13,12 @@ source=("http://www.kokkonen.net/tjko/src/${pkgname}-${pkgver}.tar.gz")
 sha256sums=('40e8e627181f524ad29717c5b07cd442')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make prefix="${pkgdir}/usr" install
 }

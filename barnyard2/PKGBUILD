@@ -13,13 +13,13 @@ source=("http://www.securixlive.com/download/${pkgname}/${pkgname}-${pkgver}.tar
 md5sums=('fadb3bb25dd4cc4ed2fb674e06031ee9')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --with-mysql
   make 
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   
   #makes dir for /etc locations

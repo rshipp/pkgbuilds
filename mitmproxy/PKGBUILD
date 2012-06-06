@@ -14,6 +14,6 @@ source=("http://mitmproxy.org/download/${pkgname}-${pkgver}.tar.gz")
 md5sums=('b53f8649fd2c082b8adaf63d2e075db6')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py install --root="${pkgdir}"
 }

@@ -21,7 +21,7 @@ sha256sums=('e09a7bdca9302e704cc62067399e0b584488f825b0e58c82ad6d54cd2e899fad'
             '3aaa567f7a0a4efce3ac127344a9b795c5494c9d011e27a7d454d632ba3d533d')
 
 build() {
-  cd "${pkgname}-${pkgver}-src"
+  cd "${srcdir}/${pkgname}-${pkgver}-src"
 
 #build package
 #  CFLAGS="$CFLAGS -fno-strict-aliasing" CXXFLAGS="$CXXFLAGS -fno-strict-aliasing" \
@@ -30,7 +30,7 @@ build() {
 }
 
 package () {
-  cd "${pkgname}-${pkgver}-src"
+  cd "${srcdir}/${pkgname}-${pkgver}-src"
 
   # This package doesn't have a typical make install, so we do it by hand.
   #make DESTDIR=${pkgdir} install

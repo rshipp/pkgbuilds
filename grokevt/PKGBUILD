@@ -14,11 +14,11 @@ source=("http://grokevt.googlecode.com/files/$pkgname-$pkgver.tar.gz")
 md5sums=('787a28d5d253e07522305208ca65bc96')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make ETC_PREFIX=/etc
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make ETC_PREFIX="${pkgdir}/etc" PREFIX="${pkgdir}/usr" DESTDIR="${pkgdir}" install
 }

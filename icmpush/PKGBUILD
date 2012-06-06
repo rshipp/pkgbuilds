@@ -15,11 +15,11 @@ md5sums=('a9832e789be4138f04fca87cbe20d29f'
          'b744953a0b37f88d50a8d3e8b2ac783f')
 
 build() {
-  cd "${pkgname}-${pkgver}.orig"
+  cd "${srcdir}/${pkgname}-${pkgver}.orig"
   patch -p1 < "${srcdir}/icmpush_2.2-6.diff"
   make linuz
 }
 package() {
-  cd "${pkgname}-${pkgver}.orig"
+  cd "${srcdir}/${pkgname}-${pkgver}.orig"
   install -Dm755 icmpush "${pkgdir}/usr/bin/icmpush"
 }

@@ -14,13 +14,13 @@ source=("http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pk
 sha256sums=('6d28cd194729f6c806df24cb604355f27c4badd4457fffcbeeca23d9b6106b76')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make prefix="${pkgdir}/usr" mandir="${pkgdir}/usr/share/man" install
   install -D -m644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE" 
 }

@@ -18,13 +18,13 @@ sha1sums=('04657cffe5087d97213b245f8281296cac86b868')
 install=install
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/ --exec-prefix=/usr --datarootdir=/usr/share
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -d "${pkgdir}/"{etc/rc.d,usr/share/{doc,licenses}/nsd}
   rm doc/differences.pdf

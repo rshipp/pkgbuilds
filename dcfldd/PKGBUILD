@@ -12,12 +12,12 @@ source=("http://prdownloads.sourceforge.net/dcfldd/${pkgname}-${pkgver}.tar.gz?d
 sha256sums=('b7568df69c7e560054e05413f280c943757025432d8dc89d2769584867a8ca06')
 
 build() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	./configure --prefix=/usr
 	make
 }
 
 package() {
-	cd "${pkgname}-${pkgver}"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	make DESTDIR="$pkgdir" install
 }

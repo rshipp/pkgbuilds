@@ -18,13 +18,13 @@ md5sums=('cbff39fecd194d7a51b3b9a5ff168c95'
          '0365846d63a9a259d905f1e5b5e62ad3')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   qmake PREFIX=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make INSTALL_ROOT="${pkgdir}" install
 
   # desktop file

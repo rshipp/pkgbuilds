@@ -18,7 +18,7 @@ md5sums=('d3da0004cd0f037ec3e926acd3f520c2'
          '5ea91297b605d51b03243adda1efed27')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   unset LDFLAGS
   unset CFLAGS
   patch -p1 <${srcdir}/disable-build-ext2fs.patch
@@ -29,6 +29,6 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make INSTALLPATH="${pkgdir}/usr" install
 }

@@ -17,13 +17,13 @@ options=(!libtool)
 md5sums=('4f92c9f6e8f62ac00ca7e2c4e480f1d7')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr PYTHON=python2
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   chmod +s "${pkgdir}/sbin/mount.ecryptfs_private"
 }

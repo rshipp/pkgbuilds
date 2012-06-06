@@ -17,7 +17,7 @@ md5sums=('4ed18aa9f79453d74957b5db220d0d59'
          '89955b26bd0d09dc906bbe0a246124c6')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   echo "#!/usr/bin/perl -wT" > ${pkgname}
   echo "use lib '/usr/lib/${pkgname}/';" >> ${pkgname}
   echo "use lib '/usr/lib/${pkgname}/lib/';" >> ${pkgname}
@@ -26,7 +26,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/usr/lib/autopsy/"{help,lib,pict,}
   install -Dm755 autopsy "${pkgdir}/usr/lib/autopsy"
   cp -R help lib pict "${pkgdir}/usr/lib/autopsy/"

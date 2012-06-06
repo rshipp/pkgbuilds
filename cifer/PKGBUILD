@@ -13,11 +13,11 @@ source=("http://cifer.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
 md5sums=('6fba4f27b09722ea07524e940c1e923f')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make -B CFLAGS=-O2 all
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make prefix="/usr" DESTDIR="${pkgdir}" install
 }

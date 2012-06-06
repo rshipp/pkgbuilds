@@ -13,13 +13,13 @@ source=("http://downloads.sf.net/sourceforge/dc3dd/${pkgname}-${pkgver}-beta.tar
 md5sums=('2e7e6f5637b9746d57471166c2f03bc3')
 
 build() {
-  cd "${pkgname}-${pkgver}-beta"
+  cd "${srcdir}/${pkgname}-${pkgver}-beta"
   qmake
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}-beta"
+  cd "${srcdir}/${pkgname}-${pkgver}-beta"
   install -Dm755 dc3ddgui "${pkgdir}/usr/bin/dc3ddgui"
   make DESTDIR="${pkgdir}" install
 }

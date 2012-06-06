@@ -17,13 +17,13 @@ source=("http://www.willhackforsushi.com/code/${pkgname}/${pkgver}/${pkgname}-${
 md5sums=('b90fd36ad987c99e7cc1d2a05a565cbd')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make 
   make strip 
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" BINDIR="/usr/bin/" install
   install -Dm644 dict "${pkgdir}/usr/share/cowpatty/dict"
   install -Dm644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/COPYING"

@@ -18,11 +18,11 @@ source=("http://download.flashrom.org/releases/${pkgname}-${pkgver}.tar.bz2")
 md5sums=('280f8b1d3ef0533d6ec913b0da857477')
  
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
  
 package() {
-  cd "${pkgname}-${pkgver}" 
+  cd "${srcdir}/${pkgname}-${pkgver}" 
   make PREFIX="${pkgdir}/usr" install
 }

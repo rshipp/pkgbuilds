@@ -18,13 +18,13 @@ source=("http://downloads.sourceforge.net/sourceforge/navit/${pkgname}-${pkgver}
 md5sums=('7eea687219526275f7bd41888eda609b')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   find -name "*.moc" -delete
   ./configure --prefix=/usr --disable-samplemap
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

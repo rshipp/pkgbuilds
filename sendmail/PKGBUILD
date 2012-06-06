@@ -53,7 +53,7 @@ check_smmsp(){
 
 build() {
   #check_smmsp
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./Build
   GROFF_NO_SGR=1 make -C doc/op op.txt op.ps
 }

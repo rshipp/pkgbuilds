@@ -15,13 +15,13 @@ source=("$url/$pkgname-$pkgver.tar.gz")
 md5sums=('a24f48fc27c3d626f77009a24a619f11')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   rm -f "${pkgdir}/usr/share/info/dir"
 }

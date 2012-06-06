@@ -13,12 +13,12 @@ source=("http://downloads.sourceforge.net/project/advancemame/${pkgname}/${pkgve
 sha256sums=('0d235c78224d450666bdd852a301159d53b9570e9cd28f015e222797ba4d5fe1')
  
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --mandir=/usr/share/man
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

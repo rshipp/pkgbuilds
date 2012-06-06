@@ -19,7 +19,7 @@ md5sums=('fde37b87b64cfae41841468e0172f3dc')
 [[ $CARCH == "x86_64" ]] && md5sums[0]='fff71ccebfc43c999352dbd5cddc5977'
 
 package() {
-  cd "${pkgname}-${pkgver}-linux${_arch-32}"
+  cd "${srcdir}/${pkgname}-${pkgver}-linux${_arch-32}"
 
   install -Dm644 charset.txt "${pkgdir}/usr/share/rainbowcrack/charset.txt"
   install -Dm644 readme.txt "${pkgdir}/usr/share/rainbowcrack/readme.txt"

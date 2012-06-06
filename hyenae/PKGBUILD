@@ -13,12 +13,12 @@ source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgver}-1/${pkgna
 md5sums=('dde7446ad98a9ab80933fe0746197ee1')
 
 build() {
-  cd "${pkgname}-${pkgver}-1"
+  cd "${srcdir}/${pkgname}-${pkgver}-1"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}-1"
+  cd "${srcdir}/${pkgname}-${pkgver}-1"
   make DESTDIR="${pkgdir}" install
 }

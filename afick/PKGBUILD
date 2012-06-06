@@ -14,13 +14,13 @@ source=("http://downloads.sourceforge.net/afick/afick-${pkgver}.tgz")
 md5sums=('6fa2d357839fc75138ef2ca287b0ae59')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   perl Makefile.pl
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   chmod a+r "${pkgdir}/etc/"{afick.conf,cron.daily/afick_cron}
   chmod a+rx "${pkgdir}/"{etc/logrotate.d,var/{log/afick,lib/afick,lib/afick/archive}}

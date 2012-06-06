@@ -14,13 +14,13 @@ source=("http://www.zlib.net/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 md5sums=('9df2a3c742524446fa4e797c17e8fd85')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   sed -i s/"CFLAGS=".*/"CFLAGS=${CFLAGS}"/g Makefile 
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm755 pigz "${pkgdir}/usr/bin/pigz"
   ln -s /usr/bin/pigz "${pkgdir}/usr/bin/unpigz"
   install -Dm644 pigz.1 "${pkgdir}/usr/share/man/man1/pigz.1"

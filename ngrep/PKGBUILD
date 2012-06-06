@@ -19,14 +19,14 @@ md5sums=('bc8150331601f3b869549c94866b4f1c'
 # Added patch for broken ipv6 support (FS#27225)
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   patch -Np1 -i $srcdir/ngrep-fix-ipv6-support.patch
   ./configure --prefix=/usr --with-pcap-includes=/usr/include/pcap --enable-ipv6
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm0644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.txt"
 }

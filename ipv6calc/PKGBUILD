@@ -12,12 +12,12 @@ source=("ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/ipv6calc-${pkgver}.tar.g
 sha256sums=('31c6473c96f24691b28c33831a0c184e86aa2396afe8c5fbc2e7e14d85043e47')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix="${pkgdir}/usr" --mandir="${pkgdir}/usr/share/man"
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make install
 }

@@ -13,14 +13,14 @@ source=("http://toxygen.net/6tunnel/${pkgname}-${pkgver}.tar.gz")
 md5sums=('74e02d4f0704b3083a01feda66033449')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   autoconf
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm644 6tunnel.1 "${pkgdir}/usr/share/man/man1/6tunnel.1"
   install -Dm755 6tunnel "${pkgdir}/usr/bin/6tunnel"
 }

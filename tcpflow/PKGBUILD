@@ -12,12 +12,12 @@ source=("http://afflib.org/downloads/${pkgname}.tar.gz")
 sha256sums=('9c786fda38e2a5a86e4d68fe60553ae0e6ac4cadbcd24381ef28de3bdcd1655c')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

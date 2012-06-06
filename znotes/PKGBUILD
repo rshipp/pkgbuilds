@@ -14,13 +14,13 @@ source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz
 md5sums=('cc0e3aecd455b0136dba11d562627c02')
 
 build() {
-   cd "${pkgname}-${pkgver}"
+   cd "${srcdir}/${pkgname}-${pkgver}"
    lrelease znotes.pro
    qmake PREFIX=/usr
    make
 }
 
 package() {
-   cd "${pkgname}-${pkgver}"
+   cd "${srcdir}/${pkgname}-${pkgver}"
    make INSTALL_ROOT="${pkgdir}" install 
 }

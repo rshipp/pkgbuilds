@@ -15,6 +15,6 @@ source=("http://projects.izzysoft.de/ftp/net/div/izzysoft/${pkgname}/${pkgname}-
 md5sums=('996107eead228ed476e89e8b9b82242f')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make prefix=/usr DESTDIR="${pkgdir}" install
 }

@@ -13,12 +13,12 @@ source=("http://prdownloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.
 sha256sums=('b6701254d88412bc5d2db869037745f65f94b900b59184157d072f35832c1111')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -dm755 "${pkgdir}/usr/bin/"
   install -dm755 "${pkgdir}/usr/share/man/man1"
   [[ -f disktype.1.gz ]] || gzip disktype.1

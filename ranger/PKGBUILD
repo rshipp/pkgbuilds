@@ -24,7 +24,7 @@ source=("http://ranger.nongnu.org/${pkgname}-${pkgver}.tar.gz")
 md5sums=('1fbc629b7a2c7e3e4695fb218eed7240')
  
 package() { 
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   # Replace "python2" with the python binary you want ranger to use!
   # (python 2.6 and >=3.1 supported, below 2.6 will certainly not work.)
   python2 setup.py -q install --root="${pkgdir}" --optimize=1

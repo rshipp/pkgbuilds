@@ -17,13 +17,13 @@ md5sums=('0aa142213f4b24a6c7dcf75d2a2c05a8'
          'f1910902932e2622fc166960819db6c4')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --localstatedir=/var --sysconfdir=/etc --prefix=/usr
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm755 "${srcdir}/rdnssd.rc.d" "${pkgdir}/etc/rc.d/rdnssd"
   install -Dm644 "${srcdir}/rdnssd.confd" "${pkgdir}/etc/conf.d/rdnssd"

@@ -21,7 +21,7 @@ sha1sums=('0b1cd2f04294af4ce1586f8ddd55523f9f2fb72f'
           '089a63e02d07ea61c8e7c265b955ac587969c814')
 
 build() {  
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr \
               --mandir=/usr/share/man \
               --enable-ipv6 \
@@ -34,7 +34,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   
   install -dm755 "${pkgdir}/etc/pmacct/examples" 

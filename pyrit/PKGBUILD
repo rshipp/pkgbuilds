@@ -16,11 +16,11 @@ source=("http://pyrit.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
 md5sums=('7258b6f3dacfb09736ddeed2a379df2d')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py build
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   python2 setup.py install --root="${pkgdir}"
 }

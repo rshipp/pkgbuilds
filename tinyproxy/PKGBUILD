@@ -20,13 +20,13 @@ md5sums=('292ac51da8ad6ae883d4ebf56908400d'
          '3c2764578f26581346fe312da0519a3e')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   ./configure --prefix=/usr --sysconfdir=/etc/tinyproxy --localstatedir=/var --enable-transparent
   make
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
   install -Dm0755 "${srcdir}/tinyproxy" "${pkgdir}/etc/rc.d/tinyproxy"
   install -Dm0644 "${srcdir}/tinyproxy.tmpfiles.conf" "${pkgdir}/usr/lib/tmpfiles.d/tinyproxy.conf"

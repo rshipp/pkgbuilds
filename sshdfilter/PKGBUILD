@@ -19,7 +19,7 @@ sha256sums=('19252f789b8eb39a39cb4ea27f64c4ba5e1822bd75d1daddca95a297f1d9ea9e'
             'ba9e84af5153835b2332a090e4d9ca7dffa60123e8d133cec3467a4fe1e04190')
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   # install the script
   install -Dm755 "source/$pkgname.pl" "${pkgdir}/usr/sbin/$pkgname"

@@ -18,14 +18,14 @@ md5sums=('f868e2a269edcbc06bf77e89a55898d1'
          '01a988376cfd4bb268120ab597c9abe3')
 
 build(){
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   sed -i "s|GLOBAL_INSTALL_DIR =.*|GLOBAL_INSTALL_DIR = /usr/bin|g" \
     Makefile.Linux
   make OPT="${CFLAGS} -DNDEBUG" LDFLAGS="${LDFLAGS}"
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" global_install
   install -m755 "${srcdir}/antiword-helper" "${pkgdir}/usr/bin/"
   install -Dm644 "Docs/antiword.1" "${pkgdir}/usr/share/man/man1/antiword.1"

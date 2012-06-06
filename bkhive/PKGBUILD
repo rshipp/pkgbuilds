@@ -19,12 +19,12 @@ md5sums=('bb5e076f3051c60331a7831b6c11719d'
          '8987a02d580924ac9c1da7196c083c05')
 
 build() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make CFLAGS="${CFLAGS}"
 }
 
 package() {
-  cd "${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm755 bkhive "${pkgdir}/usr/bin/bkhive"
   install -Dm644 bkhive.1 "${pkgdir}/usr/share/man/man1/bkhive.1"
   install -Dm644 ../syskey.txt "${pkgdir}/usr/share/bkhive/syskey.txt"
