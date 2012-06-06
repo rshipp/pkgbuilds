@@ -10,11 +10,13 @@ arch=('i686' 'x86_64')
 url='http://labrea.sourceforge.net/'
 license=('GPL')
 depends=('libdnet' 'libpcap')
-makedepends=('autoconf' 'automake' 'gcc' 'make' 'patch' 'pkgconfig')
+makedepends=('autoconf' 'automake' 'gcc' 'make' 'patch' 'pkg-config')
 options=('!libtool')
 backup=('etc/labrea.conf')
 source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${_pkgver}.tar.gz"
-        "${pkgname}.conf.d" "${pkgname}.logrotate.d" "${pkgname}.rc.d"
+        "${pkgname}.conf.d"
+        "${pkgname}.logrotate.d"
+        "${pkgname}.rc.d"
         "${pkgname}-incfix.diff")
 md5sums=('e76d506e82b60cc5477ccee1b3368cda'
          'a8138e1e0d4618f9bc5dcc0f29bf52ad'
@@ -23,7 +25,7 @@ md5sums=('e76d506e82b60cc5477ccee1b3368cda'
          '9db8e6ea1d5de046b86c038c73d14db9')
 
 build() {
-  cd "${pkgname}-${_pkgver}"
+  cd "${srcdir}/${pkgname}-${_pkgver}"
 
   # fixes compile error on 32bit
   patch -Np1 -i "${srcdir}/${pkgname}-incfix.diff"
@@ -36,7 +38,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}-${_pkgver}"
+  cd "${srcdir}/${pkgname}-${_pkgver}"
   install -dm755 "${pkgdir}/var/log" "${pkgdir}/etc/"{conf.d,logrotate.d,rc.d}
 
   make DESTDIR="${pkgdir}" install

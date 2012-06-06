@@ -2,7 +2,7 @@
 # Contributor: Spyros Stathopoulos <foucault.online@gmail.com>
 
 pkgname=qastools
-pkgver=0.17.1
+pkgver=0.17.2
 pkgrel=1
 pkgdesc='A collection of Qt desktop applications for the Linux ALSA sound system.'
 arch=('i686' 'x86_64')
@@ -14,17 +14,17 @@ makedepends=('cmake')
 replaces=('qasmixer')
 conflicts=('qasmixer')
 install=$pkgname.install
-source=("http://sourceforge.net/projects/${pkgname}/files/${pkgver}/${pkgname}_${pkgver}.tar.xz/download")
-md5sums=('61df791cc51b31e171e939bf8ce6418b')
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgver}/${pkgname}_${pkgver}.tar.bz2")
+md5sums=('a2dbd09e71297bc460a2bc3ec9d352a1')
 
 build() {
-  cd "${pkgname}_${pkgver}"
+  cd "${srcdir}/${pkgname}_${pkgver}"
   mkdir -p build
   cd build
   cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 }
 
 package() {
-  cd "${pkgname}_${pkgver}/build"
+  cd "${srcdir}/${pkgname}_${pkgver}/build"
   make DESTDIR="${pkgdir}" install
 }
