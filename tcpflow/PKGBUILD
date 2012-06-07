@@ -1,15 +1,15 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=tcpflow
-pkgver=1.1.1
+pkgver=1.2.7
 pkgrel=1
-pkgdesc='A TCP flow recorder'
+pkgdesc='A TCP flow recorder and session reassembler.'
 arch=('i686' 'x86_64')
-url='http://afflib.org/software/tcpflow'
+url='https://github.com/simsong/tcpflow/wiki/tcpflow-—-A-tcp-ip-session-reassembler'
 license=('GPL')
 depends=('libpcap')
-source=("http://afflib.org/downloads/${pkgname}.tar.gz")
-sha256sums=('9c786fda38e2a5a86e4d68fe60553ae0e6ac4cadbcd24381ef28de3bdcd1655c')
+source=("https://github.com/downloads/simsong/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('67ebcc4112815b29f5aef074b0aec1f0380bace0c002b97d890c23ad4600890c')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

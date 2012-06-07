@@ -2,7 +2,7 @@
 # Contributor: fnord0 <fnord0 AT riseup DOT net>
 
 pkgname=set-svn
-pkgver=1262
+pkgver=1300
 pkgrel=1
 pkgdesc="A python-driven suite of custom pentesting tools with a focus on attacking the human element."
 arch=('i686' 'x86_64')
