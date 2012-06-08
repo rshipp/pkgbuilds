@@ -2,7 +2,7 @@
 # Contributor: PyrO_70 <brieuc.roblin at gmail dot com>
 
 pkgname=disksystemtray-git
-pkgver=20120519
+pkgver=20120606
 pkgrel=1
 pkgdesc='Qt systemtray client for UDisks and UIso.'
 arch=('i686' 'x86_64')

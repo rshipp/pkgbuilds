@@ -2,7 +2,7 @@
 # Maintainer (bash and python): Inkane
 
 pkgname=aur2ccr-git
-pkgver=20120429
+pkgver=20120606
 pkgrel=1
 pkgdesc='Convert packages from Arch repos or AUR to CCR source packages - git version.'
 arch=('i686' 'x86_64')

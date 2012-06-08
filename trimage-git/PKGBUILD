@@ -3,7 +3,7 @@
 # Contributor: Kyle Keen <keenerd@gmail.com>
  
 pkgname=trimage-git
-pkgver=20120221
+pkgver=20120606
 pkgrel=1
 pkgdesc='A graphical frontend to several lossless image compression tools.'
 url='http://trimage.org'
