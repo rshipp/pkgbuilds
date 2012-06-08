@@ -1,0 +1,18 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=clamcolor
+pkgver=0.1
+pkgrel=1
+pkgdesc='A simple colorized wrapper for clamscan, written in bash.'
+arch=('any')
+url='https://github.com/george2/misc-bash#clamcolor'
+screenshot='http://i.imgur.com/JThNE.png'
+license=('none')
+depends=('bash' 'clamav')
+source=('clamcolor')
+sha256sums=('43ac293af94b59b97a6fca531d1eb88cbced270022015b155df9e8940c7094ea')
+
+package() {
+    install -Dm755 "${srcdir}/clamcolor" "${pkgdir}/usr/bin/clamcolor"
+    ln -s /usr/bin/clamcolor "${pkgdir}/usr/bin/clamscan-color"
+}
