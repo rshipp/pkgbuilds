@@ -4,7 +4,7 @@ pkgname=p0f
 pkgver=2.0.8
 pkgrel=2
 pkgdesc='A passive OS fingerprinting tool.'
-arch=('i686')
+arch=('i686' 'x86_64')
 url='http://lcamtuf.coredump.cx/p0f/'
 license=('LGPL2')
 depends=('libpcap>=0.4' 'coreutils')
@@ -19,7 +19,9 @@ build() {
 
 package() {
 	cd "${pkgname}"
-	ed -s mk/Linux << EOF # this is necessay for pacman -R to work
+
+    # Patch the Makefile
+	ed -s mk/Linux << EOF
 50,52d
 50i
 	install -d -m755 "${pkgdir}/usr/sbin"
@@ -34,6 +36,7 @@ package() {
 56s@\(/usr/local/man/man1/\)@"${pkgdir}\1"
 wq
 EOF
+
 	make install
 }
 
