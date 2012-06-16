@@ -3,7 +3,7 @@
 
 pkgname=alienfx-lite
 _pkgname=alienFX-lite
-pkgver=0.4b
+pkgver=0.2
 pkgrel=1
 pkgdesc='A simple cross-platform Java applet that interacts with the AlienFX device on Alienware laptops and computers.'
 arch=('i686' 'x86_64')
@@ -11,17 +11,18 @@ url='http://forum.notebookreview.com/alienware/458528-alienfx-lite-linux-windows
 license=('GPL')
 depends=('java-runtime' 'libusb')
 source=("http://progger.co.uk/alienfx/AlienFXLite-${pkgver}.jar")
-sha1sums=('8aba18a39e7bf5c2b1b2a08db85f7c66f5d1e4b0')
+sha1sums=('affedd3f203b3047b1ace2acedd5f2355e3d3153')
 
 package() {
   install -dm755 "${pkgdir}/usr/share/${_pkgname}"
   install -dm755 "${pkgdir}/usr/bin"
-  install -Dm755 ${startdir}/AlienFXLite-0.4b.jar ${pkgdir}/usr/share/${_pkgname} || return 1
+  install -Dm755 ${startdir}/AlienFXLite-${pkgver}.jar ${pkgdir}/usr/share/${_pkgname} || return 1
 
   #create startup app
   echo "#!/bin/sh" > "${pkgdir}/usr/bin/${_pkgname}"
   echo "cd /usr/share/alienFX-lite" >> "${pkgdir}/usr/bin/${_pkgname}"
-  echo "sudo \$JAVA_HOME/bin/java" -jar '/usr/share/alienFX-lite/AlienFXLite-0.4b.jar' >> \
+  echo "sudo \$JAVA_HOME/bin/java" -jar \
+    "/usr/share/alienFX-lite/AlienFXLite-${pkgver}.jar" >> \
     "${pkgdir}/usr/bin/${_pkgname}"
   echo "cd -" >> "${pkgdir}/usr/bin/${_pkgname}"
   chmod +x "${pkgdir}/usr/bin/${_pkgname}"
