@@ -1,0 +1,48 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=cuckoosandbox-git
+_pkgname=cuckoo
+pkgver=20120621
+pkgrel=1
+pkgdesc='An automated malware analysis system - git development version.'
+arch=('i686' 'x86_64')
+url='http://www.cuckoobox.org/'
+screenshot='http://www.cuckoobox.org/images/slider/2.png'
+license=('GPL3')
+conflicts=('cuckoobox')
+provides=('cuckoobox')
+backup=('opt/cuckoobox/conf/cuckoo.conf'
+        'opt/cuckoobox/conf/kvm.conf'
+        'opt/cuckoobox/conf/reporting.conf'
+        'opt/cuckoobox/conf/virtualbox.conf')
+makedepends=('git')
+depends=('python2' 'python2-magic' 'python2-dpkt' 'python2-mako' 'virtualbox')
+optdepends=('pyssdeep: for calculating ssdeep fuzzy hash of files'
+            'tcpdump: needed in some cases for packet interception')
+install=$pkgname.install
+
+_gitname="${_pkgname}"
+_gitroot="git://github.com/cuckoobox/${_gitname}.git"
+
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+    cd ..
+  else
+    git clone $_gitroot $_gitname -b development 
+  fi
+
+  msg "GIT checkout done or server timeout"
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  install -dm755 "${pkgdir}/opt/cuckoobox"
+  #rm ${_pkgname}_${pkgver}.tar.gz
+  cp -R * "${pkgdir}/opt/cuckoobox/"
+}
