@@ -9,6 +9,11 @@ arch=('i686' 'x86_64')
 url='http://www.cuckoobox.org/'
 screenshot='http://www.cuckoobox.org/images/slider/2.png'
 license=('GPL3')
+conflicts=('cuckoobox-git')
+backup=('opt/cuckoobox/conf/cuckoo.conf'
+        'opt/cuckoobox/conf/kvm.conf'
+        'opt/cuckoobox/conf/reporting.conf'
+        'opt/cuckoobox/conf/virtualbox.conf')
 depends=('python2' 'python2-magic' 'python2-dpkt' 'python2-mako' 'virtualbox')
 optdepends=('pyssdeep: for calculating ssdeep fuzzy hash of files'
             'tcpdump: needed in some cases for packet interception')
