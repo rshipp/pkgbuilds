@@ -3,7 +3,7 @@
 # Contributor: Christian Holme <cholme at gmx dot com>
 
 pkgname=feff
-pkgver=1.8
+pkgver=1.9.1
 _pkgid=140298
 pkgrel=1
 pkgdesc='Qt frontend for FFmpeg.'
@@ -13,7 +13,7 @@ screenshot='http://qt-apps.org/CONTENT/content-pre1/140298-1.jpg'
 license=('GPL3')
 depends=('qt' 'ffmpeg')
 source=("http://qt-apps.org/CONTENT/content-files/${_pkgid}-${pkgname}_source.tar.gz")
-md5sums=('44b414bae9263969c0c2b9bc3dfb0551')
+md5sums=('559801e45d700f71ebf76065dc682bc2')
 
 build() {
   cd "${srcdir}"

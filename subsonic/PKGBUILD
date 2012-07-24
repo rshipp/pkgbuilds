@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 url='http://subsonic.org/'
 license=('GPL')
 screenshot='http://www.subsonic.org/pages/inc/img/screenshots/screen02.png'
-depends=('java-runtime')
+depends=('java-runtime' 'procps' 'bash' 'sudo')
 optdepends=('lame: mp3 transcoding support'
             'ffmpeg: other media transcoding support')
 conflicts=('subsonic-beta' 'subsonic-dev')
@@ -34,5 +34,6 @@ package() {
   # see https://wiki.archlinux.org/index.php/Subsonic
   # if ffmpeg/lame are installed, create symlinks so subsonic can find them
   [[ -e /usr/bin/ffmpeg ]] && ln -s /usr/bin/ffmpeg "${pkgdir}/var/subsonic/transcode/ffmpeg"
-  [[ -e /usr/bin/lame ]] && ln -s /usr/bin/lame "${pkgdir}/var/subsonic/transcode/lame"
+  [[ -e /usr/bin/lame ]] && ln -s /usr/bin/lame "${pkgdir}/var/subsonic/transcode/lame" \
+    || return 0
 }

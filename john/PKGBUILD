@@ -6,44 +6,26 @@
 # Contributor: Michal Krenek <mikos@sg1.cz>
 
 pkgname=john
-pkgver=1.7.9
+_jumbover=6
+pkgver=1.7.9_jumbo${_jumbover}
+_pkgver=1.7.9
 pkgrel=1
-_jumbover=5
-pkgdesc="John The Ripper - A fast password cracker (jumbo-$_jumbover included)"
+pkgdesc="John the Ripper - A fast password cracker (jumbo-$_jumbover included)"
 arch=('i686' 'x86_64')
 url='http://www.openwall.com/john/'
 license=('GPL2' 'custom')
 depends=('openssl')
 backup=('etc/john/john.conf')
-source=("http://www.openwall.com/${pkgname}/g/${pkgname}-${pkgver}.tar.bz2"
-        "http://www.openwall.com/john/g/john-${pkgver}-jumbo-$_jumbover.diff.gz"
-        'ftp://ftp.kfki.hu/pub/packages/security/ssh/ossh/libdes-4.04b.tar.gz'
+source=("http://openwall.com/john/g/${pkgname}-${_pkgver}-jumbo-${_jumbover}.tar.gz"
         'params.h.patch')
-md5sums=('45f54fc59386ecd67daaef9f19781d93'
-         '68cacb612f20c71eed6c24cbaf28148a'
-         'c8d5c69f86c2eedb485583b0305284a1'
+md5sums=('665ac410007f47bfcaa5d17822037ecf'
          'f69ed632eba8fb9e45847a4b4a323787')
 
 build() {
-  # jumbo patch
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  patch -p1 < ${srcdir}/${pkgname}-${pkgver}-jumbo-$_jumbover.diff
-  cd src
-  # patch default params
-  patch -p0 < ${srcdir}/params.h.patch
-  if [ "$CARCH" == "x86_64" ]; then
-    sed -i 's|CFLAGS = -c -Wall -O2|CFLAGS = -c -Wall -O2 -march=x86-64 -DJOHN_SYSTEMWIDE=1|' Makefile
-    sed -i 's|^LDFLAGS =\(.*\)|LDFLAGS = -lm|' Makefile
-    sed -i -e 's|-m486||g' Makefile
-  else 
-    sed -i 's|CFLAGS = -c -Wall -O2|CFLAGS = -c -Wall -O2 -march=i686 -DJOHN_SYSTEMWIDE=1|' Makefile
-  fi
-  sed -i 's|LIBS = -ldes|LIBS = -ldes -Ldes|' Makefile
-  #sed -i 's|#include <des.h>|#include "des/des.h"|' KRB5_fmt.c
-  sed -i 's|#include <des.h>|#include "des/des.h"|' KRB5_std.h
-  # enable OMP
-  sed -i 's|#OMPFLAGS = -fopenmp|OMPFLAGS = -fopenmp|' Makefile
-  # build john
+  cd "${srcdir}/${pkgname}-${_pkgver}-jumbo-${_jumbover}/src"
+
+  patch -p0 < "${srcdir}/params.h.patch"
+
   if [ "$CARCH" == "x86_64" ]; then
     make linux-x86-64
   else 
@@ -52,29 +34,29 @@ build() {
 }
 
 package() {
+  cd "${srcdir}/${pkgname}-${_pkgver}-jumbo-${_jumbover}"
+
   # config file
-  sed -i 's|$JOHN|/usr/share/john|g' "${srcdir}/john-${pkgver}/run/john.conf"
-  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/run/john.conf" "${pkgdir}/etc/john/john.conf"
+  sed -i 's|$JOHN|/usr/share/john|g' "run/john.conf"
+  install -Dm644 "run/john.conf" "${pkgdir}/etc/john/john.conf"
+
   # docs
-  install -d ${pkgdir}/usr/share/doc/john
-  install -m644 ${srcdir}/${pkgname}-${pkgver}/doc/* "${pkgdir}/usr/share/doc/john/"
-  install -d "${pkgdir}/usr/share/john/"
-  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/doc/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -dm755 "${pkgdir}/usr/share/doc/john"
+  install -m644 doc/* "${pkgdir}/usr/share/doc/john/"
+  install -dm755 "${pkgdir}/usr/share/john/"
+  install -Dm644 "doc/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
   # install password list and charset files
-  install -m644 ${srcdir}/${pkgname}-${pkgver}/run/{{all,alnum,alpha,digits,lanman}.chr,password.lst} \
-  "${pkgdir}/usr/share/john/"
-  install -m644 ${srcdir}/${pkgname}-${pkgver}/run/{dumb16,dumb32,dynamic}.conf \
-  "${pkgdir}/usr/share/john/"
+  install -m644 run/{{all,alnum,alpha,digits,lanman}.chr,password.lst} \
+    "${pkgdir}/usr/share/john/"
+  install -m644 run/{dumb16,dumb32,dynamic}.conf \
+    "${pkgdir}/usr/share/john/"
+
   # install binaries
-  install -Dm755 "${srcdir}/${pkgname}-${pkgver}/run/john" "${pkgdir}/usr/bin/john"
-  install -Dm755 "${srcdir}/${pkgname}-${pkgver}/run/mailer" "${pkgdir}/usr/bin/john-mailer"
+  install -Dm755 "run/john" "${pkgdir}/usr/bin/john"
+  install -Dm755 "run/mailer" "${pkgdir}/usr/bin/john-mailer"
   cd "${pkgdir}/usr/bin"
-  ln -s john unafs
-  ln -s john unique
-  ln -s john unshadow
-  ln -s john undrop
-  ln -s john pdf2john
-  ln -s john rar2john
-  ln -s john ssh2john
-  ln -s john zip2john
+  for s in unafs unique unshadow undrop pdf2john rar2john ssh2john zip2john; do
+    ln -s john $s
+  done
 }

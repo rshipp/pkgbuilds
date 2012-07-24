@@ -5,24 +5,29 @@ pkgname=dnsflood
 pkgver=1.12
 pkgrel=1
 pkgdesc='Detect abusive usage levels on high traffic nameservers and enable quick response.'
-arch=('i686')
+arch=('i686' 'x86_64')
 url='http://www.adotout.com/'
 license=('GPL')
 depends=('libpcap')
 source=("http://www.adotout.com/${pkgname}-${pkgver}.tgz"
-        'dns_flood_detector.1.gz'
+        'dns_flood_detector.1.gz.sh'
         'dnsflood.patch')
-noextract=('dns_flood_detector.1.gz')
+noextract=('dns_flood_detector.1.gz.sh')
 md5sums=('ab893e3278e3569bc3d5beab7fb98d3f'
-         'e8f18181051026f1cfbc582fff918426'
+         'da99cb8dc7e891b3aec1e4e099e933ae'
          'da27d8270835d2785a36da14544866e2')
-
 build() {
+  bash dns_flood_detector.1.gz.sh
+  
   cd "dns_flood_detector"
   #  patch -Np0 -i ../$pkgname.patch
 
   ./configure.pl Linux
   make
+}
+
+package() {
+  cd "dns_flood_detector"
 
   # init script doesn't work, help with patching would be appreciated :)
   #  install -D -m755 "$startdir/src/dns_flood_detector/$pkgname" \
