@@ -1,14 +1,14 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=ddrescue
-pkgver=1.15
+pkgver=1.16
 pkgrel=1
-pkgdesc='A data recovery tool, which tries hard to rescue data in case of read errors.'
+pkgdesc='A data recovery tool which tries hard to rescue data in case of read errors.'
 arch=('i686' 'x86_64')
 url='http://www.gnu.org/software/ddrescue/ddrescue.html'
 license=('GPL3')
 source=("http://ftpmirror.gnu.org/ddrescue/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('75e01362005ba5b59a275edd9d012229b43e0b56533c2abb89d40a44d7ec2d78')
+sha256sums=('76b3f2e5fb0306d24f2632c3e168cccb73dc0a348e3a7089cd9230748ff23de6')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"

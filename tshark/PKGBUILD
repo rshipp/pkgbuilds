@@ -4,7 +4,7 @@
 
 pkgname=tshark
 _pkgname=wireshark
-pkgver=1.6.8
+pkgver=1.8.1
 pkgrel=1
 pkgdesc='A free network protocol analyzer for Unix/Linux - command-line frontend only.'
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ replaces=('wireshark-cli')
 install=wireshark.install
 options=(!libtool)
 source=("http://www.wireshark.org/download/src/${_pkgname}-${pkgver}.tar.bz2")
-md5sums=('dcdc5f4904af5804b622c955a30974e2')
+md5sums=('629fe03f4a64eb8c7bd9308ee4e22e2e')
 
 build() {
   cd "${_pkgname}-${pkgver}"

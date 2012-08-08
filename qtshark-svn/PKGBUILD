@@ -4,9 +4,9 @@
 
 pkgname=qtshark-svn
 _pkgname=wireshark
-pkgver=43297
+pkgver=44093
 pkgrel=1
-pkgdesc='A free network protocol analyzer for Unix/Linux - experimental Qt frontend.'
+pkgdesc='The free Wireshark network protocol analyzer for Unix/Linux - experimental Qt frontend.'
 arch=('i686' 'x86_64')
 url='http://www.wireshark.org/'
 screenshot='http://i.imgur.com/u170R.png'
