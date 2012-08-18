@@ -2,8 +2,8 @@
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 
 pkgname=webmin
-pkgver=1.580
-pkgrel=2
+pkgver=1.590
+pkgrel=1
 pkgdesc='A web-based interface for system administration.'
 arch=('i686' 'x86_64')
 license=('custom:webmin')
@@ -55,7 +55,7 @@ source=("http://downloads.sourceforge.net/sourceforge/webadmin/${pkgname}-${pkgv
         "ftp://ftp.archlinux.org/other/webmin/webmin-config.tar.bz2"
         "webmin-pacman.tar.bz2.sh"
         "webmin.rc")
-md5sums=('2aa5378bc3ed6471c460d18e87a06fa3'
+md5sums=('815005ed7f208dcfbda5308b446779c2'
          '43a77243acd519c4efe9577090b59912'
          '0e1e699e22418d5c3554982765f9eb3b'
          '0673e51af0e81418b4a6c1e205f7e5cd')
