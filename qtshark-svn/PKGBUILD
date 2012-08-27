@@ -4,7 +4,7 @@
 
 pkgname=qtshark-svn
 _pkgname=wireshark
-pkgver=44093
+pkgver=44593
 pkgrel=1
 pkgdesc='The free Wireshark network protocol analyzer for Unix/Linux - experimental Qt frontend.'
 arch=('i686' 'x86_64')
@@ -35,7 +35,8 @@ build() {
   msg "SVN checkout done or server timeout"
   msg "Starting make..."
   
-  cp -r ./$_svnmod ./$_svnmod-build
+  [[ -d ./$_svnmod-build ]] || mkdir -p ./$_svnmod-build
+  cp -r ./$_svnmod/* ./$_svnmod-build
   cd ./$_svnmod-build
   
   export CFLAGS="-fno-unit-at-a-time ${CFLAGS}"

@@ -1,7 +1,7 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=tcpflow
-pkgver=1.2.7
+pkgver=1.2.9
 pkgrel=1
 pkgdesc='A TCP flow recorder and session reassembler.'
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ url='https://github.com/simsong/tcpflow/wiki/tcpflow-—-A-tcp-ip-session-reasse
 license=('GPL')
 depends=('libpcap')
 source=("https://github.com/downloads/simsong/${pkgname}/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('67ebcc4112815b29f5aef074b0aec1f0380bace0c002b97d890c23ad4600890c')
+sha256sums=('6865da29c71d27ab9d605539447fec29193a224a4b98aabd452ac08425a15a88')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
