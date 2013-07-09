@@ -3,32 +3,33 @@
 # Contributor: Sabart Otto <seberm[at]gmail[dot]com>
 
 pkgname=metasploit
-pkgver=4.3.0
+pkgver=4.6.1
 pkgrel=1
 pkgdesc='An advanced open-source platform for developing, testing, and using exploit code.'
 url='http://metasploit.org'
 license=('BSD')
 arch=('i686' 'x86_64')
-depends=('ruby' 'libpcap' 'ruby-msgpack' 'ruby-pg')
+depends=('ruby' 'libpcap' 'ruby-msgpack' 'ruby-pg'
+         'ruby-bundler' 'ruby-rake')
 optdepends=('java-runtime: To use the msf gui'
             'dradis: Open source framework to enable effective information sharing')
 conflicts=('armitage' 'armitage-svn' 'metasploit-svn')
 provides=('armitage' 'armitage-svn')
 options=(!strip)
-source=("http://downloads.metasploit.com/data/releases/framework-${pkgver}.tar.bz2"
-        'metasploit.sh')
-md5sums=('d5607fba7f6fff8b5e5c19aacde4064e'
+source=("https://github.com/rapid7/metasploit-framework/archive/${pkgver}.tar.gz"
+        "${pkgname}.sh")
+md5sums=('b894ee07b201708dc2d9d85e5e187b26'
          '912c21a795ac6116a8c13bee876ddf99')
 
 package() {
-  cd "${srcdir}/msf3"
+  cd "${srcdir}/${pkgname}-framework-${pkgver}/"
   echo "Installing the license file..."
   install -dm755 "${pkgdir}/"{opt/,etc/profile.d/,usr/bin/}
   install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
-  install -Dm644 README "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 README.md "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
   echo "Installing the framework..."
-  mv "${srcdir}/msf3" "${pkgdir}/opt/$pkgname"
+  mv "${srcdir}/${pkgname}-framework-${pkgver}/" "${pkgdir}/opt/${pkgname}"
   install -Dm755 "${startdir}/metasploit.sh" "${pkgdir}/etc/profile.d/metasploit.sh"
 
   # Removes all .svn directories  # why the **** would you want to do that?

@@ -3,12 +3,12 @@
 
 pkgname=sslstrip
 pkgver=0.9
-pkgrel=1
+pkgrel=2
 pkgdesc='A python tool to hijack HTTPS connections during a MITM attack.'
 url='http://www.thoughtcrime.org/software/sslstrip/'
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('openssl' 'python2' 'pyopenssl' 'twisted')
+depends=('openssl' 'python2' 'pyopenssl' 'python2-twisted')
 source=("http://www.thoughtcrime.org/software/sslstrip/${pkgname}-${pkgver}.tar.gz")
 md5sums=('944020144e4f5528888b3dfbb107dd78')
 

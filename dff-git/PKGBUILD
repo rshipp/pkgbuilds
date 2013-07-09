@@ -2,23 +2,24 @@
 
 pkgname=dff-git
 _pkgname=dff
-pkgver=20120726
+pkgver=20121204
 pkgrel=1
-pkgdesc='The free and open source Digital Forensics Framework.'
+pkgdesc='The free and open source Digital Forensics Framework - git development version.'
 arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
 screenshot='http://i.imgur.com/Rr02O.png'
 license=('GPL')
-makedepends=('cmake>=2.8' 'swig' 'qt' 'git')
+makedepends=('cmake>=2.8' 'swig' 'git')
 depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio' 
-         'libpff' 'python2-magic' 'tre' 'python2-apsw')
+         'libpff' 'python2-magic' 'tre' 'python2-apsw' 'systemd'
+         'phonon' 'python2-imaging' 'qt' 'python-udev' 'reglookup')
 optdepends=('python-matplotlib: optional for some parts of the gui')
 conflicts=('dff')
 source=('dff.desktop')
 sha256sums=('00a7a84d4286883ca648c9771dfe624ce2c112caff7610bca0dfc35d19537886')
 
 _gitname="${_pkgname}"
-_gitroot="git://git.digital-forensic.org/${_gitname}.git"
+_gitroot="git://git.digital-forensic.org/${_gitname}"
 
 build() {
   cd "${srcdir}"
@@ -29,7 +30,7 @@ build() {
     msg "The local files are updated."
     cd ..
   else
-    git clone $_gitroot $_gitname -b develop
+    git clone --recursive $_gitroot $_gitname #-b develop
   fi
 
   msg "GIT checkout done or server timeout"
@@ -39,11 +40,15 @@ build() {
   cd build
   cmake ../ -DINSTALL=1 -DCMAKE_INSTALL_PREFIX=/usr
   make
+
+  touch "${srcdir}/${_gitname}/LICENSE-THIRDPARTY"
 }
 
 package() {
   cd "${srcdir}/${_gitname}/build"
+      
   make DESTDIR="${pkgdir}" install
+
   install -dm755 "${pkgdir}/usr/share/applications/"
   install -Dm755 "${startdir}/dff.desktop" "${pkgdir}/usr/share/applications/dff.desktop"
   [[ -f /usr/lib/libtre.so.4 ]] || ln -sv /usr/lib/libtre.so "${pkgdir}/usr/lib/libtre.so.4"

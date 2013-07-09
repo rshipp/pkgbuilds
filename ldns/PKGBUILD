@@ -4,7 +4,7 @@
 # Contributor: jiribb <jiribb@gmail.com>
 
 pkgname=ldns
-pkgver=1.6.13
+pkgver=1.6.16
 pkgrel=1
 pkgdesc='Fast DNS library supporting recent RFCs.'
 url='http://www.nlnetlabs.nl/projects/ldns/'
@@ -16,7 +16,7 @@ optdepends=('libpcap: ldns-dpa tool')
 makedepends=('libpcap')
 source=("http://www.nlnetlabs.nl/downloads/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         'Makefile.patch')
-sha1sums=('859f633d10b763f06b602e2113828cbbd964c7eb'
+sha1sums=('5b4fc6c5c3078cd061905c47178478cb1015c62a'
           '01bce260e9639d9cd26109a689dddf2498e5026a')
 
 build() {

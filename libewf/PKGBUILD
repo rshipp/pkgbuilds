@@ -3,7 +3,7 @@
 # Contributor: Adam Wolk <netprobe at gmail dot com>
 
 pkgname=libewf
-pkgver=20120225
+pkgver=20120813
 pkgrel=1
 pkgdesc='A library for support of the Expert Witness Compression Format (EWF).'
 url='http://sourceforge.net/projects/libewf'
@@ -11,9 +11,9 @@ license=('LGPL3')
 arch=('i686' 'x86_64')
 depends=('util-linux' 'zlib' 'openssl')
 options=('!libtool')
-conflicts=('libewf-legacy')
+conflicts=('libewf-legacy' 'libewf2011')
 source=("http://downloads.sourceforge.net/project/${pkgname}/libewf2/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.gz")
-md5sums=('aaa2ca0011f26ad045d9d606a513607f')
+sha256sums=('a127713185b11f9387a0b0ae2f7bb56d3bfbc9550c3411509ef081b5bbee5c9c')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

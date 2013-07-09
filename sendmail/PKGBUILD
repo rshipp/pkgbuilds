@@ -4,7 +4,7 @@
 
 pkgname=sendmail
 pkgver=8.14.5
-pkgrel=1
+pkgrel=2
 pkgdesc='The sendmail MTA.'
 arch=('i686' 'x86_64')
 license=('unknown')
@@ -49,10 +49,17 @@ check_smmsp(){
     echo Executing sudo "$cmd"
     /usr/bin/sudo sh -c "$cmd"
   fi
+
+  # security settings recommended by the package
+  chown smmsp:smmsp /var/spool/clientmqueue
+  chmod 2770 /var/spool/clientmqueue
+  chgrp smmsp /usr/sbin/sendmail
+  chmod g+s /usr/sbin/sendmail
+
 }
 
 build() {
-  #check_smmsp
+  check_smmsp
   cd "${srcdir}/${pkgname}-${pkgver}"
   ./Build
   GROFF_NO_SGR=1 make -C doc/op op.txt op.ps
@@ -73,6 +80,9 @@ package() {
   cp sendmail/aliases "${pkgdir}"/etc/mail/aliases
   cp cf/cf/generic-linux.cf "${pkgdir}"/etc/mail/sendmail.cf
   cp doc/op/op.{ps,txt} "${pkgdir}"/usr/share/doc/sendmail/
+
+  install -Dm755 obj.Linux.*/sendmail/sendmail "${pkgdir}/usr/bin/sendmail"
+
   find "${pkgdir}" -user bin -print | xargs chown root
   find "${pkgdir}" -group bin -print | xargs chgrp root
 }

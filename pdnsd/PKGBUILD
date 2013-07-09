@@ -4,7 +4,7 @@
 
 pkgname=pdnsd
 pkgver=1.2.9a
-pkgrel=1
+pkgrel=2
 pkgdesc='A caching DNS proxy server.'
 arch=('i686' 'x86_64')
 url='http://members.home.nl/p.a.rombouts/pdnsd/index.html'
@@ -25,5 +25,8 @@ build() {
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
+
+  install -Dm0644 "${srcdir}/service" \
+    "${pkgdir}/usr/lib/systemd/system/pdnsd.service"
   install -Dm755 "${srcdir}/pdnsd.rc" "${pkgdir}/etc/rc.d/pdnsd"
 }

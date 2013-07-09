@@ -3,13 +3,13 @@
 pkgname=p0f
 pkgver=2.0.8
 pkgrel=2
-pkgdesc='A passive OS fingerprinting tool.'
+pkgdesc='A passive OS fingerprinting tool. (Old 2.x branch)'
 arch=('i686' 'x86_64')
 url='http://lcamtuf.coredump.cx/p0f/'
 license=('LGPL2')
 depends=('libpcap>=0.4' 'coreutils')
 conflicts=('p0f-dev')
-source=("http://lcamtuf.coredump.cx/${pkgname}/${pkgname}-${pkgver}.tgz")
+source=("http://lcamtuf.coredump.cx/p0f3/releases/old/2.x/${pkgname}-${pkgver}.tgz")
 sha256sums=('6c4d8745f04e59f2ba68d56fd1554551592f08a0497c9fc21b84498f47d1aee0')
 
 build() {

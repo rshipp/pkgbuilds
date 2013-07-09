@@ -1,20 +1,20 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=dff
-pkgver=1.2.0
+pkgver=1.3.0
 pkgrel=1
 pkgdesc='The free and open source Digital Forensics Framework.'
 arch=('i686' 'x86_64')
 url='http://digital-forensic.org/'
 screenshot='http://i.imgur.com/Rr02O.png'
 license=('GPL')
-makedepends=('cmake>=2.8' 'swig' 'qt')
+makedepends=('cmake>=2.8' 'swig>=2.0.7' 'qt')
 depends=('python2' 'pyqt' 'fuse' 'libewf' 'afflib' 'libbfio' 
          'libpff' 'python2-magic' 'tre' 'python2-apsw')
 conflicts=('dff-git')
-source=("http://www.digital-forensic.org/dff-src-1.2.0.tar.gz"
+source=("http://www.digital-forensic.org/media/downloads/${pkgver}/${pkgname}-${pkgver}.tar.gz"
         'dff.desktop')
-sha256sums=('e6342f1b105fa9077d4b859e1dba0214e5e899ce152b9d26342a9f14659c6de6'
+sha256sums=('6ab0a6854ff81bc5ccf891131291dc73a42c21e4382b2c9c3e2fc00376edbc0f'
             '00a7a84d4286883ca648c9771dfe624ce2c112caff7610bca0dfc35d19537886')
 
 build() {

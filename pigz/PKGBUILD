@@ -3,7 +3,7 @@
 # Contributor: Laszlo Papp <djszapi2@gmail.com>
 
 pkgname=pigz
-pkgver=2.2.4
+pkgver=2.3
 pkgrel=1
 pkgdesc='Parallel implementation of the gzip file compressor.'
 arch=('i686' 'x86_64')
@@ -11,11 +11,12 @@ url='http://www.zlib.net/pigz/'
 license=('GPL')
 depends=('zlib')
 source=("http://www.zlib.net/${pkgname}/${pkgname}-${pkgver}.tar.gz")
-md5sums=('9df2a3c742524446fa4e797c17e8fd85')
+md5sums=('042e3322534f2c3d761736350cac303f')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  sed -i s/"CFLAGS=".*/"CFLAGS=${CFLAGS}"/g Makefile 
+  sed -i s/"CFLAGS=".*/"CFLAGS=${CFLAGS}"/g Makefile
+  sed -i 's/$(CC)\(.*\)$/$(CC)\1 -lm/g' Makefile
   make
 }
 

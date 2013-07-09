@@ -8,7 +8,7 @@ pkgdesc='A medium interaction SSH honeypot designed to log brute force attacks a
 arch=('i686' 'x86_64')
 url='http://code.google.com/p/kippo/'
 license=('BSD')
-depends=('python2' 'twisted' 'pycrypto' 'zope-interface' 'pyasn1')
+depends=('python2' 'python2-twisted' 'python2-crypto' 'python2-zope-interface' 'pyasn1')
 install=$pkgname.install
 source=("http://kippo.googlecode.com/files/${pkgname}-${pkgver}.tar.gz"
         'start.sh')

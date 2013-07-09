@@ -3,14 +3,14 @@
 
 pkgname=scapy
 pkgver=2.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A powerful interactive packet manipulation program written in Python."
 url='http://www.secdev.org/projects/scapy/'
 depends=('tcpdump' 'python2')
-optdepends=('pycrypto: WEP decription support'
+optdepends=('python2-crypto: WEP decription support'
             'gnuplot: plotting support'
             'graphviz: conversations() method support')
-provides=('python-scapy')
+provides=('python-scapy' 'python2-scapy')
 arch=('i686' 'x86_64')
 license=('GPL')
 source=("https://www.secdev.org/projects/scapy/files/${pkgname}-${pkgver}.tar.gz")

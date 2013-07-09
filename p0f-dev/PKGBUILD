@@ -2,8 +2,8 @@
 
 pkgname=p0f-dev
 _pkgname=p0f
-pkgver=3.05b
-_pkgver=3.05b
+pkgver=3.06b
+_pkgver=3.06b
 pkgrel=1
 pkgdesc='A passive OS fingerprinting tool - development version.'
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ license=('LGPL2')
 depends=('libpcap' 'coreutils')
 conflicts=('p0f')
 source=("http://lcamtuf.coredump.cx/p0f3/releases/${_pkgname}-${_pkgver}.tgz")
-sha256sums=('c4663e669fe43ef4f36f1f5935c4fab571ef19838c4aed90cf3b8bc2264f6b3b')
+sha256sums=('d151931be2557ac45f9baa0a9384b8643979f4227c391ed395792874f2c6cde7')
 
 build() {
   cd "${_pkgname}-${_pkgver}"
