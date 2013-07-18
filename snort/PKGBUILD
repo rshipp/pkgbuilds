@@ -1,4 +1,5 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: M0rf30
 # Contributor: Lukas Fleischer <archlinux at cryptocrack dot de>
 # Contributor: Hugo Doria <hugo@archlinux.org>
 # Contributor: Kessia 'even' Pinheiro <kessiapinheiro at gmail.com>
@@ -6,7 +7,7 @@
 # Contributor: Gregor Ibic <gregor.ibic@intelicom.si>
 
 pkgname=snort
-pkgver=2.9.3.1
+pkgver=2.9.5
 pkgrel=1
 pkgdesc='A lightweight network intrusion detection system.'
 arch=('i686' 'x86_64')
@@ -22,10 +23,12 @@ options=('!makeflags' '!libtool')
 install=$pkgname.install
 source=("http://www.snort.org/dl/snort-current/${pkgname}-${pkgver}.tar.gz"
         'snort'
-        'snort.conf.d')
-md5sums=('b2102605a7ca023ad6a2429821061c29'
+        'snort.conf.d'
+        'snort.service')
+md5sums=('f5fc0e176afca5989d47509478758fc7'
          'f586884c398692605873c26fa45d562c'
-         'b4fb8a68490589cd34df93de7609bfac')
+         'b4fb8a68490589cd34df93de7609bfac'
+         '0d898dfe906fe45ad8562c500c36facb')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
@@ -53,6 +56,8 @@ package() {
   install -D -m644 etc/{*.conf*,*.map} "${pkgdir}/etc/snort/"
   install -D -m644 "${srcdir}/snort.conf.d" "${pkgdir}/etc/conf.d/snort"
   install -D -m755 "${srcdir}/snort" "${pkgdir}/etc/rc.d/snort"
+  install -D -m755 "${srcdir}/snort.service" \
+    "${pkgdir}/usr/lib/systemd/system/snort.service"
 
   sed -i 's#/usr/local/lib/#/usr/lib/#' "${pkgdir}/etc/snort/snort.conf"
 }

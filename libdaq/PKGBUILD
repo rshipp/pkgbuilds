@@ -2,27 +2,25 @@
 # Contributor: Lukas Fleischer <archlinux at cryptocrack dot de>
 
 pkgname=libdaq
-_pkgname=daq
-pkgver=0.6.2
-_pkgver=1525
-pkgrel=2
+pkgver=2.0.0
+pkgrel=1
 pkgdesc='Data Acquisition library for packet I/O.'
 arch=('i686' 'x86_64')
 url='http://www.snort.org/'
 license=('GPL')
-depends=('libpcap')
+depends=('libpcap' 'libdnet')
 makedepends=('ca-certificates')
 options=('!libtool')
-source=("http://www.snort.org/downloads/${_pkgver}")
-md5sums=('6ea8aaa6f067f8b8ef6de45b95d55875')
+source=("http://www.snort.org/dl/snort-current/daq-${pkgver}.tar.gz")
+md5sums=('a00855a153647df76d47f1ea454f74ae')
 
 build() {
-  cd "${_pkgname}-${pkgver}"
+  cd "${srcdir}/daq-${pkgver}"
   ./configure --prefix=/usr
   make
 }
 
 package() {
-  cd "${_pkgname}-${pkgver}"
+  cd "${srcdir}/daq-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }
