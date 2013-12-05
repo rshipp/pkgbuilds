@@ -1,24 +1,26 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=scalpel
-pkgver=2.0
-pkgrel=2
+pkgver=2.1
+_pkgver=37b87
+pkgrel=1
 pkgdesc='A frugal, high-performance file carver.'
 arch=('i686' 'x86_64')
-url='http://www.digitalforensicssolutions.com/Scalpel/'
+url='https://github.com/sleuthkit/${pkgname}'
 license=('GPL2')
 depends=('tre')
-source=("http://www.digitalforensicssolutions.com/Scalpel/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('164a8a58ad8473c545794e981ca6349f2b4b76107c9553baab10a8a0204267e7')
+source=("https://github.com/sleuthkit/${pkgname}/archive/${_pkgver}.zip")
+sha256sums=('203eed82f124c13351d56ae97aebc112c24d1c43455e3b5aadbe9a57eea52aa4')
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  ./configure --prefix=/usr
+  cd "${srcdir}/${pkgname}-${_pkgver}"*
+  ./bootstrap
+  ./configure --prefix=/usr --disable-shared
   make
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${_pkgver}"*
   make DESTDIR="${pkgdir}" install
   install -Dm644 scalpel.conf "${pkgdir}/etc/scalpel.conf"
 }

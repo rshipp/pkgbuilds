@@ -6,7 +6,7 @@
 # Contributor: Michal Krenek <mikos@sg1.cz>
 
 pkgname=john
-_jumbover=6
+_jumbover=7
 pkgver=1.7.9_jumbo${_jumbover}
 _pkgver=1.7.9
 pkgrel=1
@@ -18,7 +18,7 @@ depends=('openssl')
 backup=('etc/john/john.conf')
 source=("http://openwall.com/john/g/${pkgname}-${_pkgver}-jumbo-${_jumbover}.tar.gz"
         'params.h.patch')
-md5sums=('665ac410007f47bfcaa5d17822037ecf'
+md5sums=('fbca743b51a503ced1aa29d3933123c7'
          'f69ed632eba8fb9e45847a4b4a323787')
 
 build() {
