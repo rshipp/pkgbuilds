@@ -1,0 +1,21 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Shanto <shanto@hotmail.com>
+
+pkgname=python2-apscheduler
+_pkgname=APScheduler
+pkgver=2.1.1
+pkgrel=1
+pkgdesc='Advanced Python Scheduler is a light but powerful in-process task scheduler.'
+arch=('any')
+url="http://pypi.python.org/pypi/APScheduler"
+license=('MIT')
+depends=('python2')
+options=(!emptydirs)
+source=("http://pypi.python.org/packages/source/A/${_pkgname}/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('e04e2adfdc691ecfd0fafaec36bc2877')
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python2 setup.py install --root="${pkgdir}/" --optimize=1
+  find "${pkgdir}" -path '*.egg-info/*' -exec chmod 0644 {} \;
+}

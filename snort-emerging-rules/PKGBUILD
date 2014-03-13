@@ -2,7 +2,7 @@
 
 pkgname=snort-emerging-rules
 pkgver=2.9.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Snort rules from EmergingThreats.'
 arch=('any')
 url='http://rules.emergingthreats.net/'
@@ -10,16 +10,12 @@ license=('BSD' 'GPL2')
 depends=('snort')
 install=snort-rules.install
 source=("http://rules.emergingthreats.net/open/snort-${pkgver}/emerging.rules.tar.gz")
-sha256sums=('aaed6cf7acbc71f731e21834647369829b15d41564503ea7d671830ec2ab2071')
+sha256sums=('75c0b8f2125e2c0f3fcfaefcb7c35afa1859617f5ff97939da61d583e1216097')
 
 package() {
   cd rules
   install -dm755 "${pkgdir}/etc/snort/rules/"
-  cp *.rules "${pkgdir}/etc/snort/rules/"
+  cp "${srcdir}/rules/"*.rules "${pkgdir}/etc/snort/rules/"
   install -dm755 "${pkgdir}/etc/snort/emerging/"
-  cp BSD-License.txt gpl-2.0.txt snort-2.9.0-open.txt \
-    classification.config rbn-ips.txt suricata-etpro.yaml.v1.old \
-    compromised-ips.txt rbn-malvertisers-ips.txt suricata-open.yaml.v1.old \
-    emerging.conf reference.config unicode.map gen-msg.map sid-msg.map \
-    "${pkgdir}/etc/snort/emerging/"
+  cp "${srcdir}/rules/"*[^rules] "${pkgdir}/etc/snort/emerging/"
 }

@@ -22,8 +22,8 @@ install=$pkgname.install
 source=("http://dovecot.org/releases/2.1/${pkgname}-${pkgver}.tar.gz"{,.sig}
         'dovecot.sh'
         'dovecot.tmpfilesd')
-md5sums=('b52d0faf1b9ec21bc5552691fe0ff1d1'
-         '391cd5f98442ef446916c0f3b671d3f7'
+md5sums=('d4414771f3cd524a608b8dae03913d4c'
+         'SKIP'
          '587159e84e2da6f83d70b3c706ba87cc'
          'f40857555bd65add2e86c89fe3242357')
 
