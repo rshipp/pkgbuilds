@@ -3,7 +3,7 @@
 # Contributor: CRT <crt.011@gmail.com>
 
 pkgname=skipfish
-pkgver=2.06b
+pkgver=2.10b
 pkgrel=1
 pkgdesc='A fully automated, active web application security reconnaissance tool.'
 arch=('i686' 'x86_64')
@@ -12,14 +12,14 @@ url='http://code.google.com/p/skipfish/'
 depends=('openssl' 'libidn' 'zlib' 'glibc' 'bash')
 source=("http://skipfish.googlecode.com/files/${pkgname}-${pkgver}.tgz"
         'skipfish.diff')
-md5sums=('301f3f209ddf57dd7103a61256f62afa'
+md5sums=('8edf6092f3d1835cb4a381b7a723db8a'
          'd1b2eb33427e1bdcfbbc5a223c80990e')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
 
   # Patch fixes application run directory system error
-  patch -p1 config.h < "${srcdir}/skipfish.diff"
+  patch -p1 src/config.h < "${srcdir}/skipfish.diff"
   make
 }
 

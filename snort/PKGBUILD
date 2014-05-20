@@ -7,7 +7,7 @@
 # Contributor: Gregor Ibic <gregor.ibic@intelicom.si>
 
 pkgname=snort
-pkgver=2.9.5.6
+pkgver=2.9.6.1
 pkgrel=1
 pkgdesc='A lightweight network intrusion detection system.'
 arch=('i686' 'x86_64')
@@ -25,7 +25,7 @@ source=("http://www.snort.org/dl/snort-current/${pkgname}-${pkgver}.tar.gz"
         'snort'
         'snort.conf.d'
         'snort.service')
-md5sums=('e993c97c1710d68a7b67813fe98c09a4'
+md5sums=('d7c0f1ddb2e70b70acdaa4664abb5fb0'
          'f586884c398692605873c26fa45d562c'
          'b4fb8a68490589cd34df93de7609bfac'
          '0d898dfe906fe45ad8562c500c36facb')
