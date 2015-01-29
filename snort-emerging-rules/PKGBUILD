@@ -2,7 +2,7 @@
 
 pkgname=snort-emerging-rules
 pkgver=2.9.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Snort rules from EmergingThreats.'
 arch=('any')
 url='http://rules.emergingthreats.net/'
@@ -10,7 +10,7 @@ license=('BSD' 'GPL2')
 depends=('snort')
 install=snort-rules.install
 source=("http://rules.emergingthreats.net/open/snort-${pkgver}/emerging.rules.tar.gz")
-sha256sums=('75c0b8f2125e2c0f3fcfaefcb7c35afa1859617f5ff97939da61d583e1216097')
+sha256sums=('a23be3a7e807d58c1e325253144ed57706e26ea32287edd23652ddc9c3d86574')
 
 package() {
   cd rules

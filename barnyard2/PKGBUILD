@@ -2,24 +2,25 @@
 # Contributor: Commiebstrd<spenserreinhardt@gmail.com>
 
 pkgname=barnyard2
-pkgver=1.9
+pkgver=1.13
 pkgrel=1
 pkgdesc="Barnyard2 is a fork of the original barnyard project, designed specifically for Snort's new unified2 file format."
 arch=('i686' 'x86_64')
 url='https://github.com/firnsy/barnyard2/'
 license=('GPLv2')
 depends=('snort')
-source=("http://www.securixlive.com/download/${pkgname}/${pkgname}-${pkgver}.tar.gz")
-md5sums=('fadb3bb25dd4cc4ed2fb674e06031ee9')
+source=("https://github.com/firnsy/${pkgname}/archive/v2-${pkgver}.tar.gz")
+md5sums=('212066058364f18a4806720b271ffd87')
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-2-${pkgver}"
+  ./autogen.sh
   ./configure --with-mysql
   make 
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-2-${pkgver}"
   make DESTDIR="${pkgdir}" install
   
   #makes dir for /etc locations
