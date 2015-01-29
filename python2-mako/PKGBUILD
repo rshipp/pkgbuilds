@@ -4,16 +4,16 @@
 
 pkgname=python2-mako
 _pkgname=Mako
-pkgver=0.7.0
+pkgver=0.9.1
 pkgrel=1
 pkgdesc='Hyperfast and lightweight templating for the Python2 platform.'
 arch=('any')
 url='http://www.makotemplates.org/'
 license=('custom')
-makedepends=('python-distribute')
+makedepends=('python2-setuptools')
 depends=('python2' 'python-markupsafe' 'python-beaker')
-source=("http://www.makotemplates.org/downloads/${_pkgname}-${pkgver}.tar.gz")
-md5sums=('fe51688d9532b220a0df1aa2aacce04d')
+source=("https://pypi.python.org/packages/source/M/Mako/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('fe3f394ef714776d09ec6133923736a7')
 
 build() {
   cd "${srcdir}/${_pkgname}-${pkgver}"

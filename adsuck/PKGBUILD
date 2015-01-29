@@ -4,7 +4,7 @@
 # Contributor: acoolon <@web.de>
 
 pkgname=adsuck
-pkgver=2.4.2
+pkgver=2.5.0
 pkgrel=1
 pkgdesc='A DNS filter that spoofs blacklisted addresses and forwards all other queries.'
 arch=('i686' 'x86_64')
@@ -14,10 +14,11 @@ depends=('ldns' 'libevent')
 install=$pkgname.install
 source=("http://opensource.conformal.com/snapshots/${pkgname}/${pkgname}-${pkgver}.tgz"
         '50-adsuck-update' 'adsuck.rc' 'filter')
-md5sums=('ecdf08c6c2b232152ef3b5b5e761d8ad'
+md5sums=('f8e442da00e9364002de177352a5e302'
          'dda609d6bdf1007cc7a1aaf465087071'
          '08053930f55cc4bd7ca758d70d180c18'
          '9b62235b449594a27388aaabcaf5ba8d')
+
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

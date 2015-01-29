@@ -1,0 +1,32 @@
+# Maintainer: george <rpubaddro {at} gmail [dot] com>
+# Contributer: lordblackfox
+
+pkgname=mozjs
+pkgver=31.2.0.rc0
+_pkgver=31.2.0
+pkgrel=1
+pkgdesc="Mozilla's latest javascript engine in a library (SpiderMonkey)."
+url='https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey'
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=('nspr' 'autoconf2.13')
+conflicts=('spidermonkey-1.7')
+options=('!buildflags')
+source=("https://people.mozilla.org/~sstangl/mozjs-${pkgver}.tar.bz2")
+md5sums=('d1ad39d0451b7231056a07bf1c57acee')
+
+build() {
+    cd "${srcdir}/${pkgname}-${_pkgver}/js/src"
+    autoconf-2.13
+    ./configure --disable-tests --disable-debug --disable-debug-symbols --prefix=/usr
+    make
+}
+
+package() {
+    install -Dm644 \
+        "${srcdir}/${pkgname}-${_pkgver}/LICENSE" \
+        "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+    cd "${srcdir}/${pkgname}-${_pkgver}/js/src"
+    make DESTDIR="${pkgdir}" install
+}

@@ -3,7 +3,7 @@
 # Contributor: amoralyrr
 
 pkgname=arping
-pkgver=2.11
+pkgver=2.13
 pkgrel=1
 pkgdesc='Broadcasts a who-has ARP packet on the network and prints answers.'
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ depends=('libnet')
 conflicts=('iputils')
 source=("http://www.habets.pp.se/synscan/files/${pkgname}-${pkgver}.tar.gz"
         'arping-HAVE_NET_BPF_H.patch')
-md5sums=('19b400b91d68fb7cc3f04dfb2a493239'
+md5sums=('698e4a87d4ea6c8535b07b06d9ed503e'
          '9491a164459ab986ab3528a2ec4e5268')
 
 build() {

@@ -1,0 +1,43 @@
+# Maintainer: george <rpubaddr0 {at} gmail[dot]com>
+# Contributor: pisuka <tekmon@gmail.com>
+
+pkgname=heroku-toolbelt
+pkgver=3.2.1
+pkgrel=1
+pkgdesc='Everything you need to get started using Heroku (including foreman).'
+arch=('any')
+url='https://toolbelt.heroku.com'
+license=('MIT' 'APACHE' 'RUBY' 'PerlArtistic' 'GPL' 'custom')
+depends=('ruby>=1.9' 'git')
+makedepends=('ruby-bundler')
+provides=('heroku' 'heroku-client' 'foreman')
+conflicts=('ruby-heroku' 'ruby-foreman' 'heroku-client' 'heroku')
+source=("http://assets.heroku.com/heroku-client/heroku-client-${pkgver}.tgz"
+        'Gemfile' 'Gemfile.lock')
+sha1sums=('0cc7547790f63ad4f7dd29962da1c37db670cb47'
+          '4168e4184987558086dc2b1d5d4be5f57eacefd6'
+          '8072d8e13d63d9f0ac0aa9004d77862413f3e640')
+
+package() {
+    cd "${pkgdir}"
+    mkdir -p 'usr/'{"lib/ruby/vendor_ruby/${pkgname}",'bin','share/man/man1'}
+
+    cd "usr/lib/ruby/vendor_ruby/${pkgname}"
+    cp -R "${srcdir}/heroku-client" .
+    cp -L "${srcdir}"/Gemfile* .
+
+    find 'heroku-client/bin' -maxdepth 1 -type f -executable -printf \
+        "/usr/lib/ruby/vendor_ruby/${pkgname}/heroku-client/bin/%f\n" |
+        xargs ln -st "${pkgdir}/usr/bin/"
+
+    msg "Installing foreman..."
+    ln -s \
+        '/usr/lib/ruby/vendor_ruby/heroku-toolbelt/vendor/bundle/ruby/2.0.0/gems/foreman-0.63.0/man/foreman.1' \
+        "${pkgdir}/usr/share/man/man1/foreman.1"
+    bundle install --deployment --binstubs="${pkgdir}/usr/bin"
+    sed -i \
+        's|\(File.expand_path\).*,|\1("/usr/lib/ruby/vendor_ruby/heroku-toolbelt/Gemfile",|' \
+        "${pkgdir}/usr/bin/foreman"
+
+    rm "${pkgdir}/usr/bin/thor"
+}

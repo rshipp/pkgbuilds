@@ -3,7 +3,7 @@
 # Contributor: Aaron Schaefer <aaron@elasticdog.com>
  
 pkgname=optipng
-pkgver=0.7.1
+pkgver=0.7.4
 pkgrel=1
 pkgdesc='A PNG optimizer that losslessly recompresses image files.'
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ url='http://optipng.sourceforge.net/'
 license=('ZLIB')
 depends=('glibc')
 source=("http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('6d28cd194729f6c806df24cb604355f27c4badd4457fffcbeeca23d9b6106b76')
+sha256sums=('520b5d5a9405dbdc5c905dd0cff87211e69c4ed2059744037510e613fe8237ff')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

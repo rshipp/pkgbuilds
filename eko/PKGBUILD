@@ -3,7 +3,7 @@
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=eko
-pkgver=0.6.1
+pkgver=0.8.0
 pkgrel=1
 pkgdesc='A simple sound editor based on Qt, libsndfile, and libsamplerate.'
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ depends=('qt' 'jack')
 install=$pkgname.install
 source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
         "eko.desktop")
-md5sums=('cbff39fecd194d7a51b3b9a5ff168c95'
+md5sums=('0bca0198f9969339a50c33e0b8b569bf'
          '0365846d63a9a259d905f1e5b5e62ad3')
 
 build() {

@@ -1,0 +1,33 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Daniel Micay <danielmicay@gmail.com>
+# Contributor: Hilton Medeiros <medeiros.hilton@gmail.com>
+# Contributor: Dave Reisner <d@falconindy.com>
+
+pkgname=libgit2
+pkgver=0.20.0
+pkgrel=1
+pkgdesc='A linkable library for Git.'
+arch=('i686' 'x86_64')
+url='http://libgit2.github.com/'
+depends=('zlib' 'openssl' 'libssh2')
+makedepends=('cmake' 'python')
+license=('GPL2')
+source=("https://github.com/libgit2/libgit2/archive/v${pkgver}.tar.gz")
+md5sums=('e35f613a37e11354f34249f2faa68237')
+
+build() {
+  cd "${pkgname}-"*
+  export LANG=en_US.UTF-8
+  cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DTHREADSAFE=ON
+  make
+}
+
+#check() {
+#  cd "${pkgname}-"*
+#  make test
+#}
+
+package() {
+  cd "${pkgname}-"*
+  make DESTDIR="${pkgdir}" install
+}

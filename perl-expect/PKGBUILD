@@ -1,0 +1,45 @@
+# Maintainer: george <rpubaddr0@gmail.com>
+# Contributor: Max Roder <maxroder@web.de>
+# Contributor: DarkHeart
+# Generator  : CPANPLUS::Dist::Arch 1.19
+
+pkgname=perl-expect
+_pkgname=Expect
+pkgver=1.32
+pkgrel=1
+pkgdesc="Perl version of Don Libes' Tcl-Expect"
+arch=('any')
+license=('PerlArtistic' 'GPL')
+options=('!emptydirs')
+depends=('perl-io-tty>=1.03')
+checkdepends=('perl-test-exception>=0.32')
+url='http://search.cpan.org/dist/Expect'
+source=("http://search.mcpan.org/CPAN/authors/id/S/SZ/SZABGAB/${_pkgname}-${pkgver}.tar.gz")
+md5sums=('f71527a34d57f601d5047ad9aa98e4e4')
+_distdir="${_pkgname}-${pkgver}"
+
+build() {
+  ( export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
+      PERL_AUTOINSTALL=--skipdeps                            \
+      PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'"     \
+      PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
+      MODULEBUILDRC=/dev/null
+
+    cd "$_distdir"
+    /usr/bin/perl Makefile.PL
+    make
+  )
+}
+
+check() {
+  cd "$_distdir"
+  ( export PERL_MM_USE_DEFAULT=1 PERL5LIB=""
+    make test
+  )
+}
+
+package() {
+  cd "${_distdir}"
+  make DESTDIR="${pkgdir}" install
+  find "${pkgdir}" -name .packlist -o -name perllocal.pod -delete
+}

@@ -1,0 +1,35 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: sandman <r.coded@gmail.com>
+# Contributor: Christoph Siegenthaler <csi@gmx.ch>
+
+pkgname=xprobe2
+pkgver=0.3
+pkgrel=1
+pkgdesc='An active OS fingerprinting tool using ICMP.'
+url='http://sourceforge.net/apps/mediawiki/xprobe/index.php?title=Main_Page'
+arch=('i686' 'x86_64')
+license=('GPL2')
+depends=('gcc' 'libpcap' )
+source=("http://downloads.sourceforge.net/project/xprobe/${pkgname}/Xprobe2%20${pkgver}/${pkgname}-${pkgver}.tar.gz"
+        'ip.patch'
+        'misc.patch'
+        'tcp.patch')
+md5sums=('3ebb89ed9380038d368327816e34ec54'
+         '2f5a8351147cef74e7c23d56cc89ebf4'
+         '9e8f6c06bd03b80c75007edaddb39720'
+         '4380d6b3f534762a35e9b7332cf78280')
+
+build() {
+    cd "${srcdir}/.."
+    patch -p1 < ip.patch
+    patch -p1 < misc.patch
+    patch -p1 < tcp.patch
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --sysconfdir=/etc
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+}

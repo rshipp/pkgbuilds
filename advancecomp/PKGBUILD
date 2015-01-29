@@ -2,15 +2,15 @@
 # Contributor: wooptoo <wooptoo@gmail.com>
 
 pkgname=advancecomp
-pkgver=1.15
-pkgrel=7
+pkgver=1.18
+pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc="Recompression utilities for .zip .png .mng and .gz files using the 7-zip agorithm."
 url='http://advancemame.sourceforge.net/comp-readme.html'
 license=('GPL')
 depends=('zlib')
 source=("http://downloads.sourceforge.net/project/advancemame/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.gz")
-sha256sums=('0d235c78224d450666bdd852a301159d53b9570e9cd28f015e222797ba4d5fe1')
+sha256sums=('3c9e7cc34f660695fbe6b4c3f7ce6528c2511f715e8ceb8a38cb8aaa0ee89845')
  
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

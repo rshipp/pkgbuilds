@@ -4,7 +4,7 @@
 
 pkgname=sshguard
 pkgver=1.5
-pkgrel=1
+pkgrel=2
 pkgdesc='Brute force detector for SSH, Exim, VSFTPD and more. Blocks by ip with iptables.'
 arch=('i686' 'x86_64')
 url="http://www.sshguard.net/"
@@ -13,11 +13,16 @@ depends=('iptables')
 options=("zipman")
 install=sshguard.install
 source=("http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
-        'sshguard.rc'
-        'sshguard.conf.d')
-md5sums=('11b9f47f9051e25bdfe84a365c961ec1'
-         '07bffbbfbf452d09cda10a1bab8cc03b'
-         '1dc6604975d3cd51321a8ad7cd53947c')
+        'sshguard.service'
+        'sshguard-journalctl')
+sha256sums=('b537f8765455fdf8424f87d4bd695e5b675b88e5d164865452137947093e7e19'
+            '24be7918dcba37805dea2fd1d9e4c1c139e3ea840773aea49574d4c6a7056507'
+            'a8f315d163128d4e8458c1d50c90082581092476937921cba2afb167f51cbe3f')
+
+prepare() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  sed -i 's|^DAYNO.*|DAYNO       [0-9]?[1-9]|' src/parser/attack_scanner.l
+}
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
@@ -32,7 +37,7 @@ check() {
 
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  make prefix="${pkgdir}/usr" install
-  install -Dm0755 "${srcdir}/sshguard.rc" "${pkgdir}/etc/rc.d/sshguard"
-  install -Dm0644 "${srcdir}/sshguard.conf.d" "${pkgdir}/etc/conf.d/sshguard"
+  make DESTDIR="${pkgdir}" install
+  install -Dm0755 "${srcdir}/sshguard.service" "${pkgdir}/usr/lib/systemd/system/sshguard.service"
+  install -Dm0644 "${srcdir}/sshguard-journalctl" "${pkgdir}/usr/lib/systemd/scripts/sshguard-journalctl"
 }

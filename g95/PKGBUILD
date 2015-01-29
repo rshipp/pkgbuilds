@@ -1,0 +1,29 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Eduardo Martins Lopes < edumlopes at gmail dot com >
+
+pkgname=g95
+pkgver=0.94
+pkgrel=1
+pkgdesc='A stable, production Fortran 95 compiler available for multiple CPU architectures and operating systems.'
+arch=('x86_64')
+url='http://www.g95.org/'
+license=('GPL')
+depends=('blas' 'lapack' 'gcc-libs')
+install=${pkgname}.install
+source=("http://ftp.g95.org/${pkgname}-x86_64-64-linux.tgz"
+        "${pkgname}.install")
+md5sums=('885ca0a86898e6334e8668cd276bd5a4'
+         '852098b27f3b5b8854bcb38a2350a7bb')
+
+build() {
+  mkdir -p "${srcdir}/g95-install/share/doc"
+  mv -f "${srcdir}/g95-install/"{INSTALL,G95Manual.pdf} \
+    "${srcdir}/g95-install/share/doc/"
+}
+
+package() {
+  install -dm755  "${pkgdir}/"{usr,lib}
+  cp -R "${srcdir}/g95-install/"* "${pkgdir}/usr"
+  cd "${pkgdir}/usr/bin"
+  ln -s x86_64-unknown-linux-gnu-g95 g95
+}

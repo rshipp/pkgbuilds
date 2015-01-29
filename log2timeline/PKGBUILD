@@ -1,0 +1,38 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributer: David Souther <davidsouther@gmail.com>
+
+pkgname=log2timeline
+pkgver=0.63
+pkgrel=1
+pkgdesc='A framework for automatic creation of a super timeline.'
+arch=('any')
+url='http://log2timeline.net/'
+depends=('perl' 'perl-datetime' 'perl-net-pcap' 'perl-archive-zip' 
+         'perl-html-scrubber' 'perl-exiftool' 'glib-perl' 'perl-libwww' 
+         'perl-extutils-depends' 'perl-extutils-pkgconfig' 'cairo-perl' 
+         'pango-perl' 'perl-xml-libxml' 'perl-parse-win32registry'
+         'perl-dbi' 'perl-datetime-format-strptime' 'perl-date-manip')
+         
+         #'gtk2-perl')
+source=("http://log2timeline.net/files/${pkgname}_${pkgver}.tgz")
+license=('GPL')
+md5sums=('e84ec743adf1cf776ed95709ed25b33d')
+
+build() {
+  #perl -MCAPNPLUS -e 'install NetPacket::Ethernet'
+  cd log2timeline
+  perl Makefile.PL PREFIX="${pkgdir}"
+  make DESTDIR="${pkgdir}"
+}
+
+package() {
+  cd log2timeline
+  make install
+  cd "${pkgdir}"
+  pwd
+  mkdir -p usr
+  mv share usr/share
+  mv lib usr/lib
+  mkdir usr/bin
+  mv bin/site_perl/* usr/bin/
+}

@@ -1,0 +1,15 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=mathematica
+pkgver=8.0.4
+pkgrel=1
+pkgdesc='Wolfram Mathematica'
+arch=('i686' 'x86_64')
+url='wolfram.com'
+license=('LGPL2')
+source=("Mathematica_${pkgver}_LINUX.sh")
+
+package() {
+	cd "${srcdir}"
+    sh ./Mathematica_${pkgver}_LINUX.sh
+}

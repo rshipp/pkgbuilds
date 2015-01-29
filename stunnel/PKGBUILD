@@ -4,7 +4,7 @@
 # Contributor: Kevin Piche <kevin@archlinux.org>
 
 pkgname=stunnel
-pkgver=4.52
+pkgver=5.07
 pkgrel=1
 pkgdesc='Encrypt arbitrary TCP connections inside SSL.'
 arch=('i686' 'x86_64')
@@ -17,8 +17,8 @@ source=("ftp://ftp.stunnel.org/stunnel/${pkgname}-${pkgver}.tar.gz"{,.asc}
         'Makefile.patch'
         'stunnel.rc.d'
         'stunnel.tmpfiles.conf')
-md5sums=('f5e713dda0e8efa659f372832ecd0c2c'
-         '3e84d222525e724788d3c2b29b899610'
+md5sums=('c10edd84ecbc676a5a48c7e34ab3d1c5'
+         'SKIP'
          'f15398497e10e080c2406d2fc541660c'
          'd42a1dda7b44aab73fba670fbcfcc8a6'
          '2e065a39998e57727ee79887bbd1751e')
@@ -27,7 +27,7 @@ build() {
   cd "$srcdir/${pkgname}-${pkgver}"
 
   # don't create a certificate...
-  patch -p0 < "$srcdir/Makefile.patch"
+  #patch -p0 < "$srcdir/Makefile.patch"
 
   ./configure --prefix=/usr \
     --sysconfdir=/etc \

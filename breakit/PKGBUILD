@@ -1,0 +1,44 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname='breakit'
+pkgver=VERSION
+pkgrel=1
+optdepends=( 'hi: this is a test' )
+pkgdesc='hee
+llo.
+pkgver=123
+epoch=12
+'
+arch=(any)
+url=""
+license=('GPL')
+groups=()
+depends=()
+groups=('
+what'
+can
+'i do with an array?'
+url=http://bob.com/js'
+pkgname = bob
+injectarbitraryvariables = andcontents
+
+Or, just arbitrary text in general.
+'
+)
+checkdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+noextract=()
+source=(http://ddg.gg/test.xml)
+md5sums=('c6e578049bdec0a8bee1b12ecb7c27bc')
+_customvar=10
+

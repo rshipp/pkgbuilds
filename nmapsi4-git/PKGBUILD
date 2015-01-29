@@ -1,0 +1,48 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: d4n1x <danlo8600 [at] gmail [dot] com>
+
+pkgname=nmapsi4-git
+_pkgname=nmapsi4
+pkgver=20120603
+pkgrel=1
+pkgdesc='Qt-based GUI for nmap - git development version.'
+arch=('i686' 'x86_64')
+url='http://www.nmapsi4.org/'
+screenshot='http://i.imgur.com/NgBvG.png'
+license=('GPL2')
+conflicts=('nmapsi4')
+depends=('qt' 'nmap' 'dnsutils')
+makedepends=('cmake')
+
+_gitname="${_pkgname}"
+_gitroot="git://gitorious.org/${_gitname}/${_gitname}.git"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+    cd ..
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+
+  cd "${_gitname}"
+  mkdir -p build
+  cd build
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr ../
+  make
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}/build"
+    make DESTDIR="${pkgdir}" install
+
+    # Change permissions to enable the excutables
+    chmod 755 "${pkgdir}/usr/bin/"*
+}

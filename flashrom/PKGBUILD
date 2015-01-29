@@ -6,7 +6,7 @@
 # Contributor: Anton Shestakov <engored*ya.ru>
  
 pkgname=flashrom
-pkgver=0.9.6.1
+pkgver=0.9.7
 pkgrel=1
 pkgdesc='Utility for reading, writing, erasing and verifying flash ROM chips.'
 url="http://www.coreboot.org/Flashrom"

@@ -1,0 +1,34 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: d4n1x <danlo8600@gmail.com>
+# Contributor: Sabart Otto <seberm[at]gmail[dot]com>
+
+pkgname=metasploit
+pkgver=4.6.2
+pkgrel=1
+pkgdesc='An advanced open-source platform for developing, testing, and using exploit code.'
+url='http://metasploit.org'
+license=('BSD')
+arch=('x86_64')
+#depends=('ruby' 'libpcap' 'ruby-msgpack' 'ruby-pg'
+#         'ruby-bundler')
+optdepends=('java-runtime: To use the msf gui'
+            'dradis: Open source framework to enable effective information sharing')
+conflicts=('armitage' 'armitage-svn' 'metasploit-svn')
+provides=('armitage' 'armitage-svn')
+options=(!strip)
+source=("http://downloads.metasploit.com/data/releases/archive/${pkgname}-${pkgver}-linux-x64-installer.run"
+        "${pkgname}.sh")
+md5sums=('f0fba3f0919a1833def8e2c6f10d0cf4'
+         '912c21a795ac6116a8c13bee876ddf99')
+
+package() {
+  cd "${srcdir}"
+  chmod +x "${pkgname}-${pkgver}-linux-x64-installer.run"
+  ./"${pkgname}-${pkgver}-linux-x64-installer.run" --prefix "${pkgdir}" \
+    --mode unattended --debuglevel 3
+  
+
+  # Removes all .svn directories  # why the **** would you want to do that?
+  #echo "Removing all .svn directories..."
+  #find "${pkgdir}/opt/${pkgname}" -name ".svn" -type d -exec rm -fr {} +
+}

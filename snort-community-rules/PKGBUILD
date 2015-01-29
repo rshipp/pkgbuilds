@@ -1,0 +1,21 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=snort-community-rules
+_pkgname=community-rules
+pkgver=2.9
+pkgrel=1
+pkgdesc='Community Snort rules.'
+arch=('i686' 'x86_64')
+url='http://www.snort.org/'
+license=('unknown')
+install=snort-rules.install
+depends=('snort')
+source=("http://www.snort.org/downloads/community/${_pkgname}.tar.gz")
+sha256sums=('0ac00801787de8e56a03b13fb29022db923d8dfae639a99122dc791b3b183816')
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+  install -dm755 "${pkgdir}/etc/snort/rules/"
+  cp *.rules "${pkgdir}/etc/snort/rules/"
+  cp sid-msg.map "${pkgdir}/etc/snort/"
+}

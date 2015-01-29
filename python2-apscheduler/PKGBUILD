@@ -3,7 +3,7 @@
 
 pkgname=python2-apscheduler
 _pkgname=APScheduler
-pkgver=2.1.1
+pkgver=3.0.1
 pkgrel=1
 pkgdesc='Advanced Python Scheduler is a light but powerful in-process task scheduler.'
 arch=('any')
@@ -12,7 +12,7 @@ license=('MIT')
 depends=('python2')
 options=(!emptydirs)
 source=("http://pypi.python.org/packages/source/A/${_pkgname}/${_pkgname}-${pkgver}.tar.gz")
-md5sums=('e04e2adfdc691ecfd0fafaec36bc2877')
+md5sums=('7c3687b3dcd645fe9df48e34eb7a7592')
 
 package() {
   cd "${srcdir}/${_pkgname}-${pkgver}"

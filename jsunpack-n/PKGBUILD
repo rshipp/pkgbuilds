@@ -1,0 +1,33 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=jsunpack-n-svn
+_pkgname=jsunpack-n
+pkgver=76
+pkgrel=1
+pkgdesc='A generic JavaScript unpacker, which runs at jsunpack.jeek.org.'
+arch=('i686' 'x86_64')
+url='https://code.google.com/p/jsunpack-n/'
+license=('GPL')
+depends=('python2')
+makedepends=('subversion')
+
+_svntrunk="http://${_pkgname}.googlecode.com/svn/trunk/"
+_svnmod="${_pkgname}"
+ 
+build() {
+  cd "${srcdir}"
+ 
+  if [[ -d "${_svnmod}/.svn" ]]; then
+    (cd "${_svnmod}" && svn up -r ${pkgver})
+  else
+    svn checkout "${_svntrunk}" --config-dir ./ -r ${pkgver} ${_svnmod}
+  fi
+ 
+  msg "SVN checkout done or server timeout"
+}
+ 
+
+package() {
+  cd "${srcdir}/${_svnmod}"
+  python2 setup.py build install --root="${pkgdir}"
+}

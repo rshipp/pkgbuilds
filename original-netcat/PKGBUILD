@@ -1,0 +1,34 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=original-netcat
+pkgver=1.10
+pkgrel=1
+pkgdesc="Hobbit's original network swiss-army knife."
+url='http://nc110.sourceforge.net/'
+arch=('i686' 'x86_64')
+license=('unknown')
+backup=('etc/snooptab')
+depends=('glibc')
+optdepends=('bind: extra dns features (compile-time optdepend)')
+source=("http://downloads.sourceforge.net/project/nc110/unix netcat 1.10 by _Hobbit_/[Unnamed release]/nc110.tgz")
+md5sums=('402632f2fe01c169ff19a0ad6e9d608c')
+
+build() {
+  cd "${srcdir}/"
+
+  # Comment the line below if you do have bind installed
+  sed -i 's/#define HAVE_BIND/\/* #define HAVE_BIND/' netcat.c
+
+  # Enable an extra feature ("if you want case-sensitive DNS matching")
+  sed -i 's/\/* #define ANAL/#define ANAL   /' netcat.c
+
+  # Finally, make it.
+  make linux
+}
+
+package() {
+  cd "${srcdir}"
+
+  install -Dm755 nc "${pkgdir}/usr/bin/nc.orig"
+  ln -sv /usr/bin/nc "${pkgdir}/usr/bin/nc.original"
+}

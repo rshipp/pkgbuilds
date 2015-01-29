@@ -1,0 +1,53 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+
+pkgname=akabeicore-git
+_pkgname=akabeicore
+pkgver=20120812
+pkgrel=1
+pkgdesc='Core libraries for Akabei.'
+arch=('i686' 'x86_64')
+url='http://chakra-project.org/'
+license=('unknown')
+depends=('libarchive' 'kdelibs' 'qt' 'sqlite3')
+makedepends=('cmake' 'git')
+conflicts=('akabeicore')
+
+_gitname="${_pkgname}"
+_gitroot="git://gitorious.org/chakra/${_pkgname}.git"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+    cd ..
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+
+  cd "${_gitname}"
+  mkdir -p build
+  cd build
+  cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug \
+            -DAKABEICORE_INCLUDE_DIR=/usr/include/akabeicore \
+            -DAKABEICLIENT_INCLUDE_DIR=/usr/include/akabeiclient \
+            -DAKABEICLIENT_LIBRARIES:FILEPATH=/usr/lib/libakabeiclient.so
+  make
+}
+
+package() {
+  cd "${srcdir}/${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
+  [[ -e "${pkgdir}/usr/local/bin/nacky" || -e "${pkgdir}/usr/local/bin/macky" ]] && 
+    sudo mv -f "${pkgdir}/usr/local/bin/"* "${pkgdir}/usr/bin/"
+  [[ -e "${pkgdir}/usr/local/include/akabeiclient" ]] && 
+    sudo mv -f "${pkgdir}/usr/local/include/akabeiclient/"* "${pkgdir}/usr/include/akabeiclient/"
+  [[ -e "${pkgdir}/usr/local/include/akabeicore" ]] && 
+    sudo mv -f "${pkgdir}/usr/local/include/akabeiclient/"* "${pkgdir}/usr/include/akabeicore/"
+  [[ -e "${pkgdir}/usr/local/lib/libakabeiclient.so" || -e "${pkgdir}/usr/local/lib/libakabeicore.so" ]] && 
+    sudo mv -f "${pkgdir}/usr/local/lib/"* "${pkgdir}/usr/lib/" || return 0
+}

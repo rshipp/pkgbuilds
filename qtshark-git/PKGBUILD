@@ -1,0 +1,71 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Guillaume ALAUX <guillaume@archlinux.org>
+# Contributor: Florian Pritz <bluewind at jabber dot ccc dot de>
+
+pkgname=qtshark-git
+_pkgname=wireshark
+pkgver=20140702
+pkgrel=2
+pkgdesc='The free Wireshark network protocol analyzer for Unix/Linux - developmental Qt frontend.'
+arch=('i686' 'x86_64')
+url='http://www.wireshark.org/'
+screenshot='http://i.imgur.com/u170R.png'
+license=('GPL2')
+makedepends=('git' 'cmake' 'perl')
+depends=('krb5' 'libcap' 'libpcap' 'bash' 'gnutls' 'libgcrypt' 'glib2'
+         'lua' 'qt' 'geoip' 'zlib')
+conflicts=('wireshark' 'wireshark-gtk' 'wireshark-cli' 'tshark'
+           'qtshark' 'wireshark-git' 'qtshark-svn')
+replaces=('wireshark-qt-svn' 'qtshark-svn')
+provides=('wireshark-cli' 'tshark' 'qtshark' 'wireshark-qt')
+install=wireshark.install
+options=(!libtool)
+
+_gitroot="https://code.wireshark.org/review/${_pkgname}"
+_gitname="${_pkgname}"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d ${_gitname} ] ; then
+    cd ${_gitname} && git pull origin
+    msg "The local files are updated."
+  else
+    git clone ${_gitroot} ${_gitname}
+  fi
+
+  cd "${srcdir}/${_gitname}"
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  perl "../${_gitname}/make-version.pl"
+
+  cd ..
+  rm -rf "${_gitname}-build"
+  mkdir "${_gitname}-build"
+  cd "${_gitname}-build"
+
+  cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DBUILD_qtshark=YES -DENABLE_QT5=NO \
+        -DENABLE_GTK3=NO "../${_gitname}"
+  make
+}
+
+package() {
+  cd "${_gitname}-build"
+  make DESTDIR="${pkgdir}" install
+
+  # Headers
+  install -dm755 "${pkgdir}/usr/include/wireshark/"{epan/{crypt,dfilter,dissectors,ftypes},wiretap,wsutil}
+  install -m644 *.h "${pkgdir}/usr/include/wireshark"
+  for header in $(find epan wiretap wsutil -name '*.h'); do
+    mkdir -p "${pkgdir}/usr/include/wireshark/$(dirname ${header})"
+    install -m644 ${header} "${pkgdir}/usr/include/wireshark/${header}"
+  done
+
+  # wireshark uid group is 150
+  chgrp 150 "${pkgdir}/usr/bin/dumpcap"
+  chmod 754 "${pkgdir}/usr/bin/dumpcap"
+}

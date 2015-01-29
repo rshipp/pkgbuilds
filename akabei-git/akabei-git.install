@@ -1,0 +1,9 @@
+post_install() {
+  echo "Generating local database..."
+  akabei-create-db generate local /var/cache/pacman/pkg/*
+  install -Dm644 local /var/loca/akabei/local.db
+}
+
+post_upgrade() {
+  post_install
+}

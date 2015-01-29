@@ -1,0 +1,10 @@
+*~
+*.tar.*
+*.gz
+*.tgz
+*.jar
+*/pkg/*
+*/src/*
+*Board*
+*board*
+notes

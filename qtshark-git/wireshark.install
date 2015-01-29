@@ -1,0 +1,18 @@
+post_install() {
+  getent group wireshark >/dev/null 2>&1 ||  usr/sbin/groupadd -g 150 wireshark &>/dev/null
+
+  setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' usr/bin/dumpcap
+  echo "NOTE: To run wireshark as normal user, you need to first run:"
+  echo "sudo gpasswd -a USERNAME wireshark"
+  echo "to add yourself to the wireshark group, then log out and back in, or reboot."
+}
+
+post_upgrade() {
+  post_install
+}
+
+post_remove() {
+  if getent group wireshark >/dev/null 2>&1; then
+    groupdel wireshark
+  fi
+}
