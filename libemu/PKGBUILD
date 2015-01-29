@@ -1,0 +1,34 @@
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
+# Contributor: Gagou <gagou@rez-gif.supelec.fr>
+
+pkgname=libemu-git
+_gitname=libemu
+pkgver=20140623
+pkgrel=1
+pkgdesc='A small library written in C offering basic x86 emulation and shellcode detection.'
+url='http://libemu.carnivore.it/'
+license=('GPL')
+arch=('i686' 'x86_64' 'armv6h')
+depends=('glibc')
+makedepends=('git')
+optdepends=('graphviz: visual representation of shellcode')
+source=("${_gitname}::git://git.carnivore.it/${_gitname}.git")
+md5sums=('SKIP')
+
+
+build() {
+  cd "${srcdir}/${_gitname}"
+
+  sed -i s/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g ./configure.ac
+  autoreconf -i
+  CFLAGS="${CFLAGS} -Wno-unused-local-typedefs" ./configure --prefix=/usr \
+      --enable-python-bindings --enable-debug
+  make
+  sed -i "s,install,install --prefix='${pkgdir}/usr'," bindings/python/Makefile.am
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  make DESTDIR="${pkgdir}" install
+}
+
