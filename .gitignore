@@ -3,6 +3,7 @@
 *.gz
 *.tgz
 *.jar
+*.zip
 */pkg/*
 */src/*
 *Board*
