@@ -2,9 +2,9 @@
 # Contributor: Emmanuel Gras <gras.emmanuel@gmail.com>
 
 pkgname=scapy
-pkgver=2.2.0
-pkgrel=2
-pkgdesc="A powerful interactive packet manipulation program written in Python."
+pkgver=2.3.1
+pkgrel=1
+pkgdesc='A powerful interactive packet manipulation program written in Python.'
 url='http://www.secdev.org/projects/scapy/'
 depends=('tcpdump' 'python2')
 optdepends=('python2-crypto: WEP decription support'
@@ -13,8 +13,8 @@ optdepends=('python2-crypto: WEP decription support'
 provides=('python-scapy' 'python2-scapy')
 arch=('i686' 'x86_64')
 license=('GPL')
-source=("https://www.secdev.org/projects/scapy/files/${pkgname}-${pkgver}.tar.gz")
-md5sums=('406990bd8da1f4958b354b4b6fc4b3eb')
+source=("https://bitbucket.org/secdev/scapy/downloads/${pkgname}-${pkgver}.zip")
+md5sums=('a30d828e59801d1d092219b349f1da9e')
 
 build(){
   cd "${srcdir}/${pkgname}-${pkgver}"
