@@ -3,7 +3,7 @@
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 
 pkgname=chntpw
-pkgver=110511
+pkgver=140201
 pkgrel=1
 pkgdesc='Offline NT Password Editor - reset passwords in a Windows NT SAM user database file.'
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ url='http://pogostick.net/~pnh/ntpasswd/'
 license=('GPL' 'LGPL')
 makedepends=('openssl')
 source=("http://pogostick.net/~pnh/ntpasswd/${pkgname}-source-${pkgver}.zip")
-md5sums=('a3fb358d1adec589cd6bc8dedf68896c')
+md5sums=('d60bc657206b07ad84d926649d6417dc')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"

@@ -2,17 +2,17 @@
 # Contributer: Sven-Hendrik Haase <sh@lutzhaase.com>
 
 pkgname=kippo
-pkgver=0.5
+pkgver=0.9
 pkgrel=1
-pkgdesc='A medium interaction SSH honeypot designed to log brute force attacks and, most importantly, the entire shell interaction performed by the attacker.'
+pkgdesc='A medium interaction SSH honeypot designed to log brute force attacks and shell interaction.'
 arch=('i686' 'x86_64')
 url='http://code.google.com/p/kippo/'
 license=('BSD')
 depends=('python2' 'python2-twisted' 'python2-crypto' 'python2-zope-interface' 'pyasn1')
 install=$pkgname.install
-source=("http://kippo.googlecode.com/files/${pkgname}-${pkgver}.tar.gz"
+source=("https://github.com/desaster/${pkgname}/archive/v${pkgver}.tar.gz"
         'start.sh')
-md5sums=('4d1572c7ce1da82bc57bd0f133973056'
+md5sums=('e1d21c791629bc2d76add7836d744455'
          'd0715a80bfb7d031f71de5b92743d2b6')
 
 package() {
