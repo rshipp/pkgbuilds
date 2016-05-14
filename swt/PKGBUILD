@@ -1,0 +1,50 @@
+# Maintainer: kdekda <find me on chakra-project.it || .org>
+pkgname=swt
+pkgver=4.2.1
+pkgrel=1
+_date=201209141800
+pkgdesc='An open source widget toolkit for Java'
+arch=('x86_64')
+url='http://www.eclipse.org/swt/'
+license=('EPL')
+depends=('java-runtime>=6' 'gtk2>=2.20.1' 'libxtst')
+optdepends=('libgnomeui' 'mesa' 'glu' 'libwebkit')
+makedepends=('java-environment' 'libxtst' 'mesa' 'glu' 'libgnomeui' 'unzip' 'pkgconfig' 'libwebkit' 'apache-ant')
+sha256sums=('e89e330df24ca72c57a381e81590293ce3f475d855258183179436bd5dcd85c8'
+              'a8119a8336442e499450d4466447818a7d3776db9460f6201276ca651eaeff75')
+#old_url=http://download.eclipse.org/eclipse/downloads/drops4/R-${pkgver}-${_date}/swt-${pkgver}-gtk-linux-${_carch}.zip
+source=(http://archive.eclipse.org/eclipse/downloads/drops4/R-${pkgver}-${_date}/swt-${pkgver}-gtk-linux-${arch}.zip
+        build-swt.xml)
+# To test this pkg:
+# http://www.eclipse.org/swt/examples.php#standaloneOutsideEclipse
+# http://download.eclipse.org/eclipse/downloads/
+
+build() {
+  cd ${srcdir}
+  unzip -oq src.zip -d src
+
+  . /etc/profile.d/jdk.sh
+  . /etc/profile.d/apache-ant.sh
+
+  # Shared objects
+  cd src
+  ./build.sh
+
+  # SWT jar
+  ant -f ../build-swt.xml compile
+}
+
+package() {
+  cd ${srcdir}/src
+
+  # Shared objects
+  export OUTPUT_DIR=${pkgdir}/usr/lib
+  install -dm755 ${OUTPUT_DIR} 
+  make -f make_linux.mak install
+
+  # SWT jar
+  ant -f ../build-swt.xml jar
+  install -Dm755 ../swt.jar ${pkgdir}/usr/share/java/swt-${pkgver}.jar
+  ln -s swt-${pkgver}.jar ${pkgdir}/usr/share/java/swt.jar
+}
+ 

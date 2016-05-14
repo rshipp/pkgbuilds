@@ -2,12 +2,11 @@
 
 pkgname=cuckoosandbox
 _pkgname=cuckoo
-pkgver=0.4
-_pkgver=0.4.0
+pkgver=1.2
 pkgrel=1
 pkgdesc='An automated malware analysis system.'
 arch=('i686' 'x86_64')
-url='http://www.cuckoobox.org/'
+url='http://www.cuckoosandbox.org/'
 screenshot='http://www.bewm.net/cuckoo/cuckoo.jpg'
 license=('GPL3')
 conflicts=('cuckoobox-git')
@@ -19,12 +18,12 @@ depends=('python2' 'python2-magic' 'python2-dpkt' 'python2-mako' 'virtualbox')
 optdepends=('pyssdeep: for calculating ssdeep fuzzy hash of files'
             'tcpdump: needed in some cases for packet interception')
 install=$pkgname.install
-source=("http://www.cuckoobox.org/downloads/${_pkgver}/${_pkgname}_${pkgver}.tar.gz")
-sha256sums=('41a7bea4480d91e69b2af72f874be4c1fed57ec9c5c8f25a94ea06db5d8c4b74')
+source=("https://github.com/cuckoobox/${_pkgname}/archive/${pkgver}.tar.gz")
+sha256sums=('a0eab31cc5bff0aff2f03ca39a6fc2a18a78c81486dbfb2acd53621950a36abc')
 
 package() {
   cd "${srcdir}"
-  install -dm755 "${pkgdir}/opt/"
+  install -dm755 "${pkgdir}/usr/share/"
   rm ${_pkgname}_${pkgver}.tar.gz
-  cp -R * "${pkgdir}/opt/"
+  cp -R * "${pkgdir}/usr/share/"
 }

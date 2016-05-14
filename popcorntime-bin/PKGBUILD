@@ -1,0 +1,46 @@
+pkgname=popcorntime-bin
+pkgver=0.3.8.2
+pkgrel=1
+_ver=0.3.8
+_rel=2
+_platform=Linux-64
+pkgdesc="Stream movies from torrents. Skip the downloads. Launch, click, watch."
+arch=('x86_64')
+url="https://popcorntime.io/"
+screenshot=http://static4.businessinsider.com/image/531f13826bb3f74f4528e9cc-1200-750/popcorn_time%20step%203.jpg
+license=('GPL3')
+depends=('alsa-lib' 'atk' 'cairo' 'dbus-core' 'expat' 'fontconfig' 'freetype2' 'gcc-libs' 'gconf' 'gdk-pixbuf2' 'glib2' 'gtk2' 'libx11' 'libxcomposite' 'libxdamage' 'libxext' 'libxfixes' 'libxi' 'libxrender' 'libxtst' 'nspr' 'nss' 'pango' 'systemd')
+provides=('popcorntime')
+conflicts=('popcorntime')
+options=('!strip')
+install="popcorntime.install"
+source=("http://get.popcorntime.io/build/Popcorn-Time-${_ver}-${_rel}-${_platform}.tar.xz"
+        "popcorntime.desktop")
+sha512sums=('a231cb405282b1c543b015cc87aab239d6db928d701d55051fd9a58ddeae4ad9647c43db2953708310a0cac381e310a9064b409e7f5d0f6a5425f1932f680008'
+            '271def97d5d0847df83361d12895d3ad772d3537266d05ac0ef11ca04a3432074c8f56817ab9d01a06515f988f153df87b9b1687a7769d6b850d4b8c5dca31ff')
+package() {
+  cd "${srcdir}"
+
+  install -dm755 ${pkgdir}/usr/{bin,share/{applications,pixmaps,popcorntime}}
+
+  install -Dm755 ${srcdir}/Popcorn-Time		"${pkgdir}/usr/share/popcorntime"
+  install -Dm644 ${srcdir}/nw.pak		"${pkgdir}/usr/share/popcorntime"
+  install -Dm644 ${srcdir}/libffmpegsumo.so	"${pkgdir}/usr/share/popcorntime"
+  install -Dm644 ${srcdir}/package.json		"${pkgdir}/usr/share/popcorntime"
+  install -Dm644 ${srcdir}/icudtl.dat		"${pkgdir}/usr/share/popcorntime"
+  cp -R    ${srcdir}/locales			"${pkgdir}/usr/share/popcorntime"
+  cp -R    ${srcdir}/node_modules		"${pkgdir}/usr/share/popcorntime"
+  cp -R    ${srcdir}/src			"${pkgdir}/usr/share/popcorntime"
+  
+  # Link to program
+  ln -s "/usr/share/popcorntime/Popcorn-Time" "${pkgdir}/usr/bin/popcorntime"
+
+  # Desktop file
+  install -Dm644 "${srcdir}/popcorntime.desktop" "${pkgdir}/usr/share/applications/popcorntime.desktop"
+
+  # Icon
+  install -Dm644 "${srcdir}/popcorntime.png" "${pkgdir}/usr/share/pixmaps/popcorntime.png"
+  
+  # License
+  install -Dm644 "${srcdir}/LICENSE.txt" "${pkgdir}/usr/share/licenses/popcorntime/LICENSE"
+}

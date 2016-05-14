@@ -3,8 +3,8 @@
 # Contributor: Barry Keegan < barrykeegan AT gmail DOT com >
 
 pkgname=maltego
-_pkgname=MaltegoCarbonCE
-pkgver=3.5.3
+_pkgname=MaltegoChlorineCE
+pkgver=3.6.0.6640
 pkgrel=1
 pkgdesc='A proprietary software for open source intelligence and forensics; community edition.'
 arch=('i686' 'x86_64')
@@ -13,13 +13,13 @@ screenshot='https://www.paterva.com/web6/images/maltegosidebar/2.jpg'
 license=('custom')
 depends=('java-runtime')
 install=$pkgname.install
-source=("https://www.paterva.com/malv35/community/${_pkgname}.v${pkgver}.zip"
+source=("https://www.paterva.com/malv36/community/${_pkgname}.${pkgver}.zip"
         "http://www.paterva.com/web6/documentation/M3GuideGUI.pdf")
-sha1sums=('773cc7f7325ae1b41301fb199526d67a06441710'
+sha1sums=('38fcea65e719a6d33f746d6130f12109d8315f5c'
           'b3d496acaa2fbd5a0fd0409aafc0af05280db736')
 
 package() {
-  cd ${srcdir}/${_pkgname}
+  cd "${srcdir}/${_pkgname/CE}.${pkgver}"
   install -d "${pkgdir}/usr/share/${pkgname}"
   install -d "${pkgdir}/usr/share/${pkgname}/doc"
   install -d "${pkgdir}/usr/bin" 

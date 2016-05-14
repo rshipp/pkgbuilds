@@ -5,7 +5,7 @@
 
 pkgname=tripwire
 pkgver=2.4.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='The well-known intrusion detection and file integrity checking system.'
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/tripwire/"
@@ -15,10 +15,12 @@ backup=('etc/tripwire/twpol.txt' 'etc/tripwire/twcfg.txt')
 install=$pkgname.install
 #options=('!makeflags')
 source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}-src.tar.bz2"
-        'twpol.txt' 'twcfg.txt')
+        'twpol.txt' 'twcfg.txt' 'tripwire-2.4.2.2-gcc-4.7.patch'
+        'tripwire-2.4.2.2-exception-shadowing.patch')
 sha256sums=('e09a7bdca9302e704cc62067399e0b584488f825b0e58c82ad6d54cd2e899fad'
             '4da49a185fee570e0a7bdc7acaadc0d2bf7f4c488057e93e60b2a2819807cd9d'
-            '3aaa567f7a0a4efce3ac127344a9b795c5494c9d011e27a7d454d632ba3d533d')
+            '3aaa567f7a0a4efce3ac127344a9b795c5494c9d011e27a7d454d632ba3d533d'
+            'SKIP' 'SKIP')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}-src"
@@ -26,6 +28,9 @@ build() {
 #build package
 #  CFLAGS="$CFLAGS -fno-strict-aliasing" CXXFLAGS="$CXXFLAGS -fno-strict-aliasing" \
     ./configure --prefix=/usr --sysconfdir=/etc/tripwire
+  patch -Np1 src/cryptlib/algebra.h < "${srcdir}/tripwire-2.4.2.2-gcc-4.7.patch" || true
+  patch -Np1 src/twadmin/twadmincl.cpp < "${srcdir}/tripwire-2.4.2.2-gcc-4.7.patch" || true
+  patch -Np1 src/core/archive.cpp < "${srcdir}/tripwire-2.4.2.2-exception-shadowing.patch" || true
   make
 }
 

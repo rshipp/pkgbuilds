@@ -1,0 +1,61 @@
+# Maintainer: eyome <baikalink@hotmail.fr>
+# Contributor: Ricardo Funke <ricardo [at] gmail [dot] com>
+# Contributor: Attila Bukor <r1pp3rj4ck [at] w4it [dot] eu>
+# Contributor: Iwan Timmer <irtimmer@gmail.com>
+# Contributor: Eric Engestrom <aur [at] engestrom [dot] ch>
+# Contributor: Ricardo Band <me [at] xengi [dot] de>
+
+pkgname=popcorntime
+pkgver=0.3.0
+pkgrel=1
+pkgdesc="Stream movies from torrents. Skip the downloads. Launch, click, watch."
+arch=('x86_64')
+url="http://popcorn.cdnjd.com/"
+license=('GPL3')
+makedepends=('zip')
+depends=('libudev.so.0' 'ttf-ms-fonts' 'gconf')
+conflicts=('popcorntime-beta' 'popcorntime-git')
+options=('!strip')
+install="popcorntime.install"
+md5sums=('2dcd7329cce6ff5afe7c87912266d3b8'
+         '5725b4c466ca3726e7a6df52730dacd2'
+         '8dd1d388ccbab5ad5d58185310289b5b'
+         '9608f35f4cc083a0c36b0f4ef275ab10')
+
+         
+_platform=Linux-64
+md5sums[0]='2dcd7329cce6ff5afe7c87912266d3b8'
+
+source=("http://cdn.get-popcorn.com/build/Popcorn-Time-${pkgver}-${_platform}.tar.gz"
+        "https://raw.githubusercontent.com/popcorn-official/popcorn-app/master/src/app/images/icon.png"
+        "popcorntime.install"
+        "popcorntime.desktop")
+ 
+build() {
+  cd "${srcdir}"
+  sed -i 's/\x75\x64\x65\x76\x2E\x73\x6F\x2E\x30/\x75\x64\x65\x76\x2E\x73\x6F\x2E\x31/g' "Popcorn-Time/Popcorn-Time"
+}         
+        
+        
+package() {
+  cd "${srcdir}"
+ 
+  install -dm755 "${pkgdir}/usr/share/${pkgname}"
+  install -dm755 "${pkgdir}/usr/bin"
+ 
+  # Program
+  install -Dm755 ${srcdir}/Popcorn-Time/Popcorn-Time "${pkgdir}/usr/share/${pkgname}/"
+  install -Dm644 ${srcdir}/Popcorn-Time/nw.pak "${pkgdir}/usr/share/${pkgname}/"
+  install -Dm644 ${srcdir}/Popcorn-Time/libffmpegsumo.so "${pkgdir}/usr/share/${pkgname}/"
+  install -Dm644 ${srcdir}/Popcorn-Time/package.nw "${pkgdir}/usr/share/${pkgname}/"
+ 
+  # Link to program
+  mkdir -p "${pkgdir}/usr/bin"
+  ln -s "/usr/share/${pkgname}/Popcorn-Time" "${pkgdir}/usr/bin/${pkgname}"
+ 
+  # Desktop file
+  install -Dm644 "${srcdir}/popcorntime.desktop" "${pkgdir}/usr/share/applications/popcorntime.desktop"
+ 
+  # Icon
+  install -Dm644 "${srcdir}/icon.png" "${pkgdir}/usr/share/pixmaps/popcorntime.png"
+}

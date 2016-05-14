@@ -5,7 +5,7 @@
 
 pkgname=mtr-cli
 _pkgname=mtr
-pkgver=0.85
+pkgver=0.86
 pkgrel=1
 pkgdesc='Combines the functionality of traceroute and ping into one tool. (CLI version)'
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ url='http://www.bitwizard.nl/mtr/'
 license=('GPL')
 depends=('ncurses>=5.7')
 source=("ftp://ftp.bitwizard.nl/mtr/${_pkgname}-${pkgver}.tar.gz")
-md5sums=('5e665c617e5659b6ec3e201ee7488eb1')
+md5sums=('8d63592c9d4579ef20cf491b41843eb2')
 
 build() {
   mkdir -p "${srcdir}/mtr-cli"

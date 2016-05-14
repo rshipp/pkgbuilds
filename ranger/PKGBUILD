@@ -3,7 +3,7 @@
 # Contributor: Roman Zimbelmann <romanz@lavabit.com>
  
 pkgname=ranger
-pkgver=1.6.1
+pkgver=1.7.2
 pkgrel=1
 pkgdesc='A simple, vim-like file manager.'
 arch=('any')
@@ -21,7 +21,7 @@ optdepends=('python-chardet: helps in case of encoding detection problems'
 conflicts=('ranger-git')
 screenshot='http://ranger.nongnu.org/screenshots/screenshot0.png'
 source=("http://ranger.nongnu.org/${pkgname}-${pkgver}.tar.gz")
-md5sums=('1062aa8b4f1e8d8eb5a03bc95a9a7ab6')
+md5sums=('cc436fe2035a024755a1cad255bffaaf')
 
 package() { 
   cd "${srcdir}/${pkgname}-${pkgver}"

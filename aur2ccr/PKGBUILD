@@ -1,35 +1,19 @@
-# Maintainer (PKGBUILD and bash): george <rpubaddr0 {at} gmail [dot] com>
-# Maintainer (bash and python): Inkane
+# Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=aur2ccr
-pkgver=0.7.5
-pkgrel=2
-pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
+pkgver=2.0.1
+pkgrel=1
+pkgdesc='A helper script for porting packages from Arch to Chakra.'
 arch=('any')
-url='http://ccr-tools.github.com/'
-license=('GPL')
-depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'python2' 'sed')
-conflicts=('aur2ccr-git')
-install=$pkgname.install
-source=('archrepos.pacman.conf'
-        'aur2ccr'
-        'aur2ccr.8'
-        'aur2ccr.conf'
-        'getmirrors.py'
-        'Makefile'
-        'names.conf')
-sha256sums=('c1b3abb04d2e0423cfd1bd8caed7e8a9f3b296910024d2672311d212b700e69e'
-            'e0e66ce21a4fd02ce9ae4e74fc025bbba052ac08c6500175a5f75db4cae20bae'
-            '005610a8541e88e4024bb1d1d00902f5cf896612419492bb35fab5712a000f7a'
-            '2a2d77fdbeaeebbd33bc448a328b6f95b4227315aa17a615832f47c69081228a'
-            '19434ce2bc9dc895292b26609f0bad5568c7e347210f83cadf5663a81ed7ca50'
-            'a053d410a2aeaadba21c5109455ed513ffdb5c101b9de30da94d429a18a07693'
-            '01a3621b80fdeeeebcabc3e713bf5684f7c5c3610d748159260e1a4e066f5543')
-
-build() {
-  make
-}
+url='http://github.com/ccr-tools/aur2ccr/'
+license=('BSD3')
+depends=('python3' 'python3-requests' 'python3-aur' 'python3-ccr'
+         'python3-toposort' 'chaser')
+makedepends=('python3-setuptools')
+source=("https://github.com/ccr-tools/${pkgname}/archive/${pkgver}.tar.gz")
+sha256sums=('446321b86b645ca993149852f3b7968113a1a54951ef08afd6aefde1024687b1')
 
 package() {
-  make DESTDIR="${pkgdir}" install
+  cd "${pkgname}-${pkgver}"
+  python3 setup.py install --root="${pkgdir}/"
 }

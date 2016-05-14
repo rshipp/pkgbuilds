@@ -5,7 +5,7 @@
 # Contributor: GARETTE Emmanuel <gnunux at laposte dot net>
 
 pkgname=dovecot
-pkgver=2.2.13
+pkgver=2.2.24
 pkgrel=1
 pkgdesc='An IMAP and POP3 server written with security primarily in mind.'
 arch=('i686' 'x86_64')
@@ -19,11 +19,11 @@ optdepends=('libldap: ldap plugin'
 provides=('imap-server' 'pop3-server')
 #options=('!libtool')
 install=$pkgname.install
-source=("http://dovecot.org/releases/2.2/${pkgname}-${pkgver}.tar.gz"{,.sig}
+source=("http://dovecot.org/releases/2.2/${pkgname}-${pkgver}.tar.gz" #{,.sig}
         'dovecot.sh'
         'dovecot.tmpfilesd')
-md5sums=('a3eb1c0b1822c4f2b0fe9247776baa71'
-         'SKIP'
+md5sums=('91576b3411b436234ca5f63e1bbab60d'
+         #'SKIP'
          '587159e84e2da6f83d70b3c706ba87cc'
          'f40857555bd65add2e86c89fe3242357')
 

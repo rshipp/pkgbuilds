@@ -1,0 +1,35 @@
+# Maintainer (PKGBUILD and bash): george <rpubaddr0 {at} gmail [dot] com>
+# Maintainer (bash and python): Inkane
+ 
+pkgname=aur2ccr
+pkgver=0.7.6
+pkgrel=1
+pkgdesc='Convert packages from Arch repos or AUR to CCR source packages.'
+arch=('any')
+url='http://ccr-tools.github.com/'
+license=('GPL')
+depends=('abs' 'bash' 'ccr' 'curl' 'gawk' 'jshon' 'pacman' 'python2' 'sed')
+conflicts=('aur2ccr-git')
+install=$pkgname.install
+source=('archrepos.pacman.conf'
+        'aur2ccr'
+        'aur2ccr.8'
+        'aur2ccr.conf'
+        'getmirrors.py'
+        'Makefile'
+        'names.conf')
+md5sums=('bb01ba4c507285532989aa254978496d'
+         '5679b8d354f117a5981d69dd34e84d07'
+         '4c5b372ff8ad5c5136be8f2db59bface'
+         '0c3727a4148551423c4d514dcc885b32'
+         'aef733356ad539679a73dc0deb0b8e9b'
+         '040909cf70d3c3bfc9357e62bb1c96dd'
+         '3f5bb24f92cdb51e6c66fdce13d7e1d6')
+ 
+build() {
+  make
+}
+ 
+package() {
+  make DESTDIR="${pkgdir}" install
+}
