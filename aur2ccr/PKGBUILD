@@ -1,7 +1,7 @@
 # Maintainer: george <rpubaddr0 {at} gmail [dot] com>
 
 pkgname=aur2ccr
-pkgver=2.0.2
+pkgver=2.0.3
 pkgrel=1
 pkgdesc='A helper script for porting packages from Arch to Chakra.'
 arch=('any')
@@ -11,7 +11,7 @@ depends=('python3' 'python3-requests' 'python3-aur' 'python3-ccr'
          'chaser')
 makedepends=('python3-setuptools')
 source=("https://github.com/ccr-tools/${pkgname}/archive/${pkgver}.tar.gz")
-sha256sums=('ed83fce3b851e6926a18495a35dd3035d7099ad6040548a005502e4917166231')
+sha256sums=('defe9a67e374e96f157357a5af5249daa4976aa0108b2867a30e7c6f5d8b9511')
 
 package() {
   cd "${pkgname}-${pkgver}"
