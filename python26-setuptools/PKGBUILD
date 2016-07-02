@@ -1,0 +1,39 @@
+#
+# Software packages for Chakra, part of www.chakraos.org
+#
+# Maintainer:   H W Tovetjärn (totte) <totte@tott.es>
+# Contributors: A Velasquez <angvp@archlinux.org>
+
+pkgname='python26-setuptools'
+pkgver=20.2.2
+pkgrel=1
+pkgdesc="Easily download, build, install, upgrade, and uninstall Python packages"
+arch=('any')
+license=('PSF')
+url="http://pypi.python.org/pypi/setuptools"
+makedepends=('python26-six')
+provides=('python26-distribute')
+conflicts=('python26-distribute')
+replaces=('python26-distribute')
+
+source=(http://pypi.python.org/packages/source/s/setuptools/setuptools-${pkgver}.tar.gz)
+md5sums=('bf37191cb4c1472fb61e6f933d2006b1')
+
+prepare() {
+   cp -a setuptools-${pkgver}{,-python2}
+   cd "${srcdir}"/setuptools-${pkgver}-python2
+   sed -i -e "s|^#\!.*/usr/bin/env python|#!/usr/bin/env python2.6|" setuptools/command/easy_install.py
+}
+
+build() {
+   # Build python 2 module
+   cd "${srcdir}"/setuptools-${pkgver}-python2
+   python2.6 setup.py build
+}
+
+package() {
+
+   cd "${srcdir}/setuptools-${pkgver}-python2"
+   python2.6 setup.py install --prefix=/usr --root="${pkgdir}" --optimize=1 --skip-build
+   rm "${pkgdir}/usr/bin/easy_install"
+}

@@ -1,0 +1,28 @@
+pkgname=python26-pip
+pkgver=8.1.2
+pkgrel=1
+pkgdesc="An easy_install replacement for installing pypi python packages"
+url="http://www.pip-installer.org/"
+arch=('any')
+license=('MIT')
+makedepends=('python26' 'python26-setuptools')
+source=(https://pypi.io/packages/source/p/pip/pip-${pkgver}.tar.gz)
+md5sums=('87083c0b9867963b29f7aba3613e8f4a')
+
+package() {
+    depends=('python26' 'python26-setuptools')
+
+    cd "$srcdir/pip-$pkgver"
+    python2.6 setup.py build
+    python2.6 setup.py install \
+        --prefix=/usr \
+        --root="$pkgdir"
+
+    mv "$pkgdir/usr/bin/pip" "$pkgdir/usr/bin/pip26"
+    rm "$pkgdir/usr/bin/pip2"
+    sed -i "s|#!/usr/bin/env python$|#!/usr/bin/env python2.6|" \
+    ${pkgdir}/usr/lib/python2.6/site-packages/pip/__init__.py
+
+    install -D -m644 LICENSE.txt \
+        "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
